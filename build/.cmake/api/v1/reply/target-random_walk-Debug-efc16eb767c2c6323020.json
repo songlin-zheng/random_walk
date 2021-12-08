@@ -2,7 +2,7 @@
 	"artifacts" : 
 	[
 		{
-			"path" : "rwalk_op"
+			"path" : "random_walk"
 		}
 	],
 	"backtrace" : 1,
@@ -12,6 +12,7 @@
 		[
 			"add_executable",
 			"target_link_libraries",
+			"add_compile_definitions",
 			"include_directories"
 		],
 		"files" : 
@@ -26,17 +27,23 @@
 			{
 				"command" : 0,
 				"file" : 0,
-				"line" : 18,
+				"line" : 19,
 				"parent" : 0
 			},
 			{
 				"command" : 1,
 				"file" : 0,
-				"line" : 23,
+				"line" : 24,
 				"parent" : 0
 			},
 			{
 				"command" : 2,
+				"file" : 0,
+				"line" : 17,
+				"parent" : 0
+			},
+			{
+				"command" : 3,
 				"file" : 0,
 				"line" : 9,
 				"parent" : 0
@@ -55,10 +62,17 @@
 					"fragment" : "-std=gnu++14"
 				}
 			],
-			"includes" : 
+			"defines" : 
 			[
 				{
 					"backtrace" : 3,
+					"define" : "PREPROCESSING=1"
+				}
+			],
+			"includes" : 
+			[
+				{
+					"backtrace" : 4,
 					"path" : "/usr/local/cuda/include"
 				}
 			],
@@ -84,7 +98,7 @@
 			"id" : "cuda_lib::@6890427a1f51a3e7e1df"
 		}
 	],
-	"id" : "rwalk_op::@6890427a1f51a3e7e1df",
+	"id" : "random_walk::@6890427a1f51a3e7e1df",
 	"link" : 
 	{
 		"commandFragments" : 
@@ -98,43 +112,19 @@
 				"role" : "flags"
 			},
 			{
-				"fragment" : "-L/usr/local/cuda/lib64/stubs",
-				"role" : "libraryPath"
-			},
-			{
-				"fragment" : "-L/usr/local/cuda/lib64",
-				"role" : "libraryPath"
+				"fragment" : "-Wl,-rpath,/home/ubuntu/random_walk/build",
+				"role" : "libraries"
 			},
 			{
 				"backtrace" : 2,
-				"fragment" : "libcuda_lib.a",
-				"role" : "libraries"
-			},
-			{
-				"fragment" : "-lcudadevrt",
-				"role" : "libraries"
-			},
-			{
-				"fragment" : "-lcudart_static",
-				"role" : "libraries"
-			},
-			{
-				"fragment" : "-lrt",
-				"role" : "libraries"
-			},
-			{
-				"fragment" : "-lpthread",
-				"role" : "libraries"
-			},
-			{
-				"fragment" : "-ldl",
+				"fragment" : "libcuda_lib.so",
 				"role" : "libraries"
 			}
 		],
 		"language" : "CXX"
 	},
-	"name" : "rwalk_op",
-	"nameOnDisk" : "rwalk_op",
+	"name" : "random_walk",
+	"nameOnDisk" : "random_walk",
 	"paths" : 
 	{
 		"build" : ".",

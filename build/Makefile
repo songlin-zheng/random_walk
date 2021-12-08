@@ -130,17 +130,17 @@ cuda_lib/fast:
 .PHONY : cuda_lib/fast
 
 #=============================================================================
-# Target rules for targets named rwalk_op
+# Target rules for targets named random_walk
 
 # Build rule for target.
-rwalk_op: cmake_check_build_system
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 rwalk_op
-.PHONY : rwalk_op
+random_walk: cmake_check_build_system
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 random_walk
+.PHONY : random_walk
 
 # fast build rule for target.
-rwalk_op/fast:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/rwalk_op.dir/build.make CMakeFiles/rwalk_op.dir/build
-.PHONY : rwalk_op/fast
+random_walk/fast:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/random_walk.dir/build.make CMakeFiles/random_walk.dir/build
+.PHONY : random_walk/fast
 
 helper.o: helper.cu.o
 .PHONY : helper.o
@@ -171,7 +171,7 @@ rwalk_kernel.o: rwalk_kernel.cc.o
 
 # target to build an object file
 rwalk_kernel.cc.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/rwalk_op.dir/build.make CMakeFiles/rwalk_op.dir/rwalk_kernel.cc.o
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/random_walk.dir/build.make CMakeFiles/random_walk.dir/rwalk_kernel.cc.o
 .PHONY : rwalk_kernel.cc.o
 
 rwalk_kernel.i: rwalk_kernel.cc.i
@@ -179,7 +179,7 @@ rwalk_kernel.i: rwalk_kernel.cc.i
 
 # target to preprocess a source file
 rwalk_kernel.cc.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/rwalk_op.dir/build.make CMakeFiles/rwalk_op.dir/rwalk_kernel.cc.i
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/random_walk.dir/build.make CMakeFiles/random_walk.dir/rwalk_kernel.cc.i
 .PHONY : rwalk_kernel.cc.i
 
 rwalk_kernel.s: rwalk_kernel.cc.s
@@ -187,7 +187,7 @@ rwalk_kernel.s: rwalk_kernel.cc.s
 
 # target to generate assembly for a file
 rwalk_kernel.cc.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/rwalk_op.dir/build.make CMakeFiles/rwalk_op.dir/rwalk_kernel.cc.s
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/random_walk.dir/build.make CMakeFiles/random_walk.dir/rwalk_kernel.cc.s
 .PHONY : rwalk_kernel.cc.s
 
 rwalk_optimized.o: rwalk_optimized.cu.o
@@ -223,7 +223,7 @@ help:
 	@echo "... edit_cache"
 	@echo "... rebuild_cache"
 	@echo "... cuda_lib"
-	@echo "... rwalk_op"
+	@echo "... random_walk"
 	@echo "... helper.o"
 	@echo "... helper.i"
 	@echo "... helper.s"

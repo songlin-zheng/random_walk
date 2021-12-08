@@ -1,2 +1,1 @@
-/usr/bin/x86_64-linux-gnu-ar qc libcuda_lib.a CMakeFiles/cuda_lib.dir/helper.cu.o CMakeFiles/cuda_lib.dir/rwalk_optimized.cu.o
-/usr/bin/x86_64-linux-gnu-ranlib libcuda_lib.a
+/usr/bin/g++ -fPIC -shared -Wl,-soname,libcuda_lib.so -o libcuda_lib.so CMakeFiles/cuda_lib.dir/helper.cu.o CMakeFiles/cuda_lib.dir/rwalk_optimized.cu.o  -lcudadevrt -lcudart_static -lrt -lpthread -ldl  -L"/usr/local/cuda/lib64/stubs" -L"/usr/local/cuda/lib64"

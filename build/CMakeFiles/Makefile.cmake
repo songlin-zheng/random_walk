@@ -52,5 +52,5 @@ set(CMAKE_MAKEFILE_PRODUCTS
 # Dependency information for all targets:
 set(CMAKE_DEPEND_INFO_FILES
   "CMakeFiles/cuda_lib.dir/DependInfo.cmake"
-  "CMakeFiles/rwalk_op.dir/DependInfo.cmake"
+  "CMakeFiles/random_walk.dir/DependInfo.cmake"
   )

@@ -863,7 +863,7 @@
 				}
 			],
 			"type" : "STATIC",
-			"value" : "rwalk_op"
+			"value" : "random_walk"
 		},
 		{
 			"name" : "CMAKE_RANLIB",

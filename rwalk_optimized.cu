@@ -323,8 +323,8 @@ void cuda_rwalk(int max_walk_length, int num_walks_per_node, int32_t num_nodes, 
     dim3 gridDim(grid_size);
     dim3 blockDim(32);
 
-    singleRandomWalk<<<gridDim, blockDim>>>(num_nodes, num_walks_per_node, max_walk_length, node_idx_dev, timestamp_dev, start_idx_dev, random_walk_dev, random_number);
-    // optimizedRandomWalk<<<gridDim, blockDim>>>(num_nodes, num_walks_per_node, max_walk_length, cdf_buffer_dev, mapping_dev, node_idx_dev_sorted, start_idx_dev, random_walk_dev, random_number);
+    // singleRandomWalk<<<gridDim, blockDim>>>(num_nodes, num_walks_per_node, max_walk_length, node_idx_dev, timestamp_dev, start_idx_dev, random_walk_dev, random_number);
+    optimizedRandomWalk<<<gridDim, blockDim>>>(num_nodes, num_walks_per_node, max_walk_length, cdf_buffer_dev, mapping_dev, node_idx_dev_sorted, start_idx_dev, random_walk_dev, random_number);
 
 #if defined(DEBUG)
     cudaError_t err = cudaGetLastError();

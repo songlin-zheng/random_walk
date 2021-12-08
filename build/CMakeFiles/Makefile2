@@ -64,7 +64,7 @@ CMAKE_BINARY_DIR = /home/ubuntu/random_walk/build
 
 # The main recursive "all" target.
 all: CMakeFiles/cuda_lib.dir/all
-all: CMakeFiles/rwalk_op.dir/all
+all: CMakeFiles/random_walk.dir/all
 .PHONY : all
 
 # The main recursive "preinstall" target.
@@ -73,7 +73,7 @@ preinstall:
 
 # The main recursive "clean" target.
 clean: CMakeFiles/cuda_lib.dir/clean
-clean: CMakeFiles/rwalk_op.dir/clean
+clean: CMakeFiles/random_walk.dir/clean
 .PHONY : clean
 
 #=============================================================================
@@ -103,30 +103,30 @@ CMakeFiles/cuda_lib.dir/clean:
 .PHONY : CMakeFiles/cuda_lib.dir/clean
 
 #=============================================================================
-# Target rules for target CMakeFiles/rwalk_op.dir
+# Target rules for target CMakeFiles/random_walk.dir
 
 # All Build rule for target.
-CMakeFiles/rwalk_op.dir/all: CMakeFiles/cuda_lib.dir/all
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/rwalk_op.dir/build.make CMakeFiles/rwalk_op.dir/depend
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/rwalk_op.dir/build.make CMakeFiles/rwalk_op.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/ubuntu/random_walk/build/CMakeFiles --progress-num=4,5,6 "Built target rwalk_op"
-.PHONY : CMakeFiles/rwalk_op.dir/all
+CMakeFiles/random_walk.dir/all: CMakeFiles/cuda_lib.dir/all
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/random_walk.dir/build.make CMakeFiles/random_walk.dir/depend
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/random_walk.dir/build.make CMakeFiles/random_walk.dir/build
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/ubuntu/random_walk/build/CMakeFiles --progress-num=4,5 "Built target random_walk"
+.PHONY : CMakeFiles/random_walk.dir/all
 
 # Build rule for subdir invocation for target.
-CMakeFiles/rwalk_op.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/ubuntu/random_walk/build/CMakeFiles 6
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 CMakeFiles/rwalk_op.dir/all
+CMakeFiles/random_walk.dir/rule: cmake_check_build_system
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/ubuntu/random_walk/build/CMakeFiles 5
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 CMakeFiles/random_walk.dir/all
 	$(CMAKE_COMMAND) -E cmake_progress_start /home/ubuntu/random_walk/build/CMakeFiles 0
-.PHONY : CMakeFiles/rwalk_op.dir/rule
+.PHONY : CMakeFiles/random_walk.dir/rule
 
 # Convenience name for target.
-rwalk_op: CMakeFiles/rwalk_op.dir/rule
-.PHONY : rwalk_op
+random_walk: CMakeFiles/random_walk.dir/rule
+.PHONY : random_walk
 
 # clean rule for target.
-CMakeFiles/rwalk_op.dir/clean:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/rwalk_op.dir/build.make CMakeFiles/rwalk_op.dir/clean
-.PHONY : CMakeFiles/rwalk_op.dir/clean
+CMakeFiles/random_walk.dir/clean:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/random_walk.dir/build.make CMakeFiles/random_walk.dir/clean
+.PHONY : CMakeFiles/random_walk.dir/clean
 
 #=============================================================================
 # Special targets to cleanup operation of make.

@@ -1,7 +1,6 @@
 file(REMOVE_RECURSE
-  "CMakeFiles/random_walk.dir/cmake_device_link.o"
-  "CMakeFiles/random_walk.dir/helper_kernel.cc.o"
-  "CMakeFiles/random_walk.dir/helper_kernel.cc.o.d"
+  "CMakeFiles/random_walk.dir/rwalk_kernel.cc.o"
+  "CMakeFiles/random_walk.dir/rwalk_kernel.cc.o.d"
   "random_walk"
   "random_walk.pdb"
 )

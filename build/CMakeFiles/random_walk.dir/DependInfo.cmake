@@ -8,7 +8,7 @@ set(CMAKE_DEPENDS_LANGUAGES
 
 # The set of dependency files which are needed:
 set(CMAKE_DEPENDS_DEPENDENCY_FILES
-  "/home/ubuntu/random_walk/helper_kernel.cc" "CMakeFiles/random_walk.dir/helper_kernel.cc.o" "gcc" "CMakeFiles/random_walk.dir/helper_kernel.cc.o.d"
+  "/home/ubuntu/random_walk/rwalk_kernel.cc" "CMakeFiles/random_walk.dir/rwalk_kernel.cc.o" "gcc" "CMakeFiles/random_walk.dir/rwalk_kernel.cc.o.d"
   )
 
 # Targets to which this target links.
