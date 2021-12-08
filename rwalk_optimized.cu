@@ -26,6 +26,7 @@ float extend_ratio = 0.1;
 
 int threadBlockSize;
 cudaDeviceProp prop;
+int count_dev;
 bool preprocessing = true;
 
 
@@ -155,17 +156,22 @@ void __global__ singleRandomWalk(int num_of_node, int num_of_walk, int max_walk_
 
 void cuda_rwalk(int max_walk_length, int num_walks_per_node, int32_t num_nodes, int32_t num_edges, unsigned long long random_number){
 
+#if defined(DEBUG)
     size_t free_memory;
     size_t total_memory;
 
     cudaCheck(cudaMemGetInfo(&free_memory, &total_memory));
     // printf("free memory : %zu ; total memory : %zu\n", free_memory, total_memory);
+#endif
 
     // malloc GPU memory
     cudaCheck(cudaMalloc((void **)&start_idx_dev, sizeof(int32_t) * (num_nodes + 1)));
     cudaCheck(cudaMalloc((void **)&node_idx_dev, sizeof(int32_t) * num_edges));
     cudaCheck(cudaMalloc((void **)&timestamp_dev, sizeof(float) * num_edges));
     cudaCheck(cudaMalloc((void **)&random_walk_dev, sizeof(int32_t) * num_nodes * max_walk_length * num_walks_per_node));
+
+    // memcpy
+    cudaCheck(cudaMemcpy(start_idx_dev, start_idx_host, sizeof(int32_t) * (num_nodes + 1), cudaMemcpyHostToDevice));
 
     cudaGetDeviceProperties(&prop, 0);
     threadBlockSize = prop.maxThreadsPerBlock;
@@ -180,10 +186,9 @@ void cuda_rwalk(int max_walk_length, int num_walks_per_node, int32_t num_nodes, 
         cudaCheck(cudaMalloc((void **)&mapping_dev, sizeof(int32_t) * num_edges));
         cudaCheck(cudaMalloc((void **)&node_idx_dev_sorted, sizeof(int32_t) * num_edges));
         cudaCheck(cudaMalloc((void **)&timestamp_dev_sorted, sizeof(float) * num_edges));
+        cuda_helper(max_walk_length, num_walks_per_node, num_nodes, num_edges);
     }
     else{
-        // memcpy
-        cudaCheck(cudaMemcpy(start_idx_dev, start_idx_host, sizeof(int32_t) * (num_nodes + 1), cudaMemcpyHostToDevice));
         cudaCheck(cudaMemcpy(node_idx_dev, node_idx_host, sizeof(int32_t) * num_edges, cudaMemcpyHostToDevice));
         cudaCheck(cudaMemcpy(timestamp_dev, timestamp_host, sizeof(float) * num_edges, cudaMemcpyHostToDevice));
     }
@@ -191,15 +196,15 @@ void cuda_rwalk(int max_walk_length, int num_walks_per_node, int32_t num_nodes, 
 #if defined(DEBUG)
     cudaGetDeviceCount(&count_dev);
     for(int i = 0; i < count_dev; i ++){
-        printf("total_global_Mem: %zu\n shared_mem_per_block: %zu\n max_threads_per_block: %d\n max_thread_dim: %d\n max_grid_size: %d",
-        prop.totalGlobalMem, prop.sharedMemPerBlock, prop.maxThreadsPerBlock, prop.maxThreadsDim, prop.maxGridSize);
+        printf("total_global_Mem: %zu MB\n shared_mem_per_block: %zu\n max_threads_per_block: %d\n max_thread_dim: [%d, %d, %d]\n max_grid_size: [%d, %d, %d]",
+        prop.totalGlobalMem / 1024 / 1024, prop.sharedMemPerBlock, prop.maxThreadsPerBlock, prop.maxThreadsDim[0], prop.maxThreadsDim[1], prop.maxThreadsDim[2], prop.maxGridSize[0], prop.maxGridSize[1], prop.maxGridSize[2]);
 
     }
 #endif
 
 
     // start training
-    int grid_size = (num_nodes - 1) / 32 + 1;
+    int grid_size = (num_nodes * num_walks_per_node - 1) / 32 + 1;
     dim3 gridDim(grid_size);
     dim3 blockDim(32);
 

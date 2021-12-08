@@ -142,3 +142,102 @@ walk number: 4
 walk number: 5
 walk number: 6
 walk number: 7
+walk number: 8
+walk number: 9
+[TimingStat] Random walk time (s):                5.66236
+Computing random walk for 100000 nodes and 1000000 edges.
+walk number: 0
+walk number: 1
+walk number: 2
+walk number: 3
+walk number: 4
+walk number: 5
+walk number: 6
+walk number: 7
+walk number: 8
+walk number: 9
+[TimingStat] Random walk time (s):                5.66940
+Computing random walk for 100000 nodes and 1000000 edges.
+walk number: 0
+walk number: 1
+walk number: 2
+walk number: 3
+walk number: 4
+walk number: 5
+walk number: 6
+walk number: 7
+walk number: 8
+walk number: 9
+[TimingStat] Random walk time (s):                5.66061
+Computing random walk for 100000 nodes and 1000000 edges.
+walk number: 0
+walk number: 1
+walk number: 2
+walk number: 3
+walk number: 4
+walk number: 5
+walk number: 6
+walk number: 7
+walk number: 8
+walk number: 9
+[TimingStat] Random walk time (s):                5.70899
+Computing random walk for 100000 nodes and 1000000 edges.
+walk number: 0
+walk number: 1
+walk number: 2
+walk number: 3
+walk number: 4
+walk number: 5
+walk number: 6
+walk number: 7
+walk number: 8
+walk number: 9
+[TimingStat] Random walk time (s):                5.66669
+Computing random walk for 100000 nodes and 1000000 edges.
+walk number: 0
+walk number: 1
+walk number: 2
+walk number: 3
+walk number: 4
+walk number: 5
+walk number: 6
+walk number: 7
+walk number: 8
+walk number: 9
+[TimingStat] Random walk time (s):                5.65754
+Computing random walk for 100000 nodes and 1000000 edges.
+walk number: 0
+walk number: 1
+walk number: 2
+walk number: 3
+walk number: 4
+walk number: 5
+walk number: 6
+walk number: 7
+walk number: 8
+walk number: 9
+[TimingStat] Random walk time (s):                6.11879
+Computing random walk for 100000 nodes and 1000000 edges.
+walk number: 0
+walk number: 1
+walk number: 2
+walk number: 3
+walk number: 4
+walk number: 5
+walk number: 6
+walk number: 7
+walk number: 8
+walk number: 9
+[TimingStat] Random walk time (s):                5.86829
+Computing random walk for 100000 nodes and 1000000 edges.
+walk number: 0
+walk number: 1
+walk number: 2
+walk number: 3
+walk number: 4
+walk number: 5
+walk number: 6
+walk number: 7
+walk number: 8
+walk number: 9
+[TimingStat] Random walk time (s):                5.68850

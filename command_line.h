@@ -113,7 +113,7 @@ class CLBase {
 class CLApp : public CLBase {
   bool do_analysis_ = false;
   int num_trials_ = 16;
-  int64_t start_vertex_ = -1;
+  int32_t start_vertex_ = -1;
   bool do_verify_ = false;
   std::string graph_dir_name_ = "add-graph_dir_name";
   std::string hyperparams_file_name_ = "add-hyperparams-filename";
@@ -160,7 +160,7 @@ class CLApp : public CLBase {
 
   bool do_analysis() const { return do_analysis_; }
   int num_trials() const { return num_trials_; }
-  int64_t start_vertex() const { return start_vertex_; }
+  int32_t start_vertex() const { return start_vertex_; }
   bool do_verify() const { return do_verify_; }
   int get_output_dim() const { return output_dim_; }
   float get_learning_rate() const { return learning_rate_; }
@@ -178,19 +178,19 @@ class CLApp : public CLBase {
   int get_max_walk_length() const { return walk_length_; }
   float get_target_val_accuracy() const { return target_val_accuracy_; }
   int get_batch_size() const { return batch_size_; }
-  std::string get_training_file_name()  const { 
+  std::string get_training_file_name()  const {
     std::string file_base_path = "../data/node_class/";
     std::string file_name = "/train.tsv";
     std::string return_file_path;
     return_file_path = file_base_path + graph_dir_name_ + file_name;
     return return_file_path; }
-  std::string get_testing_file_name()  const { 
+  std::string get_testing_file_name()  const {
     std::string file_base_path = "../data/node_class/";
     std::string file_name = "/test.tsv";
     std::string return_file_path;
     return_file_path = file_base_path + graph_dir_name_ + file_name;
     return return_file_path; }
-  std::string get_validation_file_name()  const { 
+  std::string get_validation_file_name()  const {
     std::string file_base_path = "../data/node_class/";
     std::string file_name = "/valid.tsv";
     std::string return_file_path;

@@ -15,9 +15,6 @@ then
 elif [ "$1" = "helper" ]
 then
     cp "./CMakeLists_helper.txt" "./CMakeLists.txt"
-elif [ "$1" == "rwalk_op" ]
-then
-    cp "./CMakeLists_rwalk_optimized.txt" "./CMakeLists.txt"
 fi
 
 cd _build/
@@ -29,9 +26,6 @@ then
 elif [ "$1" == "helper" ]
 then
     mv "./helper" "../"
-elif [ "$1" == "rwalk_op" ]
-then
-    mv "./rwalk_op" "../"
 fi
 cd ../
 

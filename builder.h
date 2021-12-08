@@ -42,7 +42,7 @@ class BuilderBase {
   const CLBase &cli_;
   bool symmetrize_;
   bool needs_weights_;
-  int64_t num_nodes_ = -1;
+  int32_t num_nodes_ = -1;
 
  public:
   explicit BuilderBase(const CLBase &cli) : cli_(cli) {
@@ -253,7 +253,7 @@ class BuilderBase {
     }
     Timer t;
     t.Start();
-    typedef std::pair<int64_t, NodeID_> degree_node_p;
+    typedef std::pair<int32_t, NodeID_> degree_node_p;
     pvector<degree_node_p> degree_id_pairs(g.num_nodes());
     // #pragma omp parallel for
     for (NodeID_ n=0; n < g.num_nodes(); n++)

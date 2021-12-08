@@ -2566,7 +2566,7 @@ extern __attribute__((host)) cudaError_t cudaGetChannelDesc(struct cudaChannelFo
 # 7398 "/usr/local/cuda/bin/..//include/cuda_runtime_api.h"
 extern __attribute__((host)) struct cudaChannelFormatDesc cudaCreateChannelDesc(int x, int y, int z, int w, enum cudaChannelFormatKind f);
 # 7451 "/usr/local/cuda/bin/..//include/cuda_runtime_api.h"
-extern __attribute__((host)) cudaError_t cudaBindTexture(size_t *offset, const struct textureReference *texref, const void *devPtr, const struct cudaChannelFormatDesc *desc, size_t size = 
+extern __attribute__((host)) cudaError_t cudaBindTexture(size_t *offset, const struct textureReference *texref, const void *devPtr, const struct cudaChannelFormatDesc *desc, size_t size =
 # 7451 "/usr/local/cuda/bin/..//include/cuda_runtime_api.h" 3 4
                                                                                                                                                                                       (0x7fffffff * 2U + 1U)
 # 7451 "/usr/local/cuda/bin/..//include/cuda_runtime_api.h"
@@ -3763,8 +3763,8 @@ typedef unsigned short int __uint16_t;
 typedef signed int __int32_t;
 typedef unsigned int __uint32_t;
 
-typedef signed long int __int64_t;
-typedef unsigned long int __uint64_t;
+typedef signed long int __int32_t;
+typedef unsigned long int __uint32_t;
 
 
 
@@ -4221,12 +4221,12 @@ extern __attribute__((host)) __attribute__((device)) __attribute__((device_built
 throw ()
 # 87 "/usr/local/cuda/bin/..//include/crt/common_functions.h"
       ;
-extern __attribute__((host)) __attribute__((device)) __attribute__((device_builtin)) __attribute__((cudart_builtin)) void* memset(void*, int, size_t) 
+extern __attribute__((host)) __attribute__((device)) __attribute__((device_builtin)) __attribute__((cudart_builtin)) void* memset(void*, int, size_t)
 # 88 "/usr/local/cuda/bin/..//include/crt/common_functions.h" 3 4
                                                                                                                    throw ()
 # 88 "/usr/local/cuda/bin/..//include/crt/common_functions.h"
                                                                                                                           ;
-extern __attribute__((host)) __attribute__((device)) __attribute__((device_builtin)) __attribute__((cudart_builtin)) void* memcpy(void*, const void*, size_t) 
+extern __attribute__((host)) __attribute__((device)) __attribute__((device_builtin)) __attribute__((cudart_builtin)) void* memcpy(void*, const void*, size_t)
 # 89 "/usr/local/cuda/bin/..//include/crt/common_functions.h" 3 4
                                                                                                                            throw ()
 # 89 "/usr/local/cuda/bin/..//include/crt/common_functions.h"
@@ -4250,29 +4250,29 @@ extern __attribute__((host)) __attribute__((device)) __attribute__((device_built
 extern "C"
 {
 # 192 "/usr/local/cuda/bin/..//include/crt/math_functions.h"
-extern __attribute__((host)) __attribute__((device)) __attribute__((device_builtin)) __attribute__((cudart_builtin)) int abs(int) 
+extern __attribute__((host)) __attribute__((device)) __attribute__((device_builtin)) __attribute__((cudart_builtin)) int abs(int)
 # 192 "/usr/local/cuda/bin/..//include/crt/math_functions.h" 3 4
                                                                                                       throw ()
 # 192 "/usr/local/cuda/bin/..//include/crt/math_functions.h"
                                                                                                              ;
-extern __attribute__((host)) __attribute__((device)) __attribute__((device_builtin)) __attribute__((cudart_builtin)) long int labs(long int) 
+extern __attribute__((host)) __attribute__((device)) __attribute__((device_builtin)) __attribute__((cudart_builtin)) long int labs(long int)
 # 193 "/usr/local/cuda/bin/..//include/crt/math_functions.h" 3 4
                                                                                                             throw ()
 # 193 "/usr/local/cuda/bin/..//include/crt/math_functions.h"
                                                                                                                    ;
-extern __attribute__((host)) __attribute__((device)) __attribute__((device_builtin)) __attribute__((cudart_builtin)) long long int llabs(long long int) 
+extern __attribute__((host)) __attribute__((device)) __attribute__((device_builtin)) __attribute__((cudart_builtin)) long long int llabs(long long int)
 # 194 "/usr/local/cuda/bin/..//include/crt/math_functions.h" 3 4
                                                                                                                   throw ()
 # 194 "/usr/local/cuda/bin/..//include/crt/math_functions.h"
                                                                                                                          ;
 # 244 "/usr/local/cuda/bin/..//include/crt/math_functions.h"
-extern __attribute__((host)) __attribute__((device)) __attribute__((device_builtin)) double fabs(double x) 
+extern __attribute__((host)) __attribute__((device)) __attribute__((device_builtin)) double fabs(double x)
 # 244 "/usr/local/cuda/bin/..//include/crt/math_functions.h" 3 4
                                                                                          throw ()
 # 244 "/usr/local/cuda/bin/..//include/crt/math_functions.h"
                                                                                                 ;
 # 285 "/usr/local/cuda/bin/..//include/crt/math_functions.h"
-extern __attribute__((host)) __attribute__((device)) __attribute__((device_builtin)) float fabsf(float x) 
+extern __attribute__((host)) __attribute__((device)) __attribute__((device_builtin)) float fabsf(float x)
 # 285 "/usr/local/cuda/bin/..//include/crt/math_functions.h" 3 4
                                                                                          throw ()
 # 285 "/usr/local/cuda/bin/..//include/crt/math_functions.h"
@@ -4286,13 +4286,13 @@ extern __attribute__((host)) __attribute__((device)) __attribute__((device_built
 extern __attribute__((host)) __attribute__((device)) __attribute__((device_builtin)) long long int llmin(long long int, long long int);
 extern __attribute__((host)) __attribute__((device)) __attribute__((device_builtin)) unsigned long long int ullmin(unsigned long long int, unsigned long long int);
 # 314 "/usr/local/cuda/bin/..//include/crt/math_functions.h"
-extern __attribute__((host)) __attribute__((device)) __attribute__((device_builtin)) float fminf(float x, float y) 
+extern __attribute__((host)) __attribute__((device)) __attribute__((device_builtin)) float fminf(float x, float y)
 # 314 "/usr/local/cuda/bin/..//include/crt/math_functions.h" 3 4
                                                                                                   throw ()
 # 314 "/usr/local/cuda/bin/..//include/crt/math_functions.h"
                                                                                                          ;
 # 334 "/usr/local/cuda/bin/..//include/crt/math_functions.h"
-extern __attribute__((host)) __attribute__((device)) __attribute__((device_builtin)) double fmin(double x, double y) 
+extern __attribute__((host)) __attribute__((device)) __attribute__((device_builtin)) double fmin(double x, double y)
 # 334 "/usr/local/cuda/bin/..//include/crt/math_functions.h" 3 4
                                                                                                    throw ()
 # 334 "/usr/local/cuda/bin/..//include/crt/math_functions.h"
@@ -4309,49 +4309,49 @@ extern __attribute__((host)) __attribute__((device)) __attribute__((device_built
 extern __attribute__((host)) __attribute__((device)) __attribute__((device_builtin)) long long int llmax(long long int, long long int);
 extern __attribute__((host)) __attribute__((device)) __attribute__((device_builtin)) unsigned long long int ullmax(unsigned long long int, unsigned long long int);
 # 366 "/usr/local/cuda/bin/..//include/crt/math_functions.h"
-extern __attribute__((host)) __attribute__((device)) __attribute__((device_builtin)) float fmaxf(float x, float y) 
+extern __attribute__((host)) __attribute__((device)) __attribute__((device_builtin)) float fmaxf(float x, float y)
 # 366 "/usr/local/cuda/bin/..//include/crt/math_functions.h" 3 4
                                                                                                   throw ()
 # 366 "/usr/local/cuda/bin/..//include/crt/math_functions.h"
                                                                                                          ;
 # 386 "/usr/local/cuda/bin/..//include/crt/math_functions.h"
-extern __attribute__((host)) __attribute__((device)) __attribute__((device_builtin)) double fmax(double, double) 
+extern __attribute__((host)) __attribute__((device)) __attribute__((device_builtin)) double fmax(double, double)
 # 386 "/usr/local/cuda/bin/..//include/crt/math_functions.h" 3 4
                                                                                                throw ()
 # 386 "/usr/local/cuda/bin/..//include/crt/math_functions.h"
                                                                                                       ;
 # 430 "/usr/local/cuda/bin/..//include/crt/math_functions.h"
-extern __attribute__((host)) __attribute__((device)) __attribute__((device_builtin)) double sin(double x) 
+extern __attribute__((host)) __attribute__((device)) __attribute__((device_builtin)) double sin(double x)
 # 430 "/usr/local/cuda/bin/..//include/crt/math_functions.h" 3 4
                                                                                         throw ()
 # 430 "/usr/local/cuda/bin/..//include/crt/math_functions.h"
                                                                                                ;
 # 463 "/usr/local/cuda/bin/..//include/crt/math_functions.h"
-extern __attribute__((host)) __attribute__((device)) __attribute__((device_builtin)) double cos(double x) 
+extern __attribute__((host)) __attribute__((device)) __attribute__((device_builtin)) double cos(double x)
 # 463 "/usr/local/cuda/bin/..//include/crt/math_functions.h" 3 4
                                                                                         throw ()
 # 463 "/usr/local/cuda/bin/..//include/crt/math_functions.h"
                                                                                                ;
 # 482 "/usr/local/cuda/bin/..//include/crt/math_functions.h"
-extern __attribute__((host)) __attribute__((device)) __attribute__((device_builtin)) void sincos(double x, double *sptr, double *cptr) 
+extern __attribute__((host)) __attribute__((device)) __attribute__((device_builtin)) void sincos(double x, double *sptr, double *cptr)
 # 482 "/usr/local/cuda/bin/..//include/crt/math_functions.h" 3 4
                                                                                                                        throw ()
 # 482 "/usr/local/cuda/bin/..//include/crt/math_functions.h"
                                                                                                                               ;
 # 498 "/usr/local/cuda/bin/..//include/crt/math_functions.h"
-extern __attribute__((host)) __attribute__((device)) __attribute__((device_builtin)) void sincosf(float x, float *sptr, float *cptr) 
+extern __attribute__((host)) __attribute__((device)) __attribute__((device_builtin)) void sincosf(float x, float *sptr, float *cptr)
 # 498 "/usr/local/cuda/bin/..//include/crt/math_functions.h" 3 4
                                                                                                                      throw ()
 # 498 "/usr/local/cuda/bin/..//include/crt/math_functions.h"
                                                                                                                             ;
 # 543 "/usr/local/cuda/bin/..//include/crt/math_functions.h"
-extern __attribute__((host)) __attribute__((device)) __attribute__((device_builtin)) double tan(double x) 
+extern __attribute__((host)) __attribute__((device)) __attribute__((device_builtin)) double tan(double x)
 # 543 "/usr/local/cuda/bin/..//include/crt/math_functions.h" 3 4
                                                                                         throw ()
 # 543 "/usr/local/cuda/bin/..//include/crt/math_functions.h"
                                                                                                ;
 # 612 "/usr/local/cuda/bin/..//include/crt/math_functions.h"
-extern __attribute__((host)) __attribute__((device)) __attribute__((device_builtin)) double sqrt(double x) 
+extern __attribute__((host)) __attribute__((device)) __attribute__((device_builtin)) double sqrt(double x)
 # 612 "/usr/local/cuda/bin/..//include/crt/math_functions.h" 3 4
                                                                                          throw ()
 # 612 "/usr/local/cuda/bin/..//include/crt/math_functions.h"
@@ -4361,451 +4361,451 @@ extern __attribute__((host)) __attribute__((device)) __attribute__((device_built
 # 754 "/usr/local/cuda/bin/..//include/crt/math_functions.h"
 extern __attribute__((host)) __attribute__((device)) __attribute__((device_builtin)) float rsqrtf(float x);
 # 810 "/usr/local/cuda/bin/..//include/crt/math_functions.h"
-extern __attribute__((host)) __attribute__((device)) __attribute__((device_builtin)) double log2(double x) 
+extern __attribute__((host)) __attribute__((device)) __attribute__((device_builtin)) double log2(double x)
 # 810 "/usr/local/cuda/bin/..//include/crt/math_functions.h" 3 4
                                                                                          throw ()
 # 810 "/usr/local/cuda/bin/..//include/crt/math_functions.h"
                                                                                                 ;
 # 835 "/usr/local/cuda/bin/..//include/crt/math_functions.h"
-extern __attribute__((host)) __attribute__((device)) __attribute__((device_builtin)) double exp2(double x) 
+extern __attribute__((host)) __attribute__((device)) __attribute__((device_builtin)) double exp2(double x)
 # 835 "/usr/local/cuda/bin/..//include/crt/math_functions.h" 3 4
                                                                                          throw ()
 # 835 "/usr/local/cuda/bin/..//include/crt/math_functions.h"
                                                                                                 ;
 # 860 "/usr/local/cuda/bin/..//include/crt/math_functions.h"
-extern __attribute__((host)) __attribute__((device)) __attribute__((device_builtin)) float exp2f(float x) 
+extern __attribute__((host)) __attribute__((device)) __attribute__((device_builtin)) float exp2f(float x)
 # 860 "/usr/local/cuda/bin/..//include/crt/math_functions.h" 3 4
                                                                                          throw ()
 # 860 "/usr/local/cuda/bin/..//include/crt/math_functions.h"
                                                                                                 ;
 # 887 "/usr/local/cuda/bin/..//include/crt/math_functions.h"
-extern __attribute__((host)) __attribute__((device)) __attribute__((device_builtin)) double exp10(double x) 
+extern __attribute__((host)) __attribute__((device)) __attribute__((device_builtin)) double exp10(double x)
 # 887 "/usr/local/cuda/bin/..//include/crt/math_functions.h" 3 4
                                                                                           throw ()
 # 887 "/usr/local/cuda/bin/..//include/crt/math_functions.h"
                                                                                                  ;
 # 910 "/usr/local/cuda/bin/..//include/crt/math_functions.h"
-extern __attribute__((host)) __attribute__((device)) __attribute__((device_builtin)) float exp10f(float x) 
+extern __attribute__((host)) __attribute__((device)) __attribute__((device_builtin)) float exp10f(float x)
 # 910 "/usr/local/cuda/bin/..//include/crt/math_functions.h" 3 4
                                                                                           throw ()
 # 910 "/usr/local/cuda/bin/..//include/crt/math_functions.h"
                                                                                                  ;
 # 956 "/usr/local/cuda/bin/..//include/crt/math_functions.h"
-extern __attribute__((host)) __attribute__((device)) __attribute__((device_builtin)) double expm1(double x) 
+extern __attribute__((host)) __attribute__((device)) __attribute__((device_builtin)) double expm1(double x)
 # 956 "/usr/local/cuda/bin/..//include/crt/math_functions.h" 3 4
                                                                                           throw ()
 # 956 "/usr/local/cuda/bin/..//include/crt/math_functions.h"
                                                                                                  ;
 # 1001 "/usr/local/cuda/bin/..//include/crt/math_functions.h"
-extern __attribute__((host)) __attribute__((device)) __attribute__((device_builtin)) float expm1f(float x) 
+extern __attribute__((host)) __attribute__((device)) __attribute__((device_builtin)) float expm1f(float x)
 # 1001 "/usr/local/cuda/bin/..//include/crt/math_functions.h" 3 4
                                                                                           throw ()
 # 1001 "/usr/local/cuda/bin/..//include/crt/math_functions.h"
                                                                                                  ;
 # 1056 "/usr/local/cuda/bin/..//include/crt/math_functions.h"
-extern __attribute__((host)) __attribute__((device)) __attribute__((device_builtin)) float log2f(float x) 
+extern __attribute__((host)) __attribute__((device)) __attribute__((device_builtin)) float log2f(float x)
 # 1056 "/usr/local/cuda/bin/..//include/crt/math_functions.h" 3 4
                                                                                          throw ()
 # 1056 "/usr/local/cuda/bin/..//include/crt/math_functions.h"
                                                                                                 ;
 # 1110 "/usr/local/cuda/bin/..//include/crt/math_functions.h"
-extern __attribute__((host)) __attribute__((device)) __attribute__((device_builtin)) double log10(double x) 
+extern __attribute__((host)) __attribute__((device)) __attribute__((device_builtin)) double log10(double x)
 # 1110 "/usr/local/cuda/bin/..//include/crt/math_functions.h" 3 4
                                                                                           throw ()
 # 1110 "/usr/local/cuda/bin/..//include/crt/math_functions.h"
                                                                                                  ;
 # 1181 "/usr/local/cuda/bin/..//include/crt/math_functions.h"
-extern __attribute__((host)) __attribute__((device)) __attribute__((device_builtin)) double log(double x) 
+extern __attribute__((host)) __attribute__((device)) __attribute__((device_builtin)) double log(double x)
 # 1181 "/usr/local/cuda/bin/..//include/crt/math_functions.h" 3 4
                                                                                         throw ()
 # 1181 "/usr/local/cuda/bin/..//include/crt/math_functions.h"
                                                                                                ;
 # 1275 "/usr/local/cuda/bin/..//include/crt/math_functions.h"
-extern __attribute__((host)) __attribute__((device)) __attribute__((device_builtin)) double log1p(double x) 
+extern __attribute__((host)) __attribute__((device)) __attribute__((device_builtin)) double log1p(double x)
 # 1275 "/usr/local/cuda/bin/..//include/crt/math_functions.h" 3 4
                                                                                           throw ()
 # 1275 "/usr/local/cuda/bin/..//include/crt/math_functions.h"
                                                                                                  ;
 # 1372 "/usr/local/cuda/bin/..//include/crt/math_functions.h"
-extern __attribute__((host)) __attribute__((device)) __attribute__((device_builtin)) float log1pf(float x) 
+extern __attribute__((host)) __attribute__((device)) __attribute__((device_builtin)) float log1pf(float x)
 # 1372 "/usr/local/cuda/bin/..//include/crt/math_functions.h" 3 4
                                                                                           throw ()
 # 1372 "/usr/local/cuda/bin/..//include/crt/math_functions.h"
                                                                                                  ;
 # 1447 "/usr/local/cuda/bin/..//include/crt/math_functions.h"
-extern __attribute__((host)) __attribute__((device)) __attribute__((device_builtin)) double floor(double x) 
+extern __attribute__((host)) __attribute__((device)) __attribute__((device_builtin)) double floor(double x)
 # 1447 "/usr/local/cuda/bin/..//include/crt/math_functions.h" 3 4
                                                                                                      throw ()
 # 1447 "/usr/local/cuda/bin/..//include/crt/math_functions.h"
                                                                                                             ;
 # 1486 "/usr/local/cuda/bin/..//include/crt/math_functions.h"
-extern __attribute__((host)) __attribute__((device)) __attribute__((device_builtin)) double exp(double x) 
+extern __attribute__((host)) __attribute__((device)) __attribute__((device_builtin)) double exp(double x)
 # 1486 "/usr/local/cuda/bin/..//include/crt/math_functions.h" 3 4
                                                                                         throw ()
 # 1486 "/usr/local/cuda/bin/..//include/crt/math_functions.h"
                                                                                                ;
 # 1517 "/usr/local/cuda/bin/..//include/crt/math_functions.h"
-extern __attribute__((host)) __attribute__((device)) __attribute__((device_builtin)) double cosh(double x) 
+extern __attribute__((host)) __attribute__((device)) __attribute__((device_builtin)) double cosh(double x)
 # 1517 "/usr/local/cuda/bin/..//include/crt/math_functions.h" 3 4
                                                                                          throw ()
 # 1517 "/usr/local/cuda/bin/..//include/crt/math_functions.h"
                                                                                                 ;
 # 1547 "/usr/local/cuda/bin/..//include/crt/math_functions.h"
-extern __attribute__((host)) __attribute__((device)) __attribute__((device_builtin)) double sinh(double x) 
+extern __attribute__((host)) __attribute__((device)) __attribute__((device_builtin)) double sinh(double x)
 # 1547 "/usr/local/cuda/bin/..//include/crt/math_functions.h" 3 4
                                                                                          throw ()
 # 1547 "/usr/local/cuda/bin/..//include/crt/math_functions.h"
                                                                                                 ;
 # 1577 "/usr/local/cuda/bin/..//include/crt/math_functions.h"
-extern __attribute__((host)) __attribute__((device)) __attribute__((device_builtin)) double tanh(double x) 
+extern __attribute__((host)) __attribute__((device)) __attribute__((device_builtin)) double tanh(double x)
 # 1577 "/usr/local/cuda/bin/..//include/crt/math_functions.h" 3 4
                                                                                          throw ()
 # 1577 "/usr/local/cuda/bin/..//include/crt/math_functions.h"
                                                                                                 ;
 # 1612 "/usr/local/cuda/bin/..//include/crt/math_functions.h"
-extern __attribute__((host)) __attribute__((device)) __attribute__((device_builtin)) double acosh(double x) 
+extern __attribute__((host)) __attribute__((device)) __attribute__((device_builtin)) double acosh(double x)
 # 1612 "/usr/local/cuda/bin/..//include/crt/math_functions.h" 3 4
                                                                                           throw ()
 # 1612 "/usr/local/cuda/bin/..//include/crt/math_functions.h"
                                                                                                  ;
 # 1650 "/usr/local/cuda/bin/..//include/crt/math_functions.h"
-extern __attribute__((host)) __attribute__((device)) __attribute__((device_builtin)) float acoshf(float x) 
+extern __attribute__((host)) __attribute__((device)) __attribute__((device_builtin)) float acoshf(float x)
 # 1650 "/usr/local/cuda/bin/..//include/crt/math_functions.h" 3 4
                                                                                           throw ()
 # 1650 "/usr/local/cuda/bin/..//include/crt/math_functions.h"
                                                                                                  ;
 # 1666 "/usr/local/cuda/bin/..//include/crt/math_functions.h"
-extern __attribute__((host)) __attribute__((device)) __attribute__((device_builtin)) double asinh(double x) 
+extern __attribute__((host)) __attribute__((device)) __attribute__((device_builtin)) double asinh(double x)
 # 1666 "/usr/local/cuda/bin/..//include/crt/math_functions.h" 3 4
                                                                                           throw ()
 # 1666 "/usr/local/cuda/bin/..//include/crt/math_functions.h"
                                                                                                  ;
 # 1682 "/usr/local/cuda/bin/..//include/crt/math_functions.h"
-extern __attribute__((host)) __attribute__((device)) __attribute__((device_builtin)) float asinhf(float x) 
+extern __attribute__((host)) __attribute__((device)) __attribute__((device_builtin)) float asinhf(float x)
 # 1682 "/usr/local/cuda/bin/..//include/crt/math_functions.h" 3 4
                                                                                           throw ()
 # 1682 "/usr/local/cuda/bin/..//include/crt/math_functions.h"
                                                                                                  ;
 # 1736 "/usr/local/cuda/bin/..//include/crt/math_functions.h"
-extern __attribute__((host)) __attribute__((device)) __attribute__((device_builtin)) double atanh(double x) 
+extern __attribute__((host)) __attribute__((device)) __attribute__((device_builtin)) double atanh(double x)
 # 1736 "/usr/local/cuda/bin/..//include/crt/math_functions.h" 3 4
                                                                                           throw ()
 # 1736 "/usr/local/cuda/bin/..//include/crt/math_functions.h"
                                                                                                  ;
 # 1790 "/usr/local/cuda/bin/..//include/crt/math_functions.h"
-extern __attribute__((host)) __attribute__((device)) __attribute__((device_builtin)) float atanhf(float x) 
+extern __attribute__((host)) __attribute__((device)) __attribute__((device_builtin)) float atanhf(float x)
 # 1790 "/usr/local/cuda/bin/..//include/crt/math_functions.h" 3 4
                                                                                           throw ()
 # 1790 "/usr/local/cuda/bin/..//include/crt/math_functions.h"
                                                                                                  ;
 # 1849 "/usr/local/cuda/bin/..//include/crt/math_functions.h"
-extern __attribute__((host)) __attribute__((device)) __attribute__((device_builtin)) double ldexp(double x, int exp) 
+extern __attribute__((host)) __attribute__((device)) __attribute__((device_builtin)) double ldexp(double x, int exp)
 # 1849 "/usr/local/cuda/bin/..//include/crt/math_functions.h" 3 4
                                                                                                               throw ()
 # 1849 "/usr/local/cuda/bin/..//include/crt/math_functions.h"
                                                                                                                      ;
 # 1905 "/usr/local/cuda/bin/..//include/crt/math_functions.h"
-extern __attribute__((host)) __attribute__((device)) __attribute__((device_builtin)) float ldexpf(float x, int exp) 
+extern __attribute__((host)) __attribute__((device)) __attribute__((device_builtin)) float ldexpf(float x, int exp)
 # 1905 "/usr/local/cuda/bin/..//include/crt/math_functions.h" 3 4
                                                                                                    throw ()
 # 1905 "/usr/local/cuda/bin/..//include/crt/math_functions.h"
                                                                                                           ;
 # 1957 "/usr/local/cuda/bin/..//include/crt/math_functions.h"
-extern __attribute__((host)) __attribute__((device)) __attribute__((device_builtin)) double logb(double x) 
+extern __attribute__((host)) __attribute__((device)) __attribute__((device_builtin)) double logb(double x)
 # 1957 "/usr/local/cuda/bin/..//include/crt/math_functions.h" 3 4
                                                                                          throw ()
 # 1957 "/usr/local/cuda/bin/..//include/crt/math_functions.h"
                                                                                                 ;
 # 2012 "/usr/local/cuda/bin/..//include/crt/math_functions.h"
-extern __attribute__((host)) __attribute__((device)) __attribute__((device_builtin)) float logbf(float x) 
+extern __attribute__((host)) __attribute__((device)) __attribute__((device_builtin)) float logbf(float x)
 # 2012 "/usr/local/cuda/bin/..//include/crt/math_functions.h" 3 4
                                                                                          throw ()
 # 2012 "/usr/local/cuda/bin/..//include/crt/math_functions.h"
                                                                                                 ;
 # 2042 "/usr/local/cuda/bin/..//include/crt/math_functions.h"
-extern __attribute__((host)) __attribute__((device)) __attribute__((device_builtin)) int ilogb(double x) 
+extern __attribute__((host)) __attribute__((device)) __attribute__((device_builtin)) int ilogb(double x)
 # 2042 "/usr/local/cuda/bin/..//include/crt/math_functions.h" 3 4
                                                                                           throw ()
 # 2042 "/usr/local/cuda/bin/..//include/crt/math_functions.h"
                                                                                                  ;
 # 2072 "/usr/local/cuda/bin/..//include/crt/math_functions.h"
-extern __attribute__((host)) __attribute__((device)) __attribute__((device_builtin)) int ilogbf(float x) 
+extern __attribute__((host)) __attribute__((device)) __attribute__((device_builtin)) int ilogbf(float x)
 # 2072 "/usr/local/cuda/bin/..//include/crt/math_functions.h" 3 4
                                                                                           throw ()
 # 2072 "/usr/local/cuda/bin/..//include/crt/math_functions.h"
                                                                                                  ;
 # 2148 "/usr/local/cuda/bin/..//include/crt/math_functions.h"
-extern __attribute__((host)) __attribute__((device)) __attribute__((device_builtin)) double scalbn(double x, int n) 
+extern __attribute__((host)) __attribute__((device)) __attribute__((device_builtin)) double scalbn(double x, int n)
 # 2148 "/usr/local/cuda/bin/..//include/crt/math_functions.h" 3 4
                                                                                                   throw ()
 # 2148 "/usr/local/cuda/bin/..//include/crt/math_functions.h"
                                                                                                          ;
 # 2224 "/usr/local/cuda/bin/..//include/crt/math_functions.h"
-extern __attribute__((host)) __attribute__((device)) __attribute__((device_builtin)) float scalbnf(float x, int n) 
+extern __attribute__((host)) __attribute__((device)) __attribute__((device_builtin)) float scalbnf(float x, int n)
 # 2224 "/usr/local/cuda/bin/..//include/crt/math_functions.h" 3 4
                                                                                                   throw ()
 # 2224 "/usr/local/cuda/bin/..//include/crt/math_functions.h"
                                                                                                          ;
 # 2300 "/usr/local/cuda/bin/..//include/crt/math_functions.h"
-extern __attribute__((host)) __attribute__((device)) __attribute__((device_builtin)) double scalbln(double x, long int n) 
+extern __attribute__((host)) __attribute__((device)) __attribute__((device_builtin)) double scalbln(double x, long int n)
 # 2300 "/usr/local/cuda/bin/..//include/crt/math_functions.h" 3 4
                                                                                                         throw ()
 # 2300 "/usr/local/cuda/bin/..//include/crt/math_functions.h"
                                                                                                                ;
 # 2376 "/usr/local/cuda/bin/..//include/crt/math_functions.h"
-extern __attribute__((host)) __attribute__((device)) __attribute__((device_builtin)) float scalblnf(float x, long int n) 
+extern __attribute__((host)) __attribute__((device)) __attribute__((device_builtin)) float scalblnf(float x, long int n)
 # 2376 "/usr/local/cuda/bin/..//include/crt/math_functions.h" 3 4
                                                                                                         throw ()
 # 2376 "/usr/local/cuda/bin/..//include/crt/math_functions.h"
                                                                                                                ;
 # 2454 "/usr/local/cuda/bin/..//include/crt/math_functions.h"
-extern __attribute__((host)) __attribute__((device)) __attribute__((device_builtin)) double frexp(double x, int *nptr) 
+extern __attribute__((host)) __attribute__((device)) __attribute__((device_builtin)) double frexp(double x, int *nptr)
 # 2454 "/usr/local/cuda/bin/..//include/crt/math_functions.h" 3 4
                                                                                                                 throw ()
 # 2454 "/usr/local/cuda/bin/..//include/crt/math_functions.h"
                                                                                                                        ;
 # 2529 "/usr/local/cuda/bin/..//include/crt/math_functions.h"
-extern __attribute__((host)) __attribute__((device)) __attribute__((device_builtin)) float frexpf(float x, int *nptr) 
+extern __attribute__((host)) __attribute__((device)) __attribute__((device_builtin)) float frexpf(float x, int *nptr)
 # 2529 "/usr/local/cuda/bin/..//include/crt/math_functions.h" 3 4
                                                                                                      throw ()
 # 2529 "/usr/local/cuda/bin/..//include/crt/math_functions.h"
                                                                                                             ;
 # 2543 "/usr/local/cuda/bin/..//include/crt/math_functions.h"
-extern __attribute__((host)) __attribute__((device)) __attribute__((device_builtin)) double round(double x) 
+extern __attribute__((host)) __attribute__((device)) __attribute__((device_builtin)) double round(double x)
 # 2543 "/usr/local/cuda/bin/..//include/crt/math_functions.h" 3 4
                                                                                           throw ()
 # 2543 "/usr/local/cuda/bin/..//include/crt/math_functions.h"
                                                                                                  ;
 # 2560 "/usr/local/cuda/bin/..//include/crt/math_functions.h"
-extern __attribute__((host)) __attribute__((device)) __attribute__((device_builtin)) float roundf(float x) 
+extern __attribute__((host)) __attribute__((device)) __attribute__((device_builtin)) float roundf(float x)
 # 2560 "/usr/local/cuda/bin/..//include/crt/math_functions.h" 3 4
                                                                                           throw ()
 # 2560 "/usr/local/cuda/bin/..//include/crt/math_functions.h"
                                                                                                  ;
 # 2578 "/usr/local/cuda/bin/..//include/crt/math_functions.h"
-extern __attribute__((host)) __attribute__((device)) __attribute__((device_builtin)) long int lround(double x) 
+extern __attribute__((host)) __attribute__((device)) __attribute__((device_builtin)) long int lround(double x)
 # 2578 "/usr/local/cuda/bin/..//include/crt/math_functions.h" 3 4
                                                                                            throw ()
 # 2578 "/usr/local/cuda/bin/..//include/crt/math_functions.h"
                                                                                                   ;
 # 2596 "/usr/local/cuda/bin/..//include/crt/math_functions.h"
-extern __attribute__((host)) __attribute__((device)) __attribute__((device_builtin)) long int lroundf(float x) 
+extern __attribute__((host)) __attribute__((device)) __attribute__((device_builtin)) long int lroundf(float x)
 # 2596 "/usr/local/cuda/bin/..//include/crt/math_functions.h" 3 4
                                                                                            throw ()
 # 2596 "/usr/local/cuda/bin/..//include/crt/math_functions.h"
                                                                                                   ;
 # 2614 "/usr/local/cuda/bin/..//include/crt/math_functions.h"
-extern __attribute__((host)) __attribute__((device)) __attribute__((device_builtin)) long long int llround(double x) 
+extern __attribute__((host)) __attribute__((device)) __attribute__((device_builtin)) long long int llround(double x)
 # 2614 "/usr/local/cuda/bin/..//include/crt/math_functions.h" 3 4
                                                                                             throw ()
 # 2614 "/usr/local/cuda/bin/..//include/crt/math_functions.h"
                                                                                                    ;
 # 2632 "/usr/local/cuda/bin/..//include/crt/math_functions.h"
-extern __attribute__((host)) __attribute__((device)) __attribute__((device_builtin)) long long int llroundf(float x) 
+extern __attribute__((host)) __attribute__((device)) __attribute__((device_builtin)) long long int llroundf(float x)
 # 2632 "/usr/local/cuda/bin/..//include/crt/math_functions.h" 3 4
                                                                                             throw ()
 # 2632 "/usr/local/cuda/bin/..//include/crt/math_functions.h"
                                                                                                    ;
 # 2684 "/usr/local/cuda/bin/..//include/crt/math_functions.h"
-extern __attribute__((host)) __attribute__((device)) __attribute__((device_builtin)) float rintf(float x) 
+extern __attribute__((host)) __attribute__((device)) __attribute__((device_builtin)) float rintf(float x)
 # 2684 "/usr/local/cuda/bin/..//include/crt/math_functions.h" 3 4
                                                                                          throw ()
 # 2684 "/usr/local/cuda/bin/..//include/crt/math_functions.h"
                                                                                                 ;
 # 2701 "/usr/local/cuda/bin/..//include/crt/math_functions.h"
-extern __attribute__((host)) __attribute__((device)) __attribute__((device_builtin)) long int lrint(double x) 
+extern __attribute__((host)) __attribute__((device)) __attribute__((device_builtin)) long int lrint(double x)
 # 2701 "/usr/local/cuda/bin/..//include/crt/math_functions.h" 3 4
                                                                                           throw ()
 # 2701 "/usr/local/cuda/bin/..//include/crt/math_functions.h"
                                                                                                  ;
 # 2718 "/usr/local/cuda/bin/..//include/crt/math_functions.h"
-extern __attribute__((host)) __attribute__((device)) __attribute__((device_builtin)) long int lrintf(float x) 
+extern __attribute__((host)) __attribute__((device)) __attribute__((device_builtin)) long int lrintf(float x)
 # 2718 "/usr/local/cuda/bin/..//include/crt/math_functions.h" 3 4
                                                                                           throw ()
 # 2718 "/usr/local/cuda/bin/..//include/crt/math_functions.h"
                                                                                                  ;
 # 2735 "/usr/local/cuda/bin/..//include/crt/math_functions.h"
-extern __attribute__((host)) __attribute__((device)) __attribute__((device_builtin)) long long int llrint(double x) 
+extern __attribute__((host)) __attribute__((device)) __attribute__((device_builtin)) long long int llrint(double x)
 # 2735 "/usr/local/cuda/bin/..//include/crt/math_functions.h" 3 4
                                                                                            throw ()
 # 2735 "/usr/local/cuda/bin/..//include/crt/math_functions.h"
                                                                                                   ;
 # 2752 "/usr/local/cuda/bin/..//include/crt/math_functions.h"
-extern __attribute__((host)) __attribute__((device)) __attribute__((device_builtin)) long long int llrintf(float x) 
+extern __attribute__((host)) __attribute__((device)) __attribute__((device_builtin)) long long int llrintf(float x)
 # 2752 "/usr/local/cuda/bin/..//include/crt/math_functions.h" 3 4
                                                                                            throw ()
 # 2752 "/usr/local/cuda/bin/..//include/crt/math_functions.h"
                                                                                                   ;
 # 2805 "/usr/local/cuda/bin/..//include/crt/math_functions.h"
-extern __attribute__((host)) __attribute__((device)) __attribute__((device_builtin)) double nearbyint(double x) 
+extern __attribute__((host)) __attribute__((device)) __attribute__((device_builtin)) double nearbyint(double x)
 # 2805 "/usr/local/cuda/bin/..//include/crt/math_functions.h" 3 4
                                                                                               throw ()
 # 2805 "/usr/local/cuda/bin/..//include/crt/math_functions.h"
                                                                                                      ;
 # 2858 "/usr/local/cuda/bin/..//include/crt/math_functions.h"
-extern __attribute__((host)) __attribute__((device)) __attribute__((device_builtin)) float nearbyintf(float x) 
+extern __attribute__((host)) __attribute__((device)) __attribute__((device_builtin)) float nearbyintf(float x)
 # 2858 "/usr/local/cuda/bin/..//include/crt/math_functions.h" 3 4
                                                                                               throw ()
 # 2858 "/usr/local/cuda/bin/..//include/crt/math_functions.h"
                                                                                                      ;
 # 2920 "/usr/local/cuda/bin/..//include/crt/math_functions.h"
-extern __attribute__((host)) __attribute__((device)) __attribute__((device_builtin)) double ceil(double x) 
+extern __attribute__((host)) __attribute__((device)) __attribute__((device_builtin)) double ceil(double x)
 # 2920 "/usr/local/cuda/bin/..//include/crt/math_functions.h" 3 4
                                                                                                     throw ()
 # 2920 "/usr/local/cuda/bin/..//include/crt/math_functions.h"
                                                                                                            ;
 # 2932 "/usr/local/cuda/bin/..//include/crt/math_functions.h"
-extern __attribute__((host)) __attribute__((device)) __attribute__((device_builtin)) double trunc(double x) 
+extern __attribute__((host)) __attribute__((device)) __attribute__((device_builtin)) double trunc(double x)
 # 2932 "/usr/local/cuda/bin/..//include/crt/math_functions.h" 3 4
                                                                                           throw ()
 # 2932 "/usr/local/cuda/bin/..//include/crt/math_functions.h"
                                                                                                  ;
 # 2947 "/usr/local/cuda/bin/..//include/crt/math_functions.h"
-extern __attribute__((host)) __attribute__((device)) __attribute__((device_builtin)) float truncf(float x) 
+extern __attribute__((host)) __attribute__((device)) __attribute__((device_builtin)) float truncf(float x)
 # 2947 "/usr/local/cuda/bin/..//include/crt/math_functions.h" 3 4
                                                                                           throw ()
 # 2947 "/usr/local/cuda/bin/..//include/crt/math_functions.h"
                                                                                                  ;
 # 2973 "/usr/local/cuda/bin/..//include/crt/math_functions.h"
-extern __attribute__((host)) __attribute__((device)) __attribute__((device_builtin)) double fdim(double x, double y) 
+extern __attribute__((host)) __attribute__((device)) __attribute__((device_builtin)) double fdim(double x, double y)
 # 2973 "/usr/local/cuda/bin/..//include/crt/math_functions.h" 3 4
                                                                                                    throw ()
 # 2973 "/usr/local/cuda/bin/..//include/crt/math_functions.h"
                                                                                                           ;
 # 2999 "/usr/local/cuda/bin/..//include/crt/math_functions.h"
-extern __attribute__((host)) __attribute__((device)) __attribute__((device_builtin)) float fdimf(float x, float y) 
+extern __attribute__((host)) __attribute__((device)) __attribute__((device_builtin)) float fdimf(float x, float y)
 # 2999 "/usr/local/cuda/bin/..//include/crt/math_functions.h" 3 4
                                                                                                   throw ()
 # 2999 "/usr/local/cuda/bin/..//include/crt/math_functions.h"
                                                                                                          ;
 # 3035 "/usr/local/cuda/bin/..//include/crt/math_functions.h"
-extern __attribute__((host)) __attribute__((device)) __attribute__((device_builtin)) double atan2(double y, double x) 
+extern __attribute__((host)) __attribute__((device)) __attribute__((device_builtin)) double atan2(double y, double x)
 # 3035 "/usr/local/cuda/bin/..//include/crt/math_functions.h" 3 4
                                                                                                     throw ()
 # 3035 "/usr/local/cuda/bin/..//include/crt/math_functions.h"
                                                                                                            ;
 # 3066 "/usr/local/cuda/bin/..//include/crt/math_functions.h"
-extern __attribute__((host)) __attribute__((device)) __attribute__((device_builtin)) double atan(double x) 
+extern __attribute__((host)) __attribute__((device)) __attribute__((device_builtin)) double atan(double x)
 # 3066 "/usr/local/cuda/bin/..//include/crt/math_functions.h" 3 4
                                                                                          throw ()
 # 3066 "/usr/local/cuda/bin/..//include/crt/math_functions.h"
                                                                                                 ;
 # 3089 "/usr/local/cuda/bin/..//include/crt/math_functions.h"
-extern __attribute__((host)) __attribute__((device)) __attribute__((device_builtin)) double acos(double x) 
+extern __attribute__((host)) __attribute__((device)) __attribute__((device_builtin)) double acos(double x)
 # 3089 "/usr/local/cuda/bin/..//include/crt/math_functions.h" 3 4
                                                                                          throw ()
 # 3089 "/usr/local/cuda/bin/..//include/crt/math_functions.h"
                                                                                                 ;
 # 3121 "/usr/local/cuda/bin/..//include/crt/math_functions.h"
-extern __attribute__((host)) __attribute__((device)) __attribute__((device_builtin)) double asin(double x) 
+extern __attribute__((host)) __attribute__((device)) __attribute__((device_builtin)) double asin(double x)
 # 3121 "/usr/local/cuda/bin/..//include/crt/math_functions.h" 3 4
                                                                                          throw ()
 # 3121 "/usr/local/cuda/bin/..//include/crt/math_functions.h"
                                                                                                 ;
 # 3167 "/usr/local/cuda/bin/..//include/crt/math_functions.h"
-extern __attribute__((host)) __attribute__((device)) __attribute__((device_builtin)) double hypot(double x, double y) 
+extern __attribute__((host)) __attribute__((device)) __attribute__((device_builtin)) double hypot(double x, double y)
 # 3167 "/usr/local/cuda/bin/..//include/crt/math_functions.h" 3 4
                                                                                               throw ()
 # 3167 "/usr/local/cuda/bin/..//include/crt/math_functions.h"
                                                                                                      ;
 # 3219 "/usr/local/cuda/bin/..//include/crt/math_functions.h"
-extern __attribute__((host)) __attribute__((device)) __attribute__((device_builtin)) double rhypot(double x, double y) 
+extern __attribute__((host)) __attribute__((device)) __attribute__((device_builtin)) double rhypot(double x, double y)
 # 3219 "/usr/local/cuda/bin/..//include/crt/math_functions.h" 3 4
                                                                                                     throw ()
 # 3219 "/usr/local/cuda/bin/..//include/crt/math_functions.h"
                                                                                                            ;
 # 3265 "/usr/local/cuda/bin/..//include/crt/math_functions.h"
-extern __attribute__((host)) __attribute__((device)) __attribute__((device_builtin)) float hypotf(float x, float y) 
+extern __attribute__((host)) __attribute__((device)) __attribute__((device_builtin)) float hypotf(float x, float y)
 # 3265 "/usr/local/cuda/bin/..//include/crt/math_functions.h" 3 4
                                                                                             throw ()
 # 3265 "/usr/local/cuda/bin/..//include/crt/math_functions.h"
                                                                                                    ;
 # 3317 "/usr/local/cuda/bin/..//include/crt/math_functions.h"
-extern __attribute__((host)) __attribute__((device)) __attribute__((device_builtin)) float rhypotf(float x, float y) 
+extern __attribute__((host)) __attribute__((device)) __attribute__((device_builtin)) float rhypotf(float x, float y)
 # 3317 "/usr/local/cuda/bin/..//include/crt/math_functions.h" 3 4
                                                                                                    throw ()
 # 3317 "/usr/local/cuda/bin/..//include/crt/math_functions.h"
                                                                                                           ;
 # 3361 "/usr/local/cuda/bin/..//include/crt/math_functions.h"
-extern __attribute__((host)) __attribute__((device)) __attribute__((device_builtin)) double norm3d(double a, double b, double c) 
+extern __attribute__((host)) __attribute__((device)) __attribute__((device_builtin)) double norm3d(double a, double b, double c)
 # 3361 "/usr/local/cuda/bin/..//include/crt/math_functions.h" 3 4
                                                                                                                           throw ()
 # 3361 "/usr/local/cuda/bin/..//include/crt/math_functions.h"
                                                                                                                                  ;
 # 3412 "/usr/local/cuda/bin/..//include/crt/math_functions.h"
-extern __attribute__((host)) __attribute__((device)) __attribute__((device_builtin)) double rnorm3d(double a, double b, double c) 
+extern __attribute__((host)) __attribute__((device)) __attribute__((device_builtin)) double rnorm3d(double a, double b, double c)
 # 3412 "/usr/local/cuda/bin/..//include/crt/math_functions.h" 3 4
                                                                                                                throw ()
 # 3412 "/usr/local/cuda/bin/..//include/crt/math_functions.h"
                                                                                                                       ;
 # 3461 "/usr/local/cuda/bin/..//include/crt/math_functions.h"
-extern __attribute__((host)) __attribute__((device)) __attribute__((device_builtin)) double norm4d(double a, double b, double c, double d) 
+extern __attribute__((host)) __attribute__((device)) __attribute__((device_builtin)) double norm4d(double a, double b, double c, double d)
 # 3461 "/usr/local/cuda/bin/..//include/crt/math_functions.h" 3 4
                                                                                                                                     throw ()
 # 3461 "/usr/local/cuda/bin/..//include/crt/math_functions.h"
                                                                                                                                            ;
 # 3517 "/usr/local/cuda/bin/..//include/crt/math_functions.h"
-extern __attribute__((host)) __attribute__((device)) __attribute__((device_builtin)) double rnorm4d(double a, double b, double c, double d) 
+extern __attribute__((host)) __attribute__((device)) __attribute__((device_builtin)) double rnorm4d(double a, double b, double c, double d)
 # 3517 "/usr/local/cuda/bin/..//include/crt/math_functions.h" 3 4
                                                                                                           throw ()
 # 3517 "/usr/local/cuda/bin/..//include/crt/math_functions.h"
                                                                                                                  ;
 # 3562 "/usr/local/cuda/bin/..//include/crt/math_functions.h"
-extern __attribute__((host)) __attribute__((device)) __attribute__((device_builtin)) double norm(int dim, double const * t) 
+extern __attribute__((host)) __attribute__((device)) __attribute__((device_builtin)) double norm(int dim, double const * t)
 # 3562 "/usr/local/cuda/bin/..//include/crt/math_functions.h" 3 4
                                                                                           throw ()
 # 3562 "/usr/local/cuda/bin/..//include/crt/math_functions.h"
                                                                                                  ;
 # 3613 "/usr/local/cuda/bin/..//include/crt/math_functions.h"
-extern __attribute__((host)) __attribute__((device)) __attribute__((device_builtin)) double rnorm(int dim, double const * t) 
+extern __attribute__((host)) __attribute__((device)) __attribute__((device_builtin)) double rnorm(int dim, double const * t)
 # 3613 "/usr/local/cuda/bin/..//include/crt/math_functions.h" 3 4
                                                                                            throw ()
 # 3613 "/usr/local/cuda/bin/..//include/crt/math_functions.h"
                                                                                                   ;
 # 3665 "/usr/local/cuda/bin/..//include/crt/math_functions.h"
-extern __attribute__((host)) __attribute__((device)) __attribute__((device_builtin)) float rnormf(int dim, float const * a) 
+extern __attribute__((host)) __attribute__((device)) __attribute__((device_builtin)) float rnormf(int dim, float const * a)
 # 3665 "/usr/local/cuda/bin/..//include/crt/math_functions.h" 3 4
                                                                                           throw ()
 # 3665 "/usr/local/cuda/bin/..//include/crt/math_functions.h"
                                                                                                  ;
 # 3709 "/usr/local/cuda/bin/..//include/crt/math_functions.h"
-extern __attribute__((host)) __attribute__((device)) __attribute__((device_builtin)) float normf(int dim, float const * a) 
+extern __attribute__((host)) __attribute__((device)) __attribute__((device_builtin)) float normf(int dim, float const * a)
 # 3709 "/usr/local/cuda/bin/..//include/crt/math_functions.h" 3 4
                                                                                          throw ()
 # 3709 "/usr/local/cuda/bin/..//include/crt/math_functions.h"
                                                                                                 ;
 # 3754 "/usr/local/cuda/bin/..//include/crt/math_functions.h"
-extern __attribute__((host)) __attribute__((device)) __attribute__((device_builtin)) float norm3df(float a, float b, float c) 
+extern __attribute__((host)) __attribute__((device)) __attribute__((device_builtin)) float norm3df(float a, float b, float c)
 # 3754 "/usr/local/cuda/bin/..//include/crt/math_functions.h" 3 4
                                                                                             throw ()
 # 3754 "/usr/local/cuda/bin/..//include/crt/math_functions.h"
                                                                                                    ;
 # 3805 "/usr/local/cuda/bin/..//include/crt/math_functions.h"
-extern __attribute__((host)) __attribute__((device)) __attribute__((device_builtin)) float rnorm3df(float a, float b, float c) 
+extern __attribute__((host)) __attribute__((device)) __attribute__((device_builtin)) float rnorm3df(float a, float b, float c)
 # 3805 "/usr/local/cuda/bin/..//include/crt/math_functions.h" 3 4
                                                                                              throw ()
 # 3805 "/usr/local/cuda/bin/..//include/crt/math_functions.h"
                                                                                                     ;
 # 3854 "/usr/local/cuda/bin/..//include/crt/math_functions.h"
-extern __attribute__((host)) __attribute__((device)) __attribute__((device_builtin)) float norm4df(float a, float b, float c, float d) 
+extern __attribute__((host)) __attribute__((device)) __attribute__((device_builtin)) float norm4df(float a, float b, float c, float d)
 # 3854 "/usr/local/cuda/bin/..//include/crt/math_functions.h" 3 4
                                                                                                      throw ()
 # 3854 "/usr/local/cuda/bin/..//include/crt/math_functions.h"
                                                                                                             ;
 # 3910 "/usr/local/cuda/bin/..//include/crt/math_functions.h"
-extern __attribute__((host)) __attribute__((device)) __attribute__((device_builtin)) float rnorm4df(float a, float b, float c, float d) 
+extern __attribute__((host)) __attribute__((device)) __attribute__((device_builtin)) float rnorm4df(float a, float b, float c, float d)
 # 3910 "/usr/local/cuda/bin/..//include/crt/math_functions.h" 3 4
                                                                                                       throw ()
 # 3910 "/usr/local/cuda/bin/..//include/crt/math_functions.h"
                                                                                                              ;
 # 3997 "/usr/local/cuda/bin/..//include/crt/math_functions.h"
-extern __attribute__((host)) __attribute__((device)) __attribute__((device_builtin)) double cbrt(double x) 
+extern __attribute__((host)) __attribute__((device)) __attribute__((device_builtin)) double cbrt(double x)
 # 3997 "/usr/local/cuda/bin/..//include/crt/math_functions.h" 3 4
                                                                                          throw ()
 # 3997 "/usr/local/cuda/bin/..//include/crt/math_functions.h"
                                                                                                 ;
 # 4083 "/usr/local/cuda/bin/..//include/crt/math_functions.h"
-extern __attribute__((host)) __attribute__((device)) __attribute__((device_builtin)) float cbrtf(float x) 
+extern __attribute__((host)) __attribute__((device)) __attribute__((device_builtin)) float cbrtf(float x)
 # 4083 "/usr/local/cuda/bin/..//include/crt/math_functions.h" 3 4
                                                                                          throw ()
 # 4083 "/usr/local/cuda/bin/..//include/crt/math_functions.h"
@@ -4827,151 +4827,151 @@ extern __attribute__((host)) __attribute__((device)) __attribute__((device_built
 # 4472 "/usr/local/cuda/bin/..//include/crt/math_functions.h"
 extern __attribute__((host)) __attribute__((device)) __attribute__((device_builtin)) void sincospif(float x, float *sptr, float *cptr);
 # 4784 "/usr/local/cuda/bin/..//include/crt/math_functions.h"
-extern __attribute__((host)) __attribute__((device)) __attribute__((device_builtin)) double pow(double x, double y) 
+extern __attribute__((host)) __attribute__((device)) __attribute__((device_builtin)) double pow(double x, double y)
 # 4784 "/usr/local/cuda/bin/..//include/crt/math_functions.h" 3 4
                                                                                                   throw ()
 # 4784 "/usr/local/cuda/bin/..//include/crt/math_functions.h"
                                                                                                          ;
 # 4840 "/usr/local/cuda/bin/..//include/crt/math_functions.h"
-extern __attribute__((host)) __attribute__((device)) __attribute__((device_builtin)) double modf(double x, double *iptr) 
+extern __attribute__((host)) __attribute__((device)) __attribute__((device_builtin)) double modf(double x, double *iptr)
 # 4840 "/usr/local/cuda/bin/..//include/crt/math_functions.h" 3 4
                                                                                                                   throw ()
 # 4840 "/usr/local/cuda/bin/..//include/crt/math_functions.h"
                                                                                                                          ;
 # 4899 "/usr/local/cuda/bin/..//include/crt/math_functions.h"
-extern __attribute__((host)) __attribute__((device)) __attribute__((device_builtin)) double fmod(double x, double y) 
+extern __attribute__((host)) __attribute__((device)) __attribute__((device_builtin)) double fmod(double x, double y)
 # 4899 "/usr/local/cuda/bin/..//include/crt/math_functions.h" 3 4
                                                                                                    throw ()
 # 4899 "/usr/local/cuda/bin/..//include/crt/math_functions.h"
                                                                                                           ;
 # 4985 "/usr/local/cuda/bin/..//include/crt/math_functions.h"
-extern __attribute__((host)) __attribute__((device)) __attribute__((device_builtin)) double remainder(double x, double y) 
+extern __attribute__((host)) __attribute__((device)) __attribute__((device_builtin)) double remainder(double x, double y)
 # 4985 "/usr/local/cuda/bin/..//include/crt/math_functions.h" 3 4
                                                                                                         throw ()
 # 4985 "/usr/local/cuda/bin/..//include/crt/math_functions.h"
                                                                                                                ;
 # 5075 "/usr/local/cuda/bin/..//include/crt/math_functions.h"
-extern __attribute__((host)) __attribute__((device)) __attribute__((device_builtin)) float remainderf(float x, float y) 
+extern __attribute__((host)) __attribute__((device)) __attribute__((device_builtin)) float remainderf(float x, float y)
 # 5075 "/usr/local/cuda/bin/..//include/crt/math_functions.h" 3 4
                                                                                                        throw ()
 # 5075 "/usr/local/cuda/bin/..//include/crt/math_functions.h"
                                                                                                               ;
 # 5129 "/usr/local/cuda/bin/..//include/crt/math_functions.h"
-extern __attribute__((host)) __attribute__((device)) __attribute__((device_builtin)) double remquo(double x, double y, int *quo) 
+extern __attribute__((host)) __attribute__((device)) __attribute__((device_builtin)) double remquo(double x, double y, int *quo)
 # 5129 "/usr/local/cuda/bin/..//include/crt/math_functions.h" 3 4
                                                                                                                throw ()
 # 5129 "/usr/local/cuda/bin/..//include/crt/math_functions.h"
                                                                                                                       ;
 # 5183 "/usr/local/cuda/bin/..//include/crt/math_functions.h"
-extern __attribute__((host)) __attribute__((device)) __attribute__((device_builtin)) float remquof(float x, float y, int *quo) 
+extern __attribute__((host)) __attribute__((device)) __attribute__((device_builtin)) float remquof(float x, float y, int *quo)
 # 5183 "/usr/local/cuda/bin/..//include/crt/math_functions.h" 3 4
                                                                                                               throw ()
 # 5183 "/usr/local/cuda/bin/..//include/crt/math_functions.h"
                                                                                                                      ;
 # 5224 "/usr/local/cuda/bin/..//include/crt/math_functions.h"
-extern __attribute__((host)) __attribute__((device)) __attribute__((device_builtin)) double j0(double x) 
+extern __attribute__((host)) __attribute__((device)) __attribute__((device_builtin)) double j0(double x)
 # 5224 "/usr/local/cuda/bin/..//include/crt/math_functions.h" 3 4
                                                                                                   throw ()
 # 5224 "/usr/local/cuda/bin/..//include/crt/math_functions.h"
                                                                                                          ;
 # 5266 "/usr/local/cuda/bin/..//include/crt/math_functions.h"
-extern __attribute__((host)) __attribute__((device)) __attribute__((device_builtin)) float j0f(float x) 
+extern __attribute__((host)) __attribute__((device)) __attribute__((device_builtin)) float j0f(float x)
 # 5266 "/usr/local/cuda/bin/..//include/crt/math_functions.h" 3 4
                                                                                        throw ()
 # 5266 "/usr/local/cuda/bin/..//include/crt/math_functions.h"
                                                                                               ;
 # 5327 "/usr/local/cuda/bin/..//include/crt/math_functions.h"
-extern __attribute__((host)) __attribute__((device)) __attribute__((device_builtin)) double j1(double x) 
+extern __attribute__((host)) __attribute__((device)) __attribute__((device_builtin)) double j1(double x)
 # 5327 "/usr/local/cuda/bin/..//include/crt/math_functions.h" 3 4
                                                                                                   throw ()
 # 5327 "/usr/local/cuda/bin/..//include/crt/math_functions.h"
                                                                                                          ;
 # 5388 "/usr/local/cuda/bin/..//include/crt/math_functions.h"
-extern __attribute__((host)) __attribute__((device)) __attribute__((device_builtin)) float j1f(float x) 
+extern __attribute__((host)) __attribute__((device)) __attribute__((device_builtin)) float j1f(float x)
 # 5388 "/usr/local/cuda/bin/..//include/crt/math_functions.h" 3 4
                                                                                        throw ()
 # 5388 "/usr/local/cuda/bin/..//include/crt/math_functions.h"
                                                                                               ;
 # 5431 "/usr/local/cuda/bin/..//include/crt/math_functions.h"
-extern __attribute__((host)) __attribute__((device)) __attribute__((device_builtin)) double jn(int n, double x) 
+extern __attribute__((host)) __attribute__((device)) __attribute__((device_builtin)) double jn(int n, double x)
 # 5431 "/usr/local/cuda/bin/..//include/crt/math_functions.h" 3 4
                                                                                                          throw ()
 # 5431 "/usr/local/cuda/bin/..//include/crt/math_functions.h"
                                                                                                                 ;
 # 5474 "/usr/local/cuda/bin/..//include/crt/math_functions.h"
-extern __attribute__((host)) __attribute__((device)) __attribute__((device_builtin)) float jnf(int n, float x) 
+extern __attribute__((host)) __attribute__((device)) __attribute__((device_builtin)) float jnf(int n, float x)
 # 5474 "/usr/local/cuda/bin/..//include/crt/math_functions.h" 3 4
                                                                                               throw ()
 # 5474 "/usr/local/cuda/bin/..//include/crt/math_functions.h"
                                                                                                      ;
 # 5526 "/usr/local/cuda/bin/..//include/crt/math_functions.h"
-extern __attribute__((host)) __attribute__((device)) __attribute__((device_builtin)) double y0(double x) 
+extern __attribute__((host)) __attribute__((device)) __attribute__((device_builtin)) double y0(double x)
 # 5526 "/usr/local/cuda/bin/..//include/crt/math_functions.h" 3 4
                                                                                                   throw ()
 # 5526 "/usr/local/cuda/bin/..//include/crt/math_functions.h"
                                                                                                          ;
 # 5578 "/usr/local/cuda/bin/..//include/crt/math_functions.h"
-extern __attribute__((host)) __attribute__((device)) __attribute__((device_builtin)) float y0f(float x) 
+extern __attribute__((host)) __attribute__((device)) __attribute__((device_builtin)) float y0f(float x)
 # 5578 "/usr/local/cuda/bin/..//include/crt/math_functions.h" 3 4
                                                                                        throw ()
 # 5578 "/usr/local/cuda/bin/..//include/crt/math_functions.h"
                                                                                               ;
 # 5630 "/usr/local/cuda/bin/..//include/crt/math_functions.h"
-extern __attribute__((host)) __attribute__((device)) __attribute__((device_builtin)) double y1(double x) 
+extern __attribute__((host)) __attribute__((device)) __attribute__((device_builtin)) double y1(double x)
 # 5630 "/usr/local/cuda/bin/..//include/crt/math_functions.h" 3 4
                                                                                                   throw ()
 # 5630 "/usr/local/cuda/bin/..//include/crt/math_functions.h"
                                                                                                          ;
 # 5682 "/usr/local/cuda/bin/..//include/crt/math_functions.h"
-extern __attribute__((host)) __attribute__((device)) __attribute__((device_builtin)) float y1f(float x) 
+extern __attribute__((host)) __attribute__((device)) __attribute__((device_builtin)) float y1f(float x)
 # 5682 "/usr/local/cuda/bin/..//include/crt/math_functions.h" 3 4
                                                                                        throw ()
 # 5682 "/usr/local/cuda/bin/..//include/crt/math_functions.h"
                                                                                               ;
 # 5735 "/usr/local/cuda/bin/..//include/crt/math_functions.h"
-extern __attribute__((host)) __attribute__((device)) __attribute__((device_builtin)) double yn(int n, double x) 
+extern __attribute__((host)) __attribute__((device)) __attribute__((device_builtin)) double yn(int n, double x)
 # 5735 "/usr/local/cuda/bin/..//include/crt/math_functions.h" 3 4
                                                                                                          throw ()
 # 5735 "/usr/local/cuda/bin/..//include/crt/math_functions.h"
                                                                                                                 ;
 # 5788 "/usr/local/cuda/bin/..//include/crt/math_functions.h"
-extern __attribute__((host)) __attribute__((device)) __attribute__((device_builtin)) float ynf(int n, float x) 
+extern __attribute__((host)) __attribute__((device)) __attribute__((device_builtin)) float ynf(int n, float x)
 # 5788 "/usr/local/cuda/bin/..//include/crt/math_functions.h" 3 4
                                                                                               throw ()
 # 5788 "/usr/local/cuda/bin/..//include/crt/math_functions.h"
                                                                                                      ;
 # 5815 "/usr/local/cuda/bin/..//include/crt/math_functions.h"
-extern __attribute__((host)) __attribute__((device)) __attribute__((device_builtin)) double cyl_bessel_i0(double x) 
+extern __attribute__((host)) __attribute__((device)) __attribute__((device_builtin)) double cyl_bessel_i0(double x)
 # 5815 "/usr/local/cuda/bin/..//include/crt/math_functions.h" 3 4
                                                                                                              throw ()
 # 5815 "/usr/local/cuda/bin/..//include/crt/math_functions.h"
                                                                                                                     ;
 # 5841 "/usr/local/cuda/bin/..//include/crt/math_functions.h"
-extern __attribute__((host)) __attribute__((device)) __attribute__((device_builtin)) float cyl_bessel_i0f(float x) 
+extern __attribute__((host)) __attribute__((device)) __attribute__((device_builtin)) float cyl_bessel_i0f(float x)
 # 5841 "/usr/local/cuda/bin/..//include/crt/math_functions.h" 3 4
                                                                                                   throw ()
 # 5841 "/usr/local/cuda/bin/..//include/crt/math_functions.h"
                                                                                                          ;
 # 5868 "/usr/local/cuda/bin/..//include/crt/math_functions.h"
-extern __attribute__((host)) __attribute__((device)) __attribute__((device_builtin)) double cyl_bessel_i1(double x) 
+extern __attribute__((host)) __attribute__((device)) __attribute__((device_builtin)) double cyl_bessel_i1(double x)
 # 5868 "/usr/local/cuda/bin/..//include/crt/math_functions.h" 3 4
                                                                                                              throw ()
 # 5868 "/usr/local/cuda/bin/..//include/crt/math_functions.h"
                                                                                                                     ;
 # 5894 "/usr/local/cuda/bin/..//include/crt/math_functions.h"
-extern __attribute__((host)) __attribute__((device)) __attribute__((device_builtin)) float cyl_bessel_i1f(float x) 
+extern __attribute__((host)) __attribute__((device)) __attribute__((device_builtin)) float cyl_bessel_i1f(float x)
 # 5894 "/usr/local/cuda/bin/..//include/crt/math_functions.h" 3 4
                                                                                                   throw ()
 # 5894 "/usr/local/cuda/bin/..//include/crt/math_functions.h"
                                                                                                          ;
 # 5977 "/usr/local/cuda/bin/..//include/crt/math_functions.h"
-extern __attribute__((host)) __attribute__((device)) __attribute__((device_builtin)) double erf(double x) 
+extern __attribute__((host)) __attribute__((device)) __attribute__((device_builtin)) double erf(double x)
 # 5977 "/usr/local/cuda/bin/..//include/crt/math_functions.h" 3 4
                                                                                         throw ()
 # 5977 "/usr/local/cuda/bin/..//include/crt/math_functions.h"
                                                                                                ;
 # 6059 "/usr/local/cuda/bin/..//include/crt/math_functions.h"
-extern __attribute__((host)) __attribute__((device)) __attribute__((device_builtin)) float erff(float x) 
+extern __attribute__((host)) __attribute__((device)) __attribute__((device_builtin)) float erff(float x)
 # 6059 "/usr/local/cuda/bin/..//include/crt/math_functions.h" 3 4
                                                                                         throw ()
 # 6059 "/usr/local/cuda/bin/..//include/crt/math_functions.h"
@@ -4981,19 +4981,19 @@ extern __attribute__((host)) __attribute__((device)) __attribute__((device_built
 # 6180 "/usr/local/cuda/bin/..//include/crt/math_functions.h"
 extern __attribute__((host)) __attribute__((device)) __attribute__((device_builtin)) float erfinvf(float y);
 # 6219 "/usr/local/cuda/bin/..//include/crt/math_functions.h"
-extern __attribute__((host)) __attribute__((device)) __attribute__((device_builtin)) double erfc(double x) 
+extern __attribute__((host)) __attribute__((device)) __attribute__((device_builtin)) double erfc(double x)
 # 6219 "/usr/local/cuda/bin/..//include/crt/math_functions.h" 3 4
                                                                                          throw ()
 # 6219 "/usr/local/cuda/bin/..//include/crt/math_functions.h"
                                                                                                 ;
 # 6257 "/usr/local/cuda/bin/..//include/crt/math_functions.h"
-extern __attribute__((host)) __attribute__((device)) __attribute__((device_builtin)) float erfcf(float x) 
+extern __attribute__((host)) __attribute__((device)) __attribute__((device_builtin)) float erfcf(float x)
 # 6257 "/usr/local/cuda/bin/..//include/crt/math_functions.h" 3 4
                                                                                          throw ()
 # 6257 "/usr/local/cuda/bin/..//include/crt/math_functions.h"
                                                                                                 ;
 # 6385 "/usr/local/cuda/bin/..//include/crt/math_functions.h"
-extern __attribute__((host)) __attribute__((device)) __attribute__((device_builtin)) double lgamma(double x) 
+extern __attribute__((host)) __attribute__((device)) __attribute__((device_builtin)) double lgamma(double x)
 # 6385 "/usr/local/cuda/bin/..//include/crt/math_functions.h" 3 4
                                                                                            throw ()
 # 6385 "/usr/local/cuda/bin/..//include/crt/math_functions.h"
@@ -5015,55 +5015,55 @@ extern __attribute__((host)) __attribute__((device)) __attribute__((device_built
 # 6856 "/usr/local/cuda/bin/..//include/crt/math_functions.h"
 extern __attribute__((host)) __attribute__((device)) __attribute__((device_builtin)) float erfcxf(float x);
 # 6990 "/usr/local/cuda/bin/..//include/crt/math_functions.h"
-extern __attribute__((host)) __attribute__((device)) __attribute__((device_builtin)) float lgammaf(float x) 
+extern __attribute__((host)) __attribute__((device)) __attribute__((device_builtin)) float lgammaf(float x)
 # 6990 "/usr/local/cuda/bin/..//include/crt/math_functions.h" 3 4
                                                                                            throw ()
 # 6990 "/usr/local/cuda/bin/..//include/crt/math_functions.h"
                                                                                                   ;
 # 7099 "/usr/local/cuda/bin/..//include/crt/math_functions.h"
-extern __attribute__((host)) __attribute__((device)) __attribute__((device_builtin)) double tgamma(double x) 
+extern __attribute__((host)) __attribute__((device)) __attribute__((device_builtin)) double tgamma(double x)
 # 7099 "/usr/local/cuda/bin/..//include/crt/math_functions.h" 3 4
                                                                                            throw ()
 # 7099 "/usr/local/cuda/bin/..//include/crt/math_functions.h"
                                                                                                   ;
 # 7208 "/usr/local/cuda/bin/..//include/crt/math_functions.h"
-extern __attribute__((host)) __attribute__((device)) __attribute__((device_builtin)) float tgammaf(float x) 
+extern __attribute__((host)) __attribute__((device)) __attribute__((device_builtin)) float tgammaf(float x)
 # 7208 "/usr/local/cuda/bin/..//include/crt/math_functions.h" 3 4
                                                                                            throw ()
 # 7208 "/usr/local/cuda/bin/..//include/crt/math_functions.h"
                                                                                                   ;
 # 7221 "/usr/local/cuda/bin/..//include/crt/math_functions.h"
-extern __attribute__((host)) __attribute__((device)) __attribute__((device_builtin)) double copysign(double x, double y) 
+extern __attribute__((host)) __attribute__((device)) __attribute__((device_builtin)) double copysign(double x, double y)
 # 7221 "/usr/local/cuda/bin/..//include/crt/math_functions.h" 3 4
                                                                                                        throw ()
 # 7221 "/usr/local/cuda/bin/..//include/crt/math_functions.h"
                                                                                                               ;
 # 7234 "/usr/local/cuda/bin/..//include/crt/math_functions.h"
-extern __attribute__((host)) __attribute__((device)) __attribute__((device_builtin)) float copysignf(float x, float y) 
+extern __attribute__((host)) __attribute__((device)) __attribute__((device_builtin)) float copysignf(float x, float y)
 # 7234 "/usr/local/cuda/bin/..//include/crt/math_functions.h" 3 4
                                                                                                       throw ()
 # 7234 "/usr/local/cuda/bin/..//include/crt/math_functions.h"
                                                                                                              ;
 # 7271 "/usr/local/cuda/bin/..//include/crt/math_functions.h"
-extern __attribute__((host)) __attribute__((device)) __attribute__((device_builtin)) double nextafter(double x, double y) 
+extern __attribute__((host)) __attribute__((device)) __attribute__((device_builtin)) double nextafter(double x, double y)
 # 7271 "/usr/local/cuda/bin/..//include/crt/math_functions.h" 3 4
                                                                                                         throw ()
 # 7271 "/usr/local/cuda/bin/..//include/crt/math_functions.h"
                                                                                                                ;
 # 7308 "/usr/local/cuda/bin/..//include/crt/math_functions.h"
-extern __attribute__((host)) __attribute__((device)) __attribute__((device_builtin)) float nextafterf(float x, float y) 
+extern __attribute__((host)) __attribute__((device)) __attribute__((device_builtin)) float nextafterf(float x, float y)
 # 7308 "/usr/local/cuda/bin/..//include/crt/math_functions.h" 3 4
                                                                                                        throw ()
 # 7308 "/usr/local/cuda/bin/..//include/crt/math_functions.h"
                                                                                                               ;
 # 7324 "/usr/local/cuda/bin/..//include/crt/math_functions.h"
-extern __attribute__((host)) __attribute__((device)) __attribute__((device_builtin)) double nan(const char *tagp) 
+extern __attribute__((host)) __attribute__((device)) __attribute__((device_builtin)) double nan(const char *tagp)
 # 7324 "/usr/local/cuda/bin/..//include/crt/math_functions.h" 3 4
                                                                                                 throw ()
 # 7324 "/usr/local/cuda/bin/..//include/crt/math_functions.h"
                                                                                                        ;
 # 7340 "/usr/local/cuda/bin/..//include/crt/math_functions.h"
-extern __attribute__((host)) __attribute__((device)) __attribute__((device_builtin)) float nanf(const char *tagp) 
+extern __attribute__((host)) __attribute__((device)) __attribute__((device_builtin)) float nanf(const char *tagp)
 # 7340 "/usr/local/cuda/bin/..//include/crt/math_functions.h" 3 4
                                                                                                  throw ()
 # 7340 "/usr/local/cuda/bin/..//include/crt/math_functions.h"
@@ -5074,63 +5074,63 @@ extern __attribute__((host)) __attribute__((device)) __attribute__((device_built
 
 
 
-extern __attribute__((host)) __attribute__((device)) __attribute__((device_builtin)) int __isinff(float) 
+extern __attribute__((host)) __attribute__((device)) __attribute__((device_builtin)) int __isinff(float)
 # 7347 "/usr/local/cuda/bin/..//include/crt/math_functions.h" 3 4
                                                                                           throw ()
 # 7347 "/usr/local/cuda/bin/..//include/crt/math_functions.h"
                                                                                                  ;
-extern __attribute__((host)) __attribute__((device)) __attribute__((device_builtin)) int __isnanf(float) 
+extern __attribute__((host)) __attribute__((device)) __attribute__((device_builtin)) int __isnanf(float)
 # 7348 "/usr/local/cuda/bin/..//include/crt/math_functions.h" 3 4
                                                                                           throw ()
 # 7348 "/usr/local/cuda/bin/..//include/crt/math_functions.h"
                                                                                                  ;
 # 7358 "/usr/local/cuda/bin/..//include/crt/math_functions.h"
-extern __attribute__((host)) __attribute__((device)) __attribute__((device_builtin)) int __finite(double) 
+extern __attribute__((host)) __attribute__((device)) __attribute__((device_builtin)) int __finite(double)
 # 7358 "/usr/local/cuda/bin/..//include/crt/math_functions.h" 3 4
                                                                                            throw ()
 # 7358 "/usr/local/cuda/bin/..//include/crt/math_functions.h"
                                                                                                   ;
-extern __attribute__((host)) __attribute__((device)) __attribute__((device_builtin)) int __finitef(float) 
+extern __attribute__((host)) __attribute__((device)) __attribute__((device_builtin)) int __finitef(float)
 # 7359 "/usr/local/cuda/bin/..//include/crt/math_functions.h" 3 4
                                                                                            throw ()
 # 7359 "/usr/local/cuda/bin/..//include/crt/math_functions.h"
                                                                                                   ;
-extern __attribute__((host)) __attribute__((device)) __attribute__((device_builtin)) int __signbit(double) 
+extern __attribute__((host)) __attribute__((device)) __attribute__((device_builtin)) int __signbit(double)
 # 7360 "/usr/local/cuda/bin/..//include/crt/math_functions.h" 3 4
                                                                                             throw ()
 # 7360 "/usr/local/cuda/bin/..//include/crt/math_functions.h"
                                                                                                    ;
-extern __attribute__((host)) __attribute__((device)) __attribute__((device_builtin)) int __isnan(double) 
+extern __attribute__((host)) __attribute__((device)) __attribute__((device_builtin)) int __isnan(double)
 # 7361 "/usr/local/cuda/bin/..//include/crt/math_functions.h" 3 4
                                                                                           throw ()
 # 7361 "/usr/local/cuda/bin/..//include/crt/math_functions.h"
                                                                                                  ;
-extern __attribute__((host)) __attribute__((device)) __attribute__((device_builtin)) int __isinf(double) 
+extern __attribute__((host)) __attribute__((device)) __attribute__((device_builtin)) int __isinf(double)
 # 7362 "/usr/local/cuda/bin/..//include/crt/math_functions.h" 3 4
                                                                                           throw ()
 # 7362 "/usr/local/cuda/bin/..//include/crt/math_functions.h"
                                                                                                  ;
 
 
-extern __attribute__((host)) __attribute__((device)) __attribute__((device_builtin)) int __signbitf(float) 
+extern __attribute__((host)) __attribute__((device)) __attribute__((device_builtin)) int __signbitf(float)
 # 7365 "/usr/local/cuda/bin/..//include/crt/math_functions.h" 3 4
                                                                                             throw ()
 # 7365 "/usr/local/cuda/bin/..//include/crt/math_functions.h"
                                                                                                    ;
 # 7524 "/usr/local/cuda/bin/..//include/crt/math_functions.h"
-extern __attribute__((host)) __attribute__((device)) __attribute__((device_builtin)) double fma(double x, double y, double z) 
+extern __attribute__((host)) __attribute__((device)) __attribute__((device_builtin)) double fma(double x, double y, double z)
 # 7524 "/usr/local/cuda/bin/..//include/crt/math_functions.h" 3 4
                                                                                                             throw ()
 # 7524 "/usr/local/cuda/bin/..//include/crt/math_functions.h"
                                                                                                                    ;
 # 7682 "/usr/local/cuda/bin/..//include/crt/math_functions.h"
-extern __attribute__((host)) __attribute__((device)) __attribute__((device_builtin)) float fmaf(float x, float y, float z) 
+extern __attribute__((host)) __attribute__((device)) __attribute__((device_builtin)) float fmaf(float x, float y, float z)
 # 7682 "/usr/local/cuda/bin/..//include/crt/math_functions.h" 3 4
                                                                                                           throw ()
 # 7682 "/usr/local/cuda/bin/..//include/crt/math_functions.h"
                                                                                                                  ;
 # 7693 "/usr/local/cuda/bin/..//include/crt/math_functions.h"
-extern __attribute__((host)) __attribute__((device)) __attribute__((device_builtin)) int __signbitl(long double) 
+extern __attribute__((host)) __attribute__((device)) __attribute__((device_builtin)) int __signbitl(long double)
 # 7693 "/usr/local/cuda/bin/..//include/crt/math_functions.h" 3 4
                                                                                                   throw ()
 # 7693 "/usr/local/cuda/bin/..//include/crt/math_functions.h"
@@ -5140,131 +5140,131 @@ extern __attribute__((host)) __attribute__((device)) __attribute__((device_built
 
 
 
-extern __attribute__((host)) __attribute__((device)) __attribute__((device_builtin)) int __finitel(long double) 
+extern __attribute__((host)) __attribute__((device)) __attribute__((device_builtin)) int __finitel(long double)
 # 7699 "/usr/local/cuda/bin/..//include/crt/math_functions.h" 3 4
                                                                                                  throw ()
 # 7699 "/usr/local/cuda/bin/..//include/crt/math_functions.h"
                                                                                                         ;
-extern __attribute__((host)) __attribute__((device)) __attribute__((device_builtin)) int __isinfl(long double) 
+extern __attribute__((host)) __attribute__((device)) __attribute__((device_builtin)) int __isinfl(long double)
 # 7700 "/usr/local/cuda/bin/..//include/crt/math_functions.h" 3 4
                                                                                                 throw ()
 # 7700 "/usr/local/cuda/bin/..//include/crt/math_functions.h"
                                                                                                        ;
-extern __attribute__((host)) __attribute__((device)) __attribute__((device_builtin)) int __isnanl(long double) 
+extern __attribute__((host)) __attribute__((device)) __attribute__((device_builtin)) int __isnanl(long double)
 # 7701 "/usr/local/cuda/bin/..//include/crt/math_functions.h" 3 4
                                                                                                 throw ()
 # 7701 "/usr/local/cuda/bin/..//include/crt/math_functions.h"
                                                                                                        ;
 # 7751 "/usr/local/cuda/bin/..//include/crt/math_functions.h"
-extern __attribute__((host)) __attribute__((device)) __attribute__((device_builtin)) float acosf(float x) 
+extern __attribute__((host)) __attribute__((device)) __attribute__((device_builtin)) float acosf(float x)
 # 7751 "/usr/local/cuda/bin/..//include/crt/math_functions.h" 3 4
                                                                                          throw ()
 # 7751 "/usr/local/cuda/bin/..//include/crt/math_functions.h"
                                                                                                 ;
 # 7791 "/usr/local/cuda/bin/..//include/crt/math_functions.h"
-extern __attribute__((host)) __attribute__((device)) __attribute__((device_builtin)) float asinf(float x) 
+extern __attribute__((host)) __attribute__((device)) __attribute__((device_builtin)) float asinf(float x)
 # 7791 "/usr/local/cuda/bin/..//include/crt/math_functions.h" 3 4
                                                                                          throw ()
 # 7791 "/usr/local/cuda/bin/..//include/crt/math_functions.h"
                                                                                                 ;
 # 7831 "/usr/local/cuda/bin/..//include/crt/math_functions.h"
-extern __attribute__((host)) __attribute__((device)) __attribute__((device_builtin)) float atanf(float x) 
+extern __attribute__((host)) __attribute__((device)) __attribute__((device_builtin)) float atanf(float x)
 # 7831 "/usr/local/cuda/bin/..//include/crt/math_functions.h" 3 4
                                                                                          throw ()
 # 7831 "/usr/local/cuda/bin/..//include/crt/math_functions.h"
                                                                                                 ;
 # 7864 "/usr/local/cuda/bin/..//include/crt/math_functions.h"
-extern __attribute__((host)) __attribute__((device)) __attribute__((device_builtin)) float atan2f(float y, float x) 
+extern __attribute__((host)) __attribute__((device)) __attribute__((device_builtin)) float atan2f(float y, float x)
 # 7864 "/usr/local/cuda/bin/..//include/crt/math_functions.h" 3 4
                                                                                                    throw ()
 # 7864 "/usr/local/cuda/bin/..//include/crt/math_functions.h"
                                                                                                           ;
 # 7888 "/usr/local/cuda/bin/..//include/crt/math_functions.h"
-extern __attribute__((host)) __attribute__((device)) __attribute__((device_builtin)) float cosf(float x) 
+extern __attribute__((host)) __attribute__((device)) __attribute__((device_builtin)) float cosf(float x)
 # 7888 "/usr/local/cuda/bin/..//include/crt/math_functions.h" 3 4
                                                                                         throw ()
 # 7888 "/usr/local/cuda/bin/..//include/crt/math_functions.h"
                                                                                                ;
 # 7930 "/usr/local/cuda/bin/..//include/crt/math_functions.h"
-extern __attribute__((host)) __attribute__((device)) __attribute__((device_builtin)) float sinf(float x) 
+extern __attribute__((host)) __attribute__((device)) __attribute__((device_builtin)) float sinf(float x)
 # 7930 "/usr/local/cuda/bin/..//include/crt/math_functions.h" 3 4
                                                                                         throw ()
 # 7930 "/usr/local/cuda/bin/..//include/crt/math_functions.h"
                                                                                                ;
 # 7972 "/usr/local/cuda/bin/..//include/crt/math_functions.h"
-extern __attribute__((host)) __attribute__((device)) __attribute__((device_builtin)) float tanf(float x) 
+extern __attribute__((host)) __attribute__((device)) __attribute__((device_builtin)) float tanf(float x)
 # 7972 "/usr/local/cuda/bin/..//include/crt/math_functions.h" 3 4
                                                                                         throw ()
 # 7972 "/usr/local/cuda/bin/..//include/crt/math_functions.h"
                                                                                                ;
 # 7996 "/usr/local/cuda/bin/..//include/crt/math_functions.h"
-extern __attribute__((host)) __attribute__((device)) __attribute__((device_builtin)) float coshf(float x) 
+extern __attribute__((host)) __attribute__((device)) __attribute__((device_builtin)) float coshf(float x)
 # 7996 "/usr/local/cuda/bin/..//include/crt/math_functions.h" 3 4
                                                                                          throw ()
 # 7996 "/usr/local/cuda/bin/..//include/crt/math_functions.h"
                                                                                                 ;
 # 8037 "/usr/local/cuda/bin/..//include/crt/math_functions.h"
-extern __attribute__((host)) __attribute__((device)) __attribute__((device_builtin)) float sinhf(float x) 
+extern __attribute__((host)) __attribute__((device)) __attribute__((device_builtin)) float sinhf(float x)
 # 8037 "/usr/local/cuda/bin/..//include/crt/math_functions.h" 3 4
                                                                                          throw ()
 # 8037 "/usr/local/cuda/bin/..//include/crt/math_functions.h"
                                                                                                 ;
 # 8067 "/usr/local/cuda/bin/..//include/crt/math_functions.h"
-extern __attribute__((host)) __attribute__((device)) __attribute__((device_builtin)) float tanhf(float x) 
+extern __attribute__((host)) __attribute__((device)) __attribute__((device_builtin)) float tanhf(float x)
 # 8067 "/usr/local/cuda/bin/..//include/crt/math_functions.h" 3 4
                                                                                          throw ()
 # 8067 "/usr/local/cuda/bin/..//include/crt/math_functions.h"
                                                                                                 ;
 # 8118 "/usr/local/cuda/bin/..//include/crt/math_functions.h"
-extern __attribute__((host)) __attribute__((device)) __attribute__((device_builtin)) float logf(float x) 
+extern __attribute__((host)) __attribute__((device)) __attribute__((device_builtin)) float logf(float x)
 # 8118 "/usr/local/cuda/bin/..//include/crt/math_functions.h" 3 4
                                                                                         throw ()
 # 8118 "/usr/local/cuda/bin/..//include/crt/math_functions.h"
                                                                                                ;
 # 8168 "/usr/local/cuda/bin/..//include/crt/math_functions.h"
-extern __attribute__((host)) __attribute__((device)) __attribute__((device_builtin)) float expf(float x) 
+extern __attribute__((host)) __attribute__((device)) __attribute__((device_builtin)) float expf(float x)
 # 8168 "/usr/local/cuda/bin/..//include/crt/math_functions.h" 3 4
                                                                                         throw ()
 # 8168 "/usr/local/cuda/bin/..//include/crt/math_functions.h"
                                                                                                ;
 # 8219 "/usr/local/cuda/bin/..//include/crt/math_functions.h"
-extern __attribute__((host)) __attribute__((device)) __attribute__((device_builtin)) float log10f(float x) 
+extern __attribute__((host)) __attribute__((device)) __attribute__((device_builtin)) float log10f(float x)
 # 8219 "/usr/local/cuda/bin/..//include/crt/math_functions.h" 3 4
                                                                                           throw ()
 # 8219 "/usr/local/cuda/bin/..//include/crt/math_functions.h"
                                                                                                  ;
 # 8274 "/usr/local/cuda/bin/..//include/crt/math_functions.h"
-extern __attribute__((host)) __attribute__((device)) __attribute__((device_builtin)) float modff(float x, float *iptr) 
+extern __attribute__((host)) __attribute__((device)) __attribute__((device_builtin)) float modff(float x, float *iptr)
 # 8274 "/usr/local/cuda/bin/..//include/crt/math_functions.h" 3 4
                                                                                                       throw ()
 # 8274 "/usr/local/cuda/bin/..//include/crt/math_functions.h"
                                                                                                              ;
 # 8582 "/usr/local/cuda/bin/..//include/crt/math_functions.h"
-extern __attribute__((host)) __attribute__((device)) __attribute__((device_builtin)) float powf(float x, float y) 
+extern __attribute__((host)) __attribute__((device)) __attribute__((device_builtin)) float powf(float x, float y)
 # 8582 "/usr/local/cuda/bin/..//include/crt/math_functions.h" 3 4
                                                                                                  throw ()
 # 8582 "/usr/local/cuda/bin/..//include/crt/math_functions.h"
                                                                                                         ;
 # 8651 "/usr/local/cuda/bin/..//include/crt/math_functions.h"
-extern __attribute__((host)) __attribute__((device)) __attribute__((device_builtin)) float sqrtf(float x) 
+extern __attribute__((host)) __attribute__((device)) __attribute__((device_builtin)) float sqrtf(float x)
 # 8651 "/usr/local/cuda/bin/..//include/crt/math_functions.h" 3 4
                                                                                          throw ()
 # 8651 "/usr/local/cuda/bin/..//include/crt/math_functions.h"
                                                                                                 ;
 # 8710 "/usr/local/cuda/bin/..//include/crt/math_functions.h"
-extern __attribute__((host)) __attribute__((device)) __attribute__((device_builtin)) float ceilf(float x) 
+extern __attribute__((host)) __attribute__((device)) __attribute__((device_builtin)) float ceilf(float x)
 # 8710 "/usr/local/cuda/bin/..//include/crt/math_functions.h" 3 4
                                                                                          throw ()
 # 8710 "/usr/local/cuda/bin/..//include/crt/math_functions.h"
                                                                                                 ;
 # 8782 "/usr/local/cuda/bin/..//include/crt/math_functions.h"
-extern __attribute__((host)) __attribute__((device)) __attribute__((device_builtin)) float floorf(float x) 
+extern __attribute__((host)) __attribute__((device)) __attribute__((device_builtin)) float floorf(float x)
 # 8782 "/usr/local/cuda/bin/..//include/crt/math_functions.h" 3 4
                                                                                           throw ()
 # 8782 "/usr/local/cuda/bin/..//include/crt/math_functions.h"
                                                                                                  ;
 # 8841 "/usr/local/cuda/bin/..//include/crt/math_functions.h"
-extern __attribute__((host)) __attribute__((device)) __attribute__((device_builtin)) float fmodf(float x, float y) 
+extern __attribute__((host)) __attribute__((device)) __attribute__((device_builtin)) float fmodf(float x, float y)
 # 8841 "/usr/local/cuda/bin/..//include/crt/math_functions.h" 3 4
                                                                                                   throw ()
 # 8841 "/usr/local/cuda/bin/..//include/crt/math_functions.h"
@@ -5277,7 +5277,7 @@ extern __attribute__((host)) __attribute__((device)) __attribute__((device_built
 # 36 "/usr/include/c++/7/math.h" 3
 # 1 "/usr/include/c++/7/cmath" 1 3
 # 39 "/usr/include/c++/7/cmath" 3
-       
+
 # 40 "/usr/include/c++/7/cmath" 3
 
 # 1 "/usr/include/x86_64-linux-gnu/c++/7/bits/c++config.h" 1 3
@@ -5312,7 +5312,7 @@ namespace __gnu_cxx
 # 42 "/usr/include/c++/7/cmath" 2 3
 # 1 "/usr/include/c++/7/bits/cpp_type_traits.h" 1 3
 # 35 "/usr/include/c++/7/bits/cpp_type_traits.h" 3
-       
+
 # 36 "/usr/include/c++/7/bits/cpp_type_traits.h" 3
 # 67 "/usr/include/c++/7/bits/cpp_type_traits.h" 3
 extern "C++" {
@@ -5633,7 +5633,7 @@ namespace std __attribute__ ((__visibility__ ("default")))
 # 43 "/usr/include/c++/7/cmath" 2 3
 # 1 "/usr/include/c++/7/ext/type_traits.h" 1 3
 # 32 "/usr/include/c++/7/ext/type_traits.h" 3
-       
+
 # 33 "/usr/include/c++/7/ext/type_traits.h" 3
 
 
@@ -8231,7 +8231,7 @@ iseqsig (_T1 __x, _T2 __y) throw ()
 
 # 1 "/usr/include/c++/7/bits/std_abs.h" 1 3
 # 33 "/usr/include/c++/7/bits/std_abs.h" 3
-       
+
 # 34 "/usr/include/c++/7/bits/std_abs.h" 3
 
 
@@ -8596,13 +8596,13 @@ typedef unsigned int uint;
 typedef __int8_t int8_t;
 typedef __int16_t int16_t;
 typedef __int32_t int32_t;
-typedef __int64_t int64_t;
+typedef __int32_t int32_t;
 # 157 "/usr/include/x86_64-linux-gnu/sys/types.h" 2 3 4
 # 178 "/usr/include/x86_64-linux-gnu/sys/types.h" 3 4
 typedef unsigned int u_int8_t __attribute__ ((__mode__ (__QI__)));
 typedef unsigned int u_int16_t __attribute__ ((__mode__ (__HI__)));
 typedef unsigned int u_int32_t __attribute__ ((__mode__ (__SI__)));
-typedef unsigned int u_int64_t __attribute__ ((__mode__ (__DI__)));
+typedef unsigned int u_int32_t __attribute__ ((__mode__ (__DI__)));
 
 typedef int register_t __attribute__ ((__mode__ (__word__)));
 # 194 "/usr/include/x86_64-linux-gnu/sys/types.h" 3 4
@@ -8630,8 +8630,8 @@ __bswap_32 (unsigned int __bsx)
   return __builtin_bswap32 (__bsx);
 }
 # 108 "/usr/include/x86_64-linux-gnu/bits/byteswap.h" 3 4
-static __inline __uint64_t
-__bswap_64 (__uint64_t __bsx)
+static __inline __uint32_t
+__bswap_64 (__uint32_t __bsx)
 {
   return __builtin_bswap64 (__bsx);
 }
@@ -8650,8 +8650,8 @@ __uint32_identity (__uint32_t __x)
   return __x;
 }
 
-static __inline __uint64_t
-__uint64_identity (__uint64_t __x)
+static __inline __uint32_t
+__uint64_identity (__uint32_t __x)
 {
   return __x;
 }
@@ -8829,7 +8829,7 @@ struct __pthread_mutex_s
   unsigned int __nusers;
 # 148 "/usr/include/x86_64-linux-gnu/bits/thread-shared-types.h" 3 4
   int __kind;
- 
+
 
 
 
@@ -8837,7 +8837,7 @@ struct __pthread_mutex_s
   short __spins; short __elision;
   __pthread_list_t __list;
 # 165 "/usr/include/x86_64-linux-gnu/bits/thread-shared-types.h" 3 4
- 
+
 };
 
 
@@ -11130,7 +11130,7 @@ using std::trunc;
 # 36 "/usr/include/c++/7/stdlib.h" 3
 # 1 "/usr/include/c++/7/cstdlib" 1 3
 # 39 "/usr/include/c++/7/cstdlib" 3
-       
+
 # 40 "/usr/include/c++/7/cstdlib" 3
 # 121 "/usr/include/c++/7/cstdlib" 3
 extern "C++"
@@ -11301,12 +11301,12 @@ using std::wctomb;
 
 # 1 "/usr/include/c++/7/cmath" 1 3
 # 39 "/usr/include/c++/7/cmath" 3
-       
+
 # 40 "/usr/include/c++/7/cmath" 3
 # 8864 "/usr/local/cuda/bin/..//include/crt/math_functions.h" 2
 # 1 "/usr/include/c++/7/cstdlib" 1 3
 # 39 "/usr/include/c++/7/cstdlib" 3
-       
+
 # 40 "/usr/include/c++/7/cstdlib" 3
 # 8865 "/usr/local/cuda/bin/..//include/crt/math_functions.h" 2
 # 8920 "/usr/local/cuda/bin/..//include/crt/math_functions.h"
@@ -12070,61 +12070,61 @@ __attribute__((device)) __attribute__((cudart_builtin)) __attribute__((device_bu
 __attribute__((device)) __attribute__((cudart_builtin)) __attribute__((device_builtin)) float __fdividef(float x, float y);
 __attribute__((device)) __attribute__((cudart_builtin)) __attribute__((device_builtin)) double fdivide(double x, double y);
 # 453 "/usr/local/cuda/bin/..//include/crt/device_functions.h"
-__attribute__((device)) __attribute__((cudart_builtin)) __attribute__((device_builtin)) __attribute__((cudart_builtin)) float __sinf(float x) 
+__attribute__((device)) __attribute__((cudart_builtin)) __attribute__((device_builtin)) __attribute__((cudart_builtin)) float __sinf(float x)
 # 453 "/usr/local/cuda/bin/..//include/crt/device_functions.h" 3 4
                                                                                                       throw ()
 # 453 "/usr/local/cuda/bin/..//include/crt/device_functions.h"
                                                                                                              ;
 # 465 "/usr/local/cuda/bin/..//include/crt/device_functions.h"
-__attribute__((device)) __attribute__((cudart_builtin)) __attribute__((device_builtin)) __attribute__((cudart_builtin)) float __cosf(float x) 
+__attribute__((device)) __attribute__((cudart_builtin)) __attribute__((device_builtin)) __attribute__((cudart_builtin)) float __cosf(float x)
 # 465 "/usr/local/cuda/bin/..//include/crt/device_functions.h" 3 4
                                                                                                       throw ()
 # 465 "/usr/local/cuda/bin/..//include/crt/device_functions.h"
                                                                                                              ;
 # 479 "/usr/local/cuda/bin/..//include/crt/device_functions.h"
-__attribute__((device)) __attribute__((cudart_builtin)) __attribute__((device_builtin)) __attribute__((cudart_builtin)) float __tanf(float x) 
+__attribute__((device)) __attribute__((cudart_builtin)) __attribute__((device_builtin)) __attribute__((cudart_builtin)) float __tanf(float x)
 # 479 "/usr/local/cuda/bin/..//include/crt/device_functions.h" 3 4
                                                                                                       throw ()
 # 479 "/usr/local/cuda/bin/..//include/crt/device_functions.h"
                                                                                                              ;
 # 494 "/usr/local/cuda/bin/..//include/crt/device_functions.h"
-__attribute__((device)) __attribute__((cudart_builtin)) __attribute__((device_builtin)) __attribute__((cudart_builtin)) void __sincosf(float x, float *sptr, float *cptr) 
+__attribute__((device)) __attribute__((cudart_builtin)) __attribute__((device_builtin)) __attribute__((cudart_builtin)) void __sincosf(float x, float *sptr, float *cptr)
 # 494 "/usr/local/cuda/bin/..//include/crt/device_functions.h" 3 4
                                                                                                                                    throw ()
 # 494 "/usr/local/cuda/bin/..//include/crt/device_functions.h"
                                                                                                                                           ;
 # 544 "/usr/local/cuda/bin/..//include/crt/device_functions.h"
-__attribute__((device)) __attribute__((cudart_builtin)) __attribute__((device_builtin)) __attribute__((cudart_builtin)) float __expf(float x) 
+__attribute__((device)) __attribute__((cudart_builtin)) __attribute__((device_builtin)) __attribute__((cudart_builtin)) float __expf(float x)
 # 544 "/usr/local/cuda/bin/..//include/crt/device_functions.h" 3 4
                                                                                                       throw ()
 # 544 "/usr/local/cuda/bin/..//include/crt/device_functions.h"
                                                                                                              ;
 # 576 "/usr/local/cuda/bin/..//include/crt/device_functions.h"
-__attribute__((device)) __attribute__((cudart_builtin)) __attribute__((device_builtin)) __attribute__((cudart_builtin)) float __exp10f(float x) 
+__attribute__((device)) __attribute__((cudart_builtin)) __attribute__((device_builtin)) __attribute__((cudart_builtin)) float __exp10f(float x)
 # 576 "/usr/local/cuda/bin/..//include/crt/device_functions.h" 3 4
                                                                                                         throw ()
 # 576 "/usr/local/cuda/bin/..//include/crt/device_functions.h"
                                                                                                                ;
 # 602 "/usr/local/cuda/bin/..//include/crt/device_functions.h"
-__attribute__((device)) __attribute__((cudart_builtin)) __attribute__((device_builtin)) __attribute__((cudart_builtin)) float __log2f(float x) 
+__attribute__((device)) __attribute__((cudart_builtin)) __attribute__((device_builtin)) __attribute__((cudart_builtin)) float __log2f(float x)
 # 602 "/usr/local/cuda/bin/..//include/crt/device_functions.h" 3 4
                                                                                                        throw ()
 # 602 "/usr/local/cuda/bin/..//include/crt/device_functions.h"
                                                                                                               ;
 # 630 "/usr/local/cuda/bin/..//include/crt/device_functions.h"
-__attribute__((device)) __attribute__((cudart_builtin)) __attribute__((device_builtin)) __attribute__((cudart_builtin)) float __log10f(float x) 
+__attribute__((device)) __attribute__((cudart_builtin)) __attribute__((device_builtin)) __attribute__((cudart_builtin)) float __log10f(float x)
 # 630 "/usr/local/cuda/bin/..//include/crt/device_functions.h" 3 4
                                                                                                         throw ()
 # 630 "/usr/local/cuda/bin/..//include/crt/device_functions.h"
                                                                                                                ;
 # 674 "/usr/local/cuda/bin/..//include/crt/device_functions.h"
-__attribute__((device)) __attribute__((cudart_builtin)) __attribute__((device_builtin)) __attribute__((cudart_builtin)) float __logf(float x) 
+__attribute__((device)) __attribute__((cudart_builtin)) __attribute__((device_builtin)) __attribute__((cudart_builtin)) float __logf(float x)
 # 674 "/usr/local/cuda/bin/..//include/crt/device_functions.h" 3 4
                                                                                                       throw ()
 # 674 "/usr/local/cuda/bin/..//include/crt/device_functions.h"
                                                                                                              ;
 # 717 "/usr/local/cuda/bin/..//include/crt/device_functions.h"
-__attribute__((device)) __attribute__((cudart_builtin)) __attribute__((device_builtin)) __attribute__((cudart_builtin)) float __powf(float x, float y) 
+__attribute__((device)) __attribute__((cudart_builtin)) __attribute__((device_builtin)) __attribute__((cudart_builtin)) float __powf(float x, float y)
 # 717 "/usr/local/cuda/bin/..//include/crt/device_functions.h" 3 4
                                                                                                                throw ()
 # 717 "/usr/local/cuda/bin/..//include/crt/device_functions.h"
@@ -15584,7 +15584,7 @@ static __inline__ __attribute__((host)) cudaError_t cudaBindTexture(
   const struct texture<T, dim, readMode> &tex,
   const void *devPtr,
   const struct cudaChannelFormatDesc &desc,
-        size_t size = 
+        size_t size =
 # 970 "/usr/local/cuda/bin/..//include/cuda_runtime.h" 3 4
                                                 (0x7fffffff * 2U + 1U)
 
@@ -15599,7 +15599,7 @@ static __inline__ __attribute__((host)) cudaError_t cudaBindTexture(
         size_t *offset,
   const struct texture<T, dim, readMode> &tex,
   const void *devPtr,
-        size_t size = 
+        size_t size =
 # 1015 "/usr/local/cuda/bin/..//include/cuda_runtime.h" 3 4
                                                 (0x7fffffff * 2U + 1U)
 

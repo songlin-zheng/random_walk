@@ -88,7 +88,7 @@ struct EdgePair {
 // SG = serialized graph, these types are for writing graph to file
 typedef int32_t SGID;
 typedef EdgePair<SGID> SGEdge;
-typedef int64_t SGOffset;
+typedef int32_t SGOffset;
 
 
 
@@ -132,14 +132,14 @@ class CSRGraph {
     out_index_(nullptr), out_neighbors_(nullptr),
     in_index_(nullptr), in_neighbors_(nullptr) {}
 
-  CSRGraph(int64_t num_nodes, DestID_** index, DestID_* neighs) :
+  CSRGraph(int32_t num_nodes, DestID_** index, DestID_* neighs) :
     directed_(false), num_nodes_(num_nodes),
     out_index_(index), out_neighbors_(neighs),
     in_index_(index), in_neighbors_(neighs) {
       num_edges_ = (out_index_[num_nodes_] - out_index_[0]) / 2;
     }
 
-  CSRGraph(int64_t num_nodes, DestID_** out_index, DestID_* out_neighs,
+  CSRGraph(int32_t num_nodes, DestID_** out_index, DestID_* out_neighs,
         DestID_** in_index, DestID_* in_neighs) :
     directed_(true), num_nodes_(num_nodes),
     out_index_(out_index), out_neighbors_(out_neighs),
@@ -187,23 +187,23 @@ class CSRGraph {
     return directed_;
   }
 
-  int64_t num_nodes() const {
+  int32_t num_nodes() const {
     return num_nodes_;
   }
 
-  int64_t num_edges() const {
+  int32_t num_edges() const {
     return num_edges_;
   }
 
-  int64_t num_edges_directed() const {
+  int32_t num_edges_directed() const {
     return directed_ ? num_edges_ : 2*num_edges_;
   }
 
-  int64_t out_degree(NodeID_ v) const {
+  int32_t out_degree(NodeID_ v) const {
     return out_index_[v+1] - out_index_[v];
   }
 
-  int64_t in_degree(NodeID_ v) const {
+  int32_t in_degree(NodeID_ v) const {
     static_assert(MakeInverse, "Graph inversion disabled but reading inverse");
     return in_index_[v+1] - in_index_[v];
   }
@@ -260,7 +260,7 @@ class CSRGraph {
   }
 
   /*
-    Helper function to print outgoing neighbors 
+    Helper function to print outgoing neighbors
     of a node with their weights
   */
   void PrintNeighbors(NodeID_ node_id) const {
@@ -271,9 +271,9 @@ class CSRGraph {
 
   /*
     Function to calculate the difference between
-    max and min timestamp difference from all 
+    max and min timestamp difference from all
     outgoing edges from a node.
-    TODO: integrate this while building a graph so 
+    TODO: integrate this while building a graph so
     we don't have to recompute this every time?
   */
   float TimeBoundsDelta(NodeID_ node_id) const {
@@ -303,8 +303,8 @@ class CSRGraph {
 
  private:
   bool directed_;
-  int64_t num_nodes_;
-  int64_t num_edges_;
+  int32_t num_nodes_;
+  int32_t num_edges_;
   DestID_** out_index_;
   DestID_*  out_neighbors_;
   DestID_** in_index_;

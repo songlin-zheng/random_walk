@@ -67,8 +67,8 @@ void __global__ sortByWeight(int_t start, int_t end, float_t *src_weight, int_t 
             int_t idx = num_of_sort % 2 == 0 ? idx_1[i] : idx_2[i];
             printf("[i, idx, node_idx, ts]: [%d, %d, %d, %f] ", i, idx, src_node[start + idx], local_ts[idx]);
         }
+        printf("\n");
     }
-    printf("\n");
 #endif
 
     for (int i = tid; i < end - start; i += blockDim.x)
@@ -225,7 +225,7 @@ void __global__ prefixSumConcurrent(int_t *start_idx, int_t *node_idx, float_t *
     }
 }
 
-void cuda_helper(int max_walk_length, int num_walks_per_node, int32_t num_nodes, int32_t num_edges, unsigned long long random_number)
+void cuda_helper(int max_walk_length, int num_walks_per_node, int32_t num_nodes, int32_t num_edges)
 {
 
     int count = 10;
@@ -265,6 +265,7 @@ void cuda_helper(int max_walk_length, int num_walks_per_node, int32_t num_nodes,
     delete[] streams;
 
 #if defined(DEBUG)
+    printf("----------------sort timestamp--------------------\n");
     // get result
     for (int i = 0; i < num_nodes; i++)
     {
@@ -300,6 +301,7 @@ void cuda_helper(int max_walk_length, int num_walks_per_node, int32_t num_nodes,
     cudaMemcpy(cdf_buffer_host, cdf_buffer_dev, sizeof(float) * num_edges, cudaMemcpyDeviceToHost);
 
 #if defined(DEBUG)
+    printf("----------------prefix sum--------------------\n");
     for (int i = 0; i < num_nodes; i++)
     {
         float tmp = 0;
@@ -329,6 +331,7 @@ void cuda_helper(int max_walk_length, int num_walks_per_node, int32_t num_nodes,
     cudaMemcpy(mapping_host, mapping_dev, sizeof(float) * num_edges, cudaMemcpyDeviceToHost);
 
 #if defined(DEBUG)
+    printf("----------------edge correspondence--------------------\n");
     for (int i = 0; i < num_nodes; i++)
     {
         for (int j = start_idx_host[i]; j < start_idx_host[i + 1]; j++)

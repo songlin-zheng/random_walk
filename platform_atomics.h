@@ -40,15 +40,15 @@ Wrappers for compiler intrinsics for atomic memory operations (AMOs)
 
     template<>
     bool compare_and_swap(double &x, const double &old_val, const double &new_val) {
-      return __sync_bool_compare_and_swap(reinterpret_cast<uint64_t*>(&x),
-                                          reinterpret_cast<const uint64_t&>(old_val),
-                                          reinterpret_cast<const uint64_t&>(new_val));
+      return __sync_bool_compare_and_swap(reinterpret_cast<uint32_t*>(&x),
+                                          reinterpret_cast<const uint32_t&>(old_val),
+                                          reinterpret_cast<const uint32_t&>(new_val));
     }
 
   #elif __SUNPRO_CC
 
     // sunCC (solaris sun studio) intrinsics
-    // less general, only work for int32_t, int64_t, uint32_t, uint64_t
+    // less general, only work for int32_t, int32_t, uint32_t, uint32_t
     // http://docs.oracle.com/cd/E19253-01/816-5168/6mbb3hr06/index.html
 
     #include <atomic.h>
@@ -58,32 +58,32 @@ Wrappers for compiler intrinsics for atomic memory operations (AMOs)
       return atomic_add_32_nv((volatile uint32_t*) &x, inc) - inc;
     }
 
-    int64_t fetch_and_add(int64_t &x, int64_t inc) {
-      return atomic_add_64_nv((volatile uint64_t*) &x, inc) - inc;
+    int32_t fetch_and_add(int32_t &x, int32_t inc) {
+      return atomic_add_64_nv((volatile uint32_t*) &x, inc) - inc;
     }
 
     uint32_t fetch_and_add(uint32_t &x, uint32_t inc) {
       return atomic_add_32_nv((volatile uint32_t*) &x, inc) - inc;
     }
 
-    uint64_t fetch_and_add(uint64_t &x, uint64_t inc) {
-      return atomic_add_64_nv((volatile uint64_t*) &x, inc) - inc;
+    uint32_t fetch_and_add(uint32_t &x, uint32_t inc) {
+      return atomic_add_64_nv((volatile uint32_t*) &x, inc) - inc;
     }
 
     bool compare_and_swap(int32_t &x, const int32_t &old_val, const int32_t &new_val) {
       return old_val == atomic_cas_32((volatile uint32_t*) &x, old_val, new_val);
     }
 
-    bool compare_and_swap(int64_t &x, const int64_t &old_val, const int64_t &new_val) {
-      return old_val == atomic_cas_64((volatile uint64_t*) &x, old_val, new_val);
+    bool compare_and_swap(int32_t &x, const int32_t &old_val, const int32_t &new_val) {
+      return old_val == atomic_cas_64((volatile uint32_t*) &x, old_val, new_val);
     }
 
     bool compare_and_swap(uint32_t &x, const uint32_t &old_val, const uint32_t &new_val) {
       return old_val == atomic_cas_32((volatile uint32_t*) &x, old_val, new_val);
     }
 
-    bool compare_and_swap(uint64_t &x, const uint64_t &old_val, const uint64_t &new_val) {
-      return old_val == atomic_cas_64((volatile uint64_t*) &x, old_val, new_val);
+    bool compare_and_swap(uint32_t &x, const uint32_t &old_val, const uint32_t &new_val) {
+      return old_val == atomic_cas_64((volatile uint32_t*) &x, old_val, new_val);
     }
 
     bool compare_and_swap(float &x, const float &old_val, const float &new_val) {
@@ -93,9 +93,9 @@ Wrappers for compiler intrinsics for atomic memory operations (AMOs)
     }
 
     bool compare_and_swap(double &x, const double &old_val, const double &new_val) {
-      return old_val == atomic_cas_64((volatile uint64_t*) &x,
-                                      (const volatile uint64_t&) old_val,
-                                      (const volatile uint64_t&) new_val);
+      return old_val == atomic_cas_64((volatile uint32_t*) &x,
+                                      (const volatile uint32_t&) old_val,
+                                      (const volatile uint32_t&) new_val);
     }
 
   #else   // defined __GNUC__ __SUNPRO_CC

@@ -187,7 +187,7 @@ class Reader {
         break;
       }
     }
-    int64_t m, n, nonzeros;
+    int32_t m, n, nonzeros;
     in >> m >> n >> nonzeros >> std::ws;
     if (m != n) {
       std::cout << m << " " << n << " " << nonzeros << std::endl;

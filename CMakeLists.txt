@@ -13,6 +13,7 @@ add_library(cuda_lib STATIC
             ./rwalk_optimized.cu)
 
 set(CUDA_NVCC_FLAGS ${CUDA_NVCC_FLAGS}; --std=c++14 -lineinfo)
+add_compile_definitions(DEBUG=1)
 
 add_executable(${PROJECT_NAME} rwalk_kernel.cc)
 

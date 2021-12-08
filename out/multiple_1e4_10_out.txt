@@ -1,23 +1,23 @@
-Read Time:           0.04827
-Build Time:          0.00922
+Read Time:           0.04830
+Build Time:          0.00929
 Reading hyperparameters config file add-hyperparams-filename...
-[TimingStat] Random walk time (s):                0.14207
-[TimingStat] Random walk time (s):                0.00532
-[TimingStat] Random walk time (s):                0.00226
-[TimingStat] Random walk time (s):                0.00244
-[TimingStat] Random walk time (s):                0.00230
-[TimingStat] Random walk time (s):                0.00221
-[TimingStat] Random walk time (s):                0.00229
-[TimingStat] Random walk time (s):                0.00215
-[TimingStat] Random walk time (s):                0.00230
-[TimingStat] Random walk time (s):                0.00252
-[TimingStat] Random walk time (s):                0.00225
-[TimingStat] Random walk time (s):                0.00229
-[TimingStat] Random walk time (s):                0.00252
-[TimingStat] Random walk time (s):                0.00229
-[TimingStat] Random walk time (s):                0.00220
-[TimingStat] Random walk time (s):                0.00218
-[TimingStat] Random walk time (s):                0.00216
-[TimingStat] Random walk time (s):                0.00224
-[TimingStat] Random walk time (s):                0.00214
-[TimingStat] Random walk time (s):                0.00214
+[TimingStat] Random walk time (s):                0.39665
+[TimingStat] Random walk time (s):                0.13289
+[TimingStat] Random walk time (s):                0.11263
+[TimingStat] Random walk time (s):                0.11001
+[TimingStat] Random walk time (s):                0.11150
+[TimingStat] Random walk time (s):                0.10832
+[TimingStat] Random walk time (s):                0.11331
+[TimingStat] Random walk time (s):                0.11322
+[TimingStat] Random walk time (s):                0.11067
+[TimingStat] Random walk time (s):                0.11098
+[TimingStat] Random walk time (s):                0.10993
+[TimingStat] Random walk time (s):                0.11142
+[TimingStat] Random walk time (s):                0.11233
+[TimingStat] Random walk time (s):                0.11289
+[TimingStat] Random walk time (s):                0.11560
+[TimingStat] Random walk time (s):                0.10854
+[TimingStat] Random walk time (s):                0.11267
+[TimingStat] Random walk time (s):                0.10645
+[TimingStat] Random walk time (s):                0.10685
+[TimingStat] Random walk time (s):                0.10608
