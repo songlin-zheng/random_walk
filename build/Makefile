@@ -130,17 +130,17 @@ cuda_lib/fast:
 .PHONY : cuda_lib/fast
 
 #=============================================================================
-# Target rules for targets named helper
+# Target rules for targets named rwalk_op
 
 # Build rule for target.
-helper: cmake_check_build_system
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 helper
-.PHONY : helper
+rwalk_op: cmake_check_build_system
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 rwalk_op
+.PHONY : rwalk_op
 
 # fast build rule for target.
-helper/fast:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/helper.dir/build.make CMakeFiles/helper.dir/build
-.PHONY : helper/fast
+rwalk_op/fast:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/rwalk_op.dir/build.make CMakeFiles/rwalk_op.dir/build
+.PHONY : rwalk_op/fast
 
 helper.o: helper.cu.o
 .PHONY : helper.o
@@ -166,29 +166,53 @@ helper.cu.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/cuda_lib.dir/build.make CMakeFiles/cuda_lib.dir/helper.cu.s
 .PHONY : helper.cu.s
 
-helper_kernel.o: helper_kernel.cc.o
-.PHONY : helper_kernel.o
+rwalk_kernel.o: rwalk_kernel.cc.o
+.PHONY : rwalk_kernel.o
 
 # target to build an object file
-helper_kernel.cc.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/helper.dir/build.make CMakeFiles/helper.dir/helper_kernel.cc.o
-.PHONY : helper_kernel.cc.o
+rwalk_kernel.cc.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/rwalk_op.dir/build.make CMakeFiles/rwalk_op.dir/rwalk_kernel.cc.o
+.PHONY : rwalk_kernel.cc.o
 
-helper_kernel.i: helper_kernel.cc.i
-.PHONY : helper_kernel.i
+rwalk_kernel.i: rwalk_kernel.cc.i
+.PHONY : rwalk_kernel.i
 
 # target to preprocess a source file
-helper_kernel.cc.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/helper.dir/build.make CMakeFiles/helper.dir/helper_kernel.cc.i
-.PHONY : helper_kernel.cc.i
+rwalk_kernel.cc.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/rwalk_op.dir/build.make CMakeFiles/rwalk_op.dir/rwalk_kernel.cc.i
+.PHONY : rwalk_kernel.cc.i
 
-helper_kernel.s: helper_kernel.cc.s
-.PHONY : helper_kernel.s
+rwalk_kernel.s: rwalk_kernel.cc.s
+.PHONY : rwalk_kernel.s
 
 # target to generate assembly for a file
-helper_kernel.cc.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/helper.dir/build.make CMakeFiles/helper.dir/helper_kernel.cc.s
-.PHONY : helper_kernel.cc.s
+rwalk_kernel.cc.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/rwalk_op.dir/build.make CMakeFiles/rwalk_op.dir/rwalk_kernel.cc.s
+.PHONY : rwalk_kernel.cc.s
+
+rwalk_optimized.o: rwalk_optimized.cu.o
+.PHONY : rwalk_optimized.o
+
+# target to build an object file
+rwalk_optimized.cu.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/cuda_lib.dir/build.make CMakeFiles/cuda_lib.dir/rwalk_optimized.cu.o
+.PHONY : rwalk_optimized.cu.o
+
+rwalk_optimized.i: rwalk_optimized.cu.i
+.PHONY : rwalk_optimized.i
+
+# target to preprocess a source file
+rwalk_optimized.cu.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/cuda_lib.dir/build.make CMakeFiles/cuda_lib.dir/rwalk_optimized.cu.i
+.PHONY : rwalk_optimized.cu.i
+
+rwalk_optimized.s: rwalk_optimized.cu.s
+.PHONY : rwalk_optimized.s
+
+# target to generate assembly for a file
+rwalk_optimized.cu.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/cuda_lib.dir/build.make CMakeFiles/cuda_lib.dir/rwalk_optimized.cu.s
+.PHONY : rwalk_optimized.cu.s
 
 # Help Target
 help:
@@ -199,13 +223,16 @@ help:
 	@echo "... edit_cache"
 	@echo "... rebuild_cache"
 	@echo "... cuda_lib"
-	@echo "... helper"
+	@echo "... rwalk_op"
 	@echo "... helper.o"
 	@echo "... helper.i"
 	@echo "... helper.s"
-	@echo "... helper_kernel.o"
-	@echo "... helper_kernel.i"
-	@echo "... helper_kernel.s"
+	@echo "... rwalk_kernel.o"
+	@echo "... rwalk_kernel.i"
+	@echo "... rwalk_kernel.s"
+	@echo "... rwalk_optimized.o"
+	@echo "... rwalk_optimized.i"
+	@echo "... rwalk_optimized.s"
 .PHONY : help
 
 

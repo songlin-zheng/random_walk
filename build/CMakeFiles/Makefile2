@@ -64,7 +64,7 @@ CMAKE_BINARY_DIR = /home/ubuntu/random_walk/build
 
 # The main recursive "all" target.
 all: CMakeFiles/cuda_lib.dir/all
-all: CMakeFiles/helper.dir/all
+all: CMakeFiles/rwalk_op.dir/all
 .PHONY : all
 
 # The main recursive "preinstall" target.
@@ -73,7 +73,7 @@ preinstall:
 
 # The main recursive "clean" target.
 clean: CMakeFiles/cuda_lib.dir/clean
-clean: CMakeFiles/helper.dir/clean
+clean: CMakeFiles/rwalk_op.dir/clean
 .PHONY : clean
 
 #=============================================================================
@@ -83,12 +83,12 @@ clean: CMakeFiles/helper.dir/clean
 CMakeFiles/cuda_lib.dir/all:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/cuda_lib.dir/build.make CMakeFiles/cuda_lib.dir/depend
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/cuda_lib.dir/build.make CMakeFiles/cuda_lib.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/ubuntu/random_walk/build/CMakeFiles --progress-num=1,2 "Built target cuda_lib"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/ubuntu/random_walk/build/CMakeFiles --progress-num=1,2,3 "Built target cuda_lib"
 .PHONY : CMakeFiles/cuda_lib.dir/all
 
 # Build rule for subdir invocation for target.
 CMakeFiles/cuda_lib.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/ubuntu/random_walk/build/CMakeFiles 2
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/ubuntu/random_walk/build/CMakeFiles 3
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 CMakeFiles/cuda_lib.dir/all
 	$(CMAKE_COMMAND) -E cmake_progress_start /home/ubuntu/random_walk/build/CMakeFiles 0
 .PHONY : CMakeFiles/cuda_lib.dir/rule
@@ -103,30 +103,30 @@ CMakeFiles/cuda_lib.dir/clean:
 .PHONY : CMakeFiles/cuda_lib.dir/clean
 
 #=============================================================================
-# Target rules for target CMakeFiles/helper.dir
+# Target rules for target CMakeFiles/rwalk_op.dir
 
 # All Build rule for target.
-CMakeFiles/helper.dir/all: CMakeFiles/cuda_lib.dir/all
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/helper.dir/build.make CMakeFiles/helper.dir/depend
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/helper.dir/build.make CMakeFiles/helper.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/ubuntu/random_walk/build/CMakeFiles --progress-num=3,4,5 "Built target helper"
-.PHONY : CMakeFiles/helper.dir/all
+CMakeFiles/rwalk_op.dir/all: CMakeFiles/cuda_lib.dir/all
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/rwalk_op.dir/build.make CMakeFiles/rwalk_op.dir/depend
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/rwalk_op.dir/build.make CMakeFiles/rwalk_op.dir/build
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/ubuntu/random_walk/build/CMakeFiles --progress-num=4,5,6 "Built target rwalk_op"
+.PHONY : CMakeFiles/rwalk_op.dir/all
 
 # Build rule for subdir invocation for target.
-CMakeFiles/helper.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/ubuntu/random_walk/build/CMakeFiles 5
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 CMakeFiles/helper.dir/all
+CMakeFiles/rwalk_op.dir/rule: cmake_check_build_system
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/ubuntu/random_walk/build/CMakeFiles 6
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 CMakeFiles/rwalk_op.dir/all
 	$(CMAKE_COMMAND) -E cmake_progress_start /home/ubuntu/random_walk/build/CMakeFiles 0
-.PHONY : CMakeFiles/helper.dir/rule
+.PHONY : CMakeFiles/rwalk_op.dir/rule
 
 # Convenience name for target.
-helper: CMakeFiles/helper.dir/rule
-.PHONY : helper
+rwalk_op: CMakeFiles/rwalk_op.dir/rule
+.PHONY : rwalk_op
 
 # clean rule for target.
-CMakeFiles/helper.dir/clean:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/helper.dir/build.make CMakeFiles/helper.dir/clean
-.PHONY : CMakeFiles/helper.dir/clean
+CMakeFiles/rwalk_op.dir/clean:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/rwalk_op.dir/build.make CMakeFiles/rwalk_op.dir/clean
+.PHONY : CMakeFiles/rwalk_op.dir/clean
 
 #=============================================================================
 # Special targets to cleanup operation of make.

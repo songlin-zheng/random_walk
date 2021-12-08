@@ -2,7 +2,7 @@
 	"artifacts" : 
 	[
 		{
-			"path" : "helper"
+			"path" : "rwalk_op"
 		}
 	],
 	"backtrace" : 1,
@@ -26,19 +26,19 @@
 			{
 				"command" : 0,
 				"file" : 0,
-				"line" : 23,
+				"line" : 18,
 				"parent" : 0
 			},
 			{
 				"command" : 1,
 				"file" : 0,
-				"line" : 28,
+				"line" : 23,
 				"parent" : 0
 			},
 			{
 				"command" : 2,
 				"file" : 0,
-				"line" : 14,
+				"line" : 9,
 				"parent" : 0
 			}
 		]
@@ -84,7 +84,7 @@
 			"id" : "cuda_lib::@6890427a1f51a3e7e1df"
 		}
 	],
-	"id" : "helper::@6890427a1f51a3e7e1df",
+	"id" : "rwalk_op::@6890427a1f51a3e7e1df",
 	"link" : 
 	{
 		"commandFragments" : 
@@ -133,8 +133,8 @@
 		],
 		"language" : "CXX"
 	},
-	"name" : "helper",
-	"nameOnDisk" : "helper",
+	"name" : "rwalk_op",
+	"nameOnDisk" : "rwalk_op",
 	"paths" : 
 	{
 		"build" : ".",
@@ -155,7 +155,7 @@
 		{
 			"backtrace" : 1,
 			"compileGroupIndex" : 0,
-			"path" : "helper_kernel.cc",
+			"path" : "rwalk_kernel.cc",
 			"sourceGroupIndex" : 0
 		}
 	],

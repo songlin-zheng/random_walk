@@ -1,2 +1,2 @@
-/usr/bin/x86_64-linux-gnu-ar qc libcuda_lib.a CMakeFiles/cuda_lib.dir/helper.cu.o
+/usr/bin/x86_64-linux-gnu-ar qc libcuda_lib.a CMakeFiles/cuda_lib.dir/helper.cu.o CMakeFiles/cuda_lib.dir/rwalk_optimized.cu.o
 /usr/bin/x86_64-linux-gnu-ranlib libcuda_lib.a

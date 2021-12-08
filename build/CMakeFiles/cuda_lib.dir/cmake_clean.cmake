@@ -1,6 +1,8 @@
 file(REMOVE_RECURSE
   "CMakeFiles/cuda_lib.dir/helper.cu.o"
   "CMakeFiles/cuda_lib.dir/helper.cu.o.d"
+  "CMakeFiles/cuda_lib.dir/rwalk_optimized.cu.o"
+  "CMakeFiles/cuda_lib.dir/rwalk_optimized.cu.o.d"
   "libcuda_lib.a"
   "libcuda_lib.pdb"
 )

@@ -4,10 +4,10 @@
 #include <assert.h>
 #include <limits>
 
-int64_t* dev_global_walk;
-int64_t* dev_node_idx;
-float* dev_timestamp;
-int64_t* dev_start_idx;
+int32_t* random_walk_dev;
+int32_t* node_idx_dev;
+float* timestamp_dev;
+int32_t* start_idx_dev;
 
 int threadBlockSize;
 cudaDeviceProp prop;
@@ -22,21 +22,21 @@ cudaDeviceProp prop;
 }
 
 // rand_walk -> [num_of_node, num_of_walk, max_walk_length]
-void __global__ singleRandomWalk(int num_of_node, int num_of_walk, int max_walk_length, int64_t* node_idx, float* timestamp, int64_t* start_idx, int64_t* rand_walk, unsigned long long rnumber){
+void __global__ singleRandomWalk(int num_of_node, int num_of_walk, int max_walk_length, int32_t* node_idx, float* timestamp, int32_t* start_idx, int32_t* rand_walk, unsigned long long rnumber){
     // assuming grid = 1
-    int64_t i =  (blockDim.x * blockIdx.x) + threadIdx.x;
+    int32_t i =  (blockDim.x * blockIdx.x) + threadIdx.x;
     rnumber = i * (unsigned long long) rnumber + 11;
     if(i >= num_of_node * num_of_walk){
         return;
     }
 
-    int64_t src_node = i / (int64_t) num_of_walk;
+    int32_t src_node = i / (int32_t) num_of_walk;
     float curr_timestamp = .0f;
     rand_walk[i * max_walk_length + 0] = src_node;
 
     // printf("start : %lld ; end : %lld; src_node: %lld; num_of_walk : %d; max_walk_length: %d; i : %lld\n", (long long int)start, (long long int)end, (long long int)src_node, num_of_walk, max_walk_length, (long long int)i);
-    int64_t start;
-    int64_t end;
+    int32_t start;
+    int32_t end;
 
     int walk_cnt;
     for(walk_cnt = 1; walk_cnt < max_walk_length; walk_cnt ++){
@@ -49,13 +49,13 @@ void __global__ singleRandomWalk(int num_of_node, int num_of_walk, int max_walk_
         // range should be [start, end)
         if(start < end){
             float* valid_timestamp = (float*) malloc((end - start) * sizeof(float));
-            int64_t* valid_node = (int64_t*) malloc((end - start) * sizeof(int64_t));
+            int32_t* valid_node = (int32_t*) malloc((end - start) * sizeof(int32_t));
             int idx = 0;
             // float cdf[end - start];
             float max_timestamp = timestamp[start];
             float min_timestamp = timestamp[start];
             // ! parallizable
-            for(int64_t j = start; j < end; j ++){
+            for(int32_t j = start; j < end; j ++){
                 // printf("idx: %lld, timestamp: %f node_idx: %lld\n", (long long int) j, timestamp[j], (long long int) node_idx);
                 if(timestamp[j] > curr_timestamp){
                     valid_node[idx] = node_idx[j];
@@ -136,9 +136,9 @@ void __global__ singleRandomWalk(int num_of_node, int num_of_walk, int max_walk_
     }
 }
 
-void __global__ multipleRandomWalk(int num_of_node, int num_of_walk, int max_walk_length, int64_t* node_idx, float* timestamp, int64_t* start_idx, int64_t* rand_walk, unsigned long long rnumber){
+void __global__ multipleRandomWalk(int num_of_node, int num_of_walk, int max_walk_length, int32_t* node_idx, float* timestamp, int32_t* start_idx, int32_t* rand_walk, unsigned long long rnumber){
     // assuming grid = 1
-    int64_t src_node_original =  (blockDim.x * blockIdx.x) + threadIdx.x;
+    int32_t src_node_original =  (blockDim.x * blockIdx.x) + threadIdx.x;
     if(src_node_original >= num_of_node){
         return;
     }
@@ -147,15 +147,15 @@ void __global__ multipleRandomWalk(int num_of_node, int num_of_walk, int max_wal
     for (int k = 0; k < num_of_walk; k++)
     {
       int i = src_node_original * num_of_walk + k;
-      int64_t src_node = src_node_original;
+      int32_t src_node = src_node_original;
 
       float curr_timestamp = .0f;
       rand_walk[i * max_walk_length + 0] = src_node;
     //   printf("In node : %lld\n", (unsigned long long)src_node);
 
       // printf("start : %lld ; end : %lld; src_node: %lld; num_of_walk : %d; max_walk_length: %d; i : %lld\n", (long long int)start, (long long int)end, (long long int)src_node, num_of_walk, max_walk_length, (long long int)i);
-      int64_t start;
-      int64_t end;
+      int32_t start;
+      int32_t end;
 
       int walk_cnt;
       for(walk_cnt = 1; walk_cnt < max_walk_length; walk_cnt ++){
@@ -168,13 +168,13 @@ void __global__ multipleRandomWalk(int num_of_node, int num_of_walk, int max_wal
           // range should be [start, end)
           if(start < end){
               float* valid_timestamp = (float*) malloc((end - start) * sizeof(float));
-              int64_t* valid_node = (int64_t*) malloc((end - start) * sizeof(int64_t));
+              int32_t* valid_node = (int32_t*) malloc((end - start) * sizeof(int32_t));
               int idx = 0;
               // float cdf[end - start];
               float max_timestamp = timestamp[start];
               float min_timestamp = timestamp[start];
               // ! parallizable
-              for(int64_t j = start; j < end; j ++){
+              for(int32_t j = start; j < end; j ++){
                   // printf("idx: %lld, timestamp: %f node_idx: %lld\n", (long long int) j, timestamp[j], (long long int) node_idx);
                   if(timestamp[j] > curr_timestamp){
                       valid_node[idx] = node_idx[j];
@@ -256,7 +256,7 @@ void __global__ multipleRandomWalk(int num_of_node, int num_of_walk, int max_wal
     }
   }
 
-  void __global__ multipleRandomWalk2(int num_of_node, int num_of_walk, int max_walk_length, int64_t* node_idx, float* timestamp, int64_t* start_idx, int64_t* rand_walk, unsigned long long rnumber){
+  void __global__ multipleRandomWalk2(int num_of_node, int num_of_walk, int max_walk_length, int32_t* node_idx, float* timestamp, int32_t* start_idx, int32_t* rand_walk, unsigned long long rnumber){
     // assuming grid = 1
     int walk =  (blockDim.x * blockIdx.x) + threadIdx.x;
     if(walk >= num_of_walk){
@@ -267,15 +267,15 @@ void __global__ multipleRandomWalk(int num_of_node, int num_of_walk, int max_wal
     for (int k = 0; k < num_of_node; k++)
     {
       int i = k * num_of_walk + walk;
-      int64_t src_node = k;
+      int32_t src_node = k;
 
       float curr_timestamp = .0f;
       rand_walk[i * max_walk_length + 0] = src_node;
     //   printf("In node : %lld\n", (unsigned long long)src_node);
 
       // printf("start : %lld ; end : %lld; src_node: %lld; num_of_walk : %d; max_walk_length: %d; i : %lld\n", (long long int)start, (long long int)end, (long long int)src_node, num_of_walk, max_walk_length, (long long int)i);
-      int64_t start;
-      int64_t end;
+      int32_t start;
+      int32_t end;
 
       int walk_cnt;
       for(walk_cnt = 1; walk_cnt < max_walk_length; walk_cnt ++){
@@ -288,13 +288,13 @@ void __global__ multipleRandomWalk(int num_of_node, int num_of_walk, int max_wal
           // range should be [start, end)
           if(start < end){
               float* valid_timestamp = (float*) malloc((end - start) * sizeof(float));
-              int64_t* valid_node = (int64_t*) malloc((end - start) * sizeof(int64_t));
+              int32_t* valid_node = (int32_t*) malloc((end - start) * sizeof(int32_t));
               int idx = 0;
               // float cdf[end - start];
               float max_timestamp = timestamp[start];
               float min_timestamp = timestamp[start];
               // ! parallizable
-              for(int64_t j = start; j < end; j ++){
+              for(int32_t j = start; j < end; j ++){
                   // printf("idx: %lld, timestamp: %f node_idx: %lld\n", (long long int) j, timestamp[j], (long long int) node_idx);
                   if(timestamp[j] > curr_timestamp){
                       valid_node[idx] = node_idx[j];
@@ -377,7 +377,7 @@ void __global__ multipleRandomWalk(int num_of_node, int num_of_walk, int max_wal
   }
 
 
-void cuda_rwalk(int max_walk_length, int num_walks_per_node, int64_t num_nodes, int64_t num_edges, unsigned long long random_number){
+void cuda_rwalk(int max_walk_length, int num_walks_per_node, int32_t num_nodes, int32_t num_edges, unsigned long long random_number){
 
     size_t free_memory;
     size_t total_memory;
@@ -386,18 +386,18 @@ void cuda_rwalk(int max_walk_length, int num_walks_per_node, int64_t num_nodes, 
     // printf("free memory : %zu ; total memory : %zu\n", free_memory, total_memory);
 
     // malloc GPU memory
-    cudaCheck(cudaMalloc((void **)&dev_start_idx, sizeof(int64_t) * (num_nodes + 1)));
-    cudaCheck(cudaMalloc((void **)&dev_node_idx, sizeof(int64_t) * num_edges));
-    cudaCheck(cudaMalloc((void **)&dev_timestamp, sizeof(float) * num_edges));
-    cudaCheck(cudaMalloc((void **)&dev_global_walk, sizeof(int64_t) * num_nodes * max_walk_length * num_walks_per_node));
+    cudaCheck(cudaMalloc((void **)&start_idx_dev, sizeof(int32_t) * (num_nodes + 1)));
+    cudaCheck(cudaMalloc((void **)&node_idx_dev, sizeof(int32_t) * num_edges));
+    cudaCheck(cudaMalloc((void **)&timestamp_dev, sizeof(float) * num_edges));
+    cudaCheck(cudaMalloc((void **)&random_walk_dev, sizeof(int32_t) * num_nodes * max_walk_length * num_walks_per_node));
 
     // memcpy
-    cudaCheck(cudaMemcpy(dev_start_idx, start_idx_host, sizeof(int64_t) * (num_nodes + 1), cudaMemcpyHostToDevice));
-    cudaCheck(cudaMemcpy(dev_node_idx, node_idx_host, sizeof(int64_t) * num_edges, cudaMemcpyHostToDevice));
-    cudaCheck(cudaMemcpy(dev_timestamp, timestamp_host, sizeof(float) * num_edges, cudaMemcpyHostToDevice));
+    cudaCheck(cudaMemcpy(start_idx_dev, start_idx_host, sizeof(int32_t) * (num_nodes + 1), cudaMemcpyHostToDevice));
+    cudaCheck(cudaMemcpy(node_idx_dev, node_idx_host, sizeof(int32_t) * num_edges, cudaMemcpyHostToDevice));
+    cudaCheck(cudaMemcpy(timestamp_dev, timestamp_host, sizeof(float) * num_edges, cudaMemcpyHostToDevice));
 
-    // cudaGetDeviceCount(&dev_count);
-    // for(int i = 0; i < dev_count; i ++){
+    // cudaGetDeviceCount(&count_dev);
+    // for(int i = 0; i < count_dev; i ++){
     //     printf("total_global_Mem: %zu\n shared_mem_per_block: %zu\n max_threads_per_block: %d\n max_thread_dim: %d\n max_grid_size: %d",
     //     prop.totalGlobalMem, prop.sharedMemPerBlock, prop.maxThreadsPerBlock, prop.maxThreadsDim, prop.maxGridSize);
 
@@ -412,7 +412,7 @@ void cuda_rwalk(int max_walk_length, int num_walks_per_node, int64_t num_nodes, 
     dim3 gridDim(grid_size);
     dim3 blockDim(32);
     // ?? header file
-    multipleRandomWalk<<<gridDim, blockDim>>>(num_nodes, num_walks_per_node, max_walk_length, dev_node_idx, dev_timestamp, dev_start_idx, dev_global_walk, random_number);
+    multipleRandomWalk<<<gridDim, blockDim>>>(num_nodes, num_walks_per_node, max_walk_length, node_idx_dev, dev_timestamp, start_idx_dev, random_walk_dev, random_number);
     cudaError_t err = cudaGetLastError();
     if (err != cudaSuccess) {
         printf("Error: %s\n", cudaGetErrorString(err));
@@ -423,12 +423,12 @@ void cuda_rwalk(int max_walk_length, int num_walks_per_node, int64_t num_nodes, 
 
     // get result
     cudaDeviceSynchronize();
-    cudaCheck(cudaMemcpy(random_walk_host, dev_global_walk, sizeof(int64_t) * num_nodes * max_walk_length * num_walks_per_node, cudaMemcpyDeviceToHost));
+    cudaCheck(cudaMemcpy(random_walk_host, random_walk_dev, sizeof(int32_t) * num_nodes * max_walk_length * num_walks_per_node, cudaMemcpyDeviceToHost));
 
     // clean arrays
-    cudaCheck(cudaFree(dev_start_idx));
-    cudaCheck(cudaFree(dev_node_idx));
-    cudaCheck(cudaFree(dev_timestamp));
-    cudaCheck(cudaFree(dev_global_walk));
+    cudaCheck(cudaFree(start_idx_dev));
+    cudaCheck(cudaFree(node_idx_dev));
+    cudaCheck(cudaFree(timestamp_dev));
+    cudaCheck(cudaFree(random_walk_dev));
 }
 

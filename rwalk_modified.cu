@@ -3,9 +3,9 @@
 #include <assert.h>
 #include <limits>
 
-void __global__ multipleRandomWalk(int num_of_node, int num_of_walk, int max_walk_length, int64_t* node_idx, float* timestamp, int64_t* start_idx, int64_t* rand_walk, unsigned long long rnumber){
+void __global__ multipleRandomWalk(int num_of_node, int num_of_walk, int max_walk_length, int32_t* node_idx, float* timestamp, int32_t* start_idx, int32_t* rand_walk, unsigned long long rnumber){
   // assuming grid = 1
-  int64_t src_node =  (blockDim.x * blockIdx.x) + threadIdx.x;
+  int32_t src_node =  (blockDim.x * blockIdx.x) + threadIdx.x;
   if(src_node >= num_of_node){
       return;
   }
@@ -19,14 +19,14 @@ void __global__ multipleRandomWalk(int num_of_node, int num_of_walk, int max_wal
 
     int walk_cnt;
     for(walk_cnt = 1; walk_cnt < max_walk_length; walk_cnt ++){
-        int64_t start = start_idx[src_node];
-        int64_t end = start_idx[src_node];
+        int32_t start = start_idx[src_node];
+        int32_t end = start_idx[src_node];
 
         // control divergence
         // range should be [start, end)
         if(start < end){
             float* cdf = (float*) malloc((end - start) * sizeof(float));
-            int64_t* valid_node_idx = (int64_t*) malloc((end - start) * sizeof(int64_t));
+            int32_t* valid_node_idx = (int32_t*) malloc((end - start) * sizeof(int32_t));
             int idx = 0;
             int valid_neighbor_cnt = 0;
             // float cdf[end - start];
@@ -102,26 +102,26 @@ void __global__ multipleRandomWalk(int num_of_node, int num_of_walk, int max_wal
   }
 }
 
-void __global__ singleRandomWalk(int num_of_node, int num_of_walk, int max_walk_length, int64_t* node_idx, float* timestamp, int64_t* start_idx, int64_t* rand_walk, unsigned long long rnumber){
+void __global__ singleRandomWalk(int num_of_node, int num_of_walk, int max_walk_length, int32_t* node_idx, float* timestamp, int32_t* start_idx, int32_t* rand_walk, unsigned long long rnumber){
   // assuming grid = 1
-  int64_t i =  (blockDim.x * blockIdx.x) + threadIdx.x;
+  int32_t i =  (blockDim.x * blockIdx.x) + threadIdx.x;
   if(i >= num_of_node * num_of_walk){
       return;
   }
-  int64_t src_node = i / num_of_walk;
+  int32_t src_node = i / num_of_walk;
   float curr_timestamp = .0f;
   rand_walk[i * max_walk_length + 0] = src_node;
 
   int walk_cnt;
   for(walk_cnt = 1; walk_cnt < max_walk_length; walk_cnt ++){
-      int64_t start = start_idx[src_node];
-      int64_t end = start_idx[src_node];
+      int32_t start = start_idx[src_node];
+      int32_t end = start_idx[src_node];
 
       // control divergence
       // range should be [start, end)
       if(start < end){
           float* cdf = (float*) malloc((end - start) * sizeof(float));
-          int64_t* valid_node_idx = (int64_t*) malloc((end - start) * sizeof(int64_t));
+          int32_t* valid_node_idx = (int32_t*) malloc((end - start) * sizeof(int32_t));
           int idx = 0;
           // float cdf[end - start];
           float max_timestamp = timestamp[start];

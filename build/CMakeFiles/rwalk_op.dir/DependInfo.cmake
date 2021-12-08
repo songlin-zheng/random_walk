@@ -8,12 +8,12 @@ set(CMAKE_DEPENDS_LANGUAGES
 
 # The set of dependency files which are needed:
 set(CMAKE_DEPENDS_DEPENDENCY_FILES
-  "/home/ubuntu/random_walk/helper.cu" "CMakeFiles/cuda_lib.dir/helper.cu.o" "gcc" "CMakeFiles/cuda_lib.dir/helper.cu.o.d"
-  "/home/ubuntu/random_walk/rwalk_optimized.cu" "CMakeFiles/cuda_lib.dir/rwalk_optimized.cu.o" "gcc" "CMakeFiles/cuda_lib.dir/rwalk_optimized.cu.o.d"
+  "/home/ubuntu/random_walk/rwalk_kernel.cc" "CMakeFiles/rwalk_op.dir/rwalk_kernel.cc.o" "gcc" "CMakeFiles/rwalk_op.dir/rwalk_kernel.cc.o.d"
   )
 
 # Targets to which this target links.
 set(CMAKE_TARGET_LINKED_INFO_FILES
+  "/home/ubuntu/random_walk/build/CMakeFiles/cuda_lib.dir/DependInfo.cmake"
   )
 
 # Fortran module output directory.

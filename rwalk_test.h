@@ -301,7 +301,7 @@ void helper(
 
     Timer t;
     t.Start();
-    cuda_helper_test(max_walk_length, num_walks_per_node, num_nodes, num_edges, (unsigned long long) (RandomNumberGenerator() * 1.0 * ULLONG_MAX));
+    cuda_helper(max_walk_length, num_walks_per_node, num_nodes, num_edges, (unsigned long long) (RandomNumberGenerator() * 1.0 * ULLONG_MAX));
     t.Stop();
 
     PrintStep("[TimingStat] Random walk time (s):", t.Seconds());
