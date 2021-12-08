@@ -26,6 +26,5 @@ extern int threadBlockSize; // rwalk.cu
 extern int count_dev;
 extern cudaDeviceProp prop; // rwalk.cu
 extern float extend_ratio; // rwalk.cu
-extern bool preprocessing; // rwalk.cu
 
 #endif

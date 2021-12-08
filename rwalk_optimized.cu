@@ -5,6 +5,9 @@
 #include <assert.h>
 #include <limits>
 
+#include "timer.h"
+#include "util.h"
+
 int32_t* random_walk_dev;
 int32_t* node_idx_dev;
 float* timestamp_dev;
@@ -27,7 +30,8 @@ float extend_ratio = 0.1;
 int threadBlockSize;
 cudaDeviceProp prop;
 int count_dev;
-bool preprocessing = true;
+
+__constant__ float EPSILON = 1e-8;
 
 
 // assert(err == cudaSuccess);
@@ -113,7 +117,7 @@ void __global__ singleRandomWalk(int num_of_node, int num_of_walk, int max_walk_
             // ! reduction tree here (kernel in kernel)
             float denom = .0f;
             for(int j = 0; j < idx; j ++){
-                cdf[j] =  expf((valid_timestamp[j] - curr_timestamp) / (max_timestamp - min_timestamp));
+                cdf[j] =  expf(-(valid_timestamp[j] - curr_timestamp) / (max_timestamp - min_timestamp));
                 denom += cdf[j];
             }
             float curr_cdf = .0f,  next_cdf = .0f;
@@ -153,6 +157,131 @@ void __global__ singleRandomWalk(int num_of_node, int num_of_walk, int max_walk_
     }
 }
 
+void __global__ optimizedRandomWalk(int num_of_node, int num_of_walk, int max_walk_length, float* cdf_buffer, int32_t* mapping, int32_t* node_idx,  int32_t* start_idx, int32_t* rand_walk, unsigned long long rnumber){
+    // assuming grid = 1
+    int32_t i =  (blockDim.x * blockIdx.x) + threadIdx.x;
+    rnumber = i * (unsigned long long) rnumber + 11;
+    if(i >= num_of_node * num_of_walk){
+        return;
+    }
+
+    int32_t src_node = i / (int32_t) num_of_walk;
+    int32_t curr_pos = -1;
+    rand_walk[i * max_walk_length + 0] = src_node;
+
+    // printf("start : %lld ; end : %lld; src_node: %lld; num_of_walk : %d; max_walk_length: %d; i : %lld\n", (long long int)start, (long long int)end, (long long int)src_node, num_of_walk, max_walk_length, (long long int)i);
+    int32_t start;
+    int32_t end;
+
+    int walk_cnt;
+    for(walk_cnt = 1; walk_cnt < max_walk_length; walk_cnt ++){
+        // ! can be improved
+        start = start_idx[src_node];
+        end = start_idx[src_node + 1];
+        // printf("start: %lld end: %lld\n", (long long int) start, (long long int)end);
+
+        // control divergence
+        // range should be [start, end)
+        if(start < end){
+            // ! need to determine how to get prob
+            float prob = rnumber * 1.0 / ULLONG_MAX;
+            // float prob = 0.9999999;
+
+            // refresh rnumber
+            rnumber = rnumber * (unsigned long long)25214903917 + 11;
+            int32_t l = start + curr_pos + 1;
+            int32_t r = end - 1;
+
+            // curr_pos is larger than all timestamp
+            // int target = 2;
+            if(l > r){
+                break;
+            }
+            while(l < r){
+                int32_t mid = l + (r - l) / 2;
+                float denom = (cdf_buffer[end - 1] - (curr_pos == -1 ? 0 : cdf_buffer[start + curr_pos]));
+                float left_prob = (mid == 0 ?  0 : (cdf_buffer[mid - 1] - (curr_pos == -1 ? 0 : cdf_buffer[start + curr_pos]))) / denom;
+                float right_prob = (cdf_buffer[mid] - (curr_pos == -1 ? 0 : cdf_buffer[start + curr_pos])) / denom;
+                // if(right_prob - 1 < EPSILON && right_prob - 1 > - EPSILON){
+                // if(i == 0){
+                //     printf("wala curr_pos %d mid_buf %f end_buf %f left %f, right %f\n", curr_pos, cdf_buffer[mid], cdf_buffer[end - 1], left_prob, right_prob);
+                // }
+                // }
+                // if(rand_walk[i * max_walk_length + 0] == target){
+                //     printf("guid: %d prob, left_p, right_p: %f, %f, %f \n", i, prob, left_prob, right_prob);
+                // }
+                if(prob >= left_prob && ((right_prob - 1 < EPSILON && right_prob - 1 > - EPSILON) ? (prob <= right_prob) : (prob < right_prob))){
+                    l = mid;
+                    break;
+                }
+                else if(prob >= right_prob){
+                    l = mid + 1;
+                }
+                else{
+                    r = mid - 1;
+                }
+            }
+            // printf("l %d end -1 %d\n", l, end - 1);
+            // if(rand_walk[i * max_walk_length + 0] == target){
+            //     printf("prev: %d, next: %d\n", src_node, node_idx[l]);
+            // }
+            rand_walk[i * max_walk_length + walk_cnt] = node_idx[l];
+            src_node = node_idx[l];
+            curr_pos = mapping[l];
+        }
+        else{
+            break;
+        }
+    }
+
+    if(walk_cnt < max_walk_length){
+        // signal the rest is invalid and there is no descending node
+        rand_walk[i * max_walk_length + walk_cnt] = -1;
+    }
+}
+
+void cuda_preprocess(int max_walk_length, int num_walks_per_node, int32_t num_nodes, int32_t num_edges){
+    printf("------------start preprocessing--------------\n");
+    Timer t;
+    t.Start();
+    cdf_buffer_host = new float[num_edges];
+    node_idx_host_sorted = new int32_t[num_edges];
+    timestamp_host_sorted = new float[num_edges];
+    mapping_host = new int32_t[num_edges];
+
+    cudaGetDeviceProperties(&prop, 0);
+    threadBlockSize = prop.maxThreadsPerBlock;
+
+    cudaCheck(cudaMalloc((void **)&start_idx_dev, sizeof(int32_t) * (num_nodes + 1)));
+    cudaCheck(cudaMalloc((void **)&node_idx_dev, sizeof(int32_t) * num_edges));
+    cudaCheck(cudaMalloc((void **)&timestamp_dev, sizeof(float) * num_edges));
+
+    cudaCheck(cudaMalloc((void **)&cdf_buffer_dev, sizeof(float) * num_edges));
+    cudaCheck(cudaMalloc((void **)&mapping_dev, sizeof(int32_t) * num_edges));
+    cudaCheck(cudaMalloc((void **)&node_idx_dev_sorted, sizeof(int32_t) * num_edges));
+    cudaCheck(cudaMalloc((void **)&timestamp_dev_sorted, sizeof(float) * num_edges));
+
+    cudaCheck(cudaMemcpy(start_idx_dev, start_idx_host, sizeof(int32_t) * (num_nodes + 1), cudaMemcpyHostToDevice));
+    cuda_helper(max_walk_length, num_walks_per_node, num_nodes, num_edges);
+    t.Stop();
+
+    cudaCheck(cudaFree(start_idx_dev));
+    cudaCheck(cudaFree(node_idx_dev));
+    cudaCheck(cudaFree(timestamp_dev));
+    PrintStep("[TimingStat] preprocessing time (s):", t.Seconds());
+}
+
+void cuda_clean_preprocess(){
+    printf("------------clean preprocessing--------------\n");
+    cudaCheck(cudaFree(cdf_buffer_dev));
+    cudaCheck(cudaFree(mapping_dev));
+    cudaCheck(cudaFree(node_idx_dev_sorted));
+    cudaCheck(cudaFree(timestamp_dev_sorted));
+    delete[] mapping_host;
+    delete[] timestamp_host_sorted;
+    delete[] node_idx_host_sorted;
+    delete[] cdf_buffer_host;
+}
 
 void cuda_rwalk(int max_walk_length, int num_walks_per_node, int32_t num_nodes, int32_t num_edges, unsigned long long random_number){
 
@@ -172,26 +301,12 @@ void cuda_rwalk(int max_walk_length, int num_walks_per_node, int32_t num_nodes, 
 
     // memcpy
     cudaCheck(cudaMemcpy(start_idx_dev, start_idx_host, sizeof(int32_t) * (num_nodes + 1), cudaMemcpyHostToDevice));
+    cudaCheck(cudaMemcpy(node_idx_dev, node_idx_host, sizeof(int32_t) * num_edges, cudaMemcpyHostToDevice));
+    cudaCheck(cudaMemcpy(timestamp_dev, timestamp_host, sizeof(float) * num_edges, cudaMemcpyHostToDevice));
 
     cudaGetDeviceProperties(&prop, 0);
     threadBlockSize = prop.maxThreadsPerBlock;
 
-    if(preprocessing){
-        cdf_buffer_host = new float[num_edges];
-        node_idx_host_sorted = new int32_t[num_edges];
-        timestamp_host_sorted = new float[num_edges];
-        mapping_host = new int32_t[num_edges];
-
-        cudaCheck(cudaMalloc((void **)&cdf_buffer_dev, sizeof(float) * num_edges));
-        cudaCheck(cudaMalloc((void **)&mapping_dev, sizeof(int32_t) * num_edges));
-        cudaCheck(cudaMalloc((void **)&node_idx_dev_sorted, sizeof(int32_t) * num_edges));
-        cudaCheck(cudaMalloc((void **)&timestamp_dev_sorted, sizeof(float) * num_edges));
-        cuda_helper(max_walk_length, num_walks_per_node, num_nodes, num_edges);
-    }
-    else{
-        cudaCheck(cudaMemcpy(node_idx_dev, node_idx_host, sizeof(int32_t) * num_edges, cudaMemcpyHostToDevice));
-        cudaCheck(cudaMemcpy(timestamp_dev, timestamp_host, sizeof(float) * num_edges, cudaMemcpyHostToDevice));
-    }
 
 #if defined(DEBUG)
     cudaGetDeviceCount(&count_dev);
@@ -209,6 +324,7 @@ void cuda_rwalk(int max_walk_length, int num_walks_per_node, int32_t num_nodes, 
     dim3 blockDim(32);
 
     singleRandomWalk<<<gridDim, blockDim>>>(num_nodes, num_walks_per_node, max_walk_length, node_idx_dev, timestamp_dev, start_idx_dev, random_walk_dev, random_number);
+    // optimizedRandomWalk<<<gridDim, blockDim>>>(num_nodes, num_walks_per_node, max_walk_length, cdf_buffer_dev, mapping_dev, node_idx_dev_sorted, start_idx_dev, random_walk_dev, random_number);
 
 #if defined(DEBUG)
     cudaError_t err = cudaGetLastError();
@@ -224,16 +340,7 @@ void cuda_rwalk(int max_walk_length, int num_walks_per_node, int32_t num_nodes, 
     cudaDeviceSynchronize();
     cudaCheck(cudaMemcpy(random_walk_host, random_walk_dev, sizeof(int32_t) * num_nodes * max_walk_length * num_walks_per_node, cudaMemcpyDeviceToHost));
 
-    if(preprocessing){
-        cudaCheck(cudaFree(cdf_buffer_dev));
-        cudaCheck(cudaFree(mapping_dev));
-        cudaCheck(cudaFree(node_idx_dev_sorted));
-        cudaCheck(cudaFree(timestamp_dev_sorted));
-        delete[] mapping_host;
-        delete[] timestamp_host_sorted;
-        delete[] node_idx_host_sorted;
-        delete[] cdf_buffer_host;
-    }
+
     // clean arrays
     cudaCheck(cudaFree(start_idx_dev));
     cudaCheck(cudaFree(node_idx_dev));

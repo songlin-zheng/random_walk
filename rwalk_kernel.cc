@@ -52,7 +52,8 @@ int main(int argc, char* argv[]) {
       /* temporal graph */ g,
       /* max random walk length */ max_walk_length,
       /* number of rwalks/node */ num_walks_per_node,
-      /* filename of random walk */ "out_random_walk.txt"
+      /* filename of random walk */ "out_random_walk.txt",
+      i == 19 ? true : false
     );
   }
 

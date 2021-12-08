@@ -12,6 +12,7 @@ int32_t *start_idx_host;
 int32_t *node_idx_host;
 float *timestamp_host;
 int32_t *random_walk_host;
+bool preprocessed = false;
 
 // int32_t * p_scan_list;
 // int32_t * v_list;
@@ -36,18 +37,17 @@ bool SortByTime(TNode n1, TNode n2)
   than the incoming edge (i.e., src_time)
 */
 TempNodeVector FilterEdgesPostTime(
-    const WGraph &g,
-    NodeID src_node,
-    WeightT src_time)
+  const WGraph &g,
+  NodeID src_node,
+  WeightT src_time)
 {
   TempNodeVector filtered_edges;
-  for (auto v : g.out_neigh(src_node))
-  {
-    if (v.w > src_time)
+  for(auto v : g.out_neigh(src_node)) {
+    if(v.w > src_time)
       filtered_edges.push_back(std::make_pair(v, v.w));
   }
   // Sort edges by timestamp?
-  // std::sort(filtered_edges.begin(), filtered_edges.end(), SortByTime);
+  //std::sort(filtered_edges.begin(), filtered_edges.end(), SortByTime);
   return filtered_edges;
 }
 
@@ -56,8 +56,8 @@ TempNodeVector FilterEdgesPostTime(
 */
 double RandomNumberGenerator()
 {
-  static std::uniform_real_distribution<double> uid(0, 1);
-  return uid(rng);
+    static std::uniform_real_distribution<double> uid(0,1);
+    return uid(rng);
 }
 
 /*
@@ -74,17 +74,13 @@ int FindNeighborIdx(DoubleVector prob_dist)
   double curCDF = 0, nextCDF = 0;
   int cnt = 0;
   double random_number = RandomNumberGenerator();
-  for (auto it : prob_dist)
-  {
-    nextCDF += it;
-    if (nextCDF >= random_number && curCDF <= random_number)
-    {
-      return cnt;
-    }
-    else
-    {
-      curCDF = nextCDF;
-      cnt++;
+  for(auto it : prob_dist) {
+      nextCDF += it;
+      if(nextCDF >= random_number && curCDF <= random_number) {
+          return cnt;
+      }  else {
+          curCDF = nextCDF;
+          cnt++;
     }
   }
   // Ideally, it should never hit this point
@@ -100,48 +96,37 @@ int FindNeighborIdx(DoubleVector prob_dist)
   of incoming edge and outgoing edges
 */
 bool GetNeighborToWalk(
-    const WGraph &g,
-    NodeID src_node,
-    WeightT src_time,
-    TNode &next_neighbor)
+  const WGraph &g,
+  NodeID src_node,
+  WeightT src_time,
+  TNode& next_neighbor)
 {
   int neighborhood_size = g.out_degree(src_node);
-  if (neighborhood_size == 0)
-  {
+  if(neighborhood_size == 0) {
     return false;
-  }
-  else
-  {
+  } else {
     TempNodeVector filtered_edges = FilterEdgesPostTime(g, src_node, src_time);
-    if (filtered_edges.empty())
-    {
+    if(filtered_edges.empty()) {
       return false;
     }
-    if (filtered_edges.size() == 1)
-    {
+    if(filtered_edges.size() == 1) {
       next_neighbor = filtered_edges[0];
       return true;
-    }
-    else
-    {
+    } else {
       DoubleVector prob_dist;
       WeightT time_boundary_diff;
       time_boundary_diff = g.TimeBoundsDelta(src_node);
-      if (time_boundary_diff == 0)
+      if(time_boundary_diff == 0)
       {
         next_neighbor = filtered_edges[rand() % filtered_edges.size()];
         return true;
-      }
-      else
-      {
+      } else {
         // TODO: parallelism?
-        for (auto it : filtered_edges)
-        {
-          prob_dist.push_back(exp((float)(it.second - src_time) / time_boundary_diff));
+        for(auto it : filtered_edges) {
+          prob_dist.push_back(exp((float)(it.second-src_time)/time_boundary_diff));
         }
         double exp_sum = std::accumulate(prob_dist.begin(), prob_dist.end(), 0.0);
-        for (uint32_t i = 0; i < prob_dist.size(); ++i)
-        {
+        for (uint32_t i = 0; i < prob_dist.size(); ++i) {
           prob_dist[i] = prob_dist[i] / exp_sum;
         }
         int neighbor_index = FindNeighborIdx(prob_dist);
@@ -160,18 +145,17 @@ bool GetNeighborToWalk(
   next neighbor to walk.
 */
 bool compute_walk_from_a_node(
-    const WGraph &g,
-    NodeID src_node,
-    WeightT prev_time_stamp,
-    TNode &next_neighbor_ret,
-    int max_walk_length,
-    NodeID *local_array,
-    int32_t pos)
+  const WGraph& g,
+  NodeID src_node,
+  WeightT prev_time_stamp,
+  TNode& next_neighbor_ret,
+  int max_walk_length,
+  NodeID *local_array,
+  int32_t pos)
 {
   TNode next_neighbor;
-  if (g.out_degree(src_node) != 0 &&
-      GetNeighborToWalk(g, src_node, prev_time_stamp, next_neighbor))
-  {
+  if(g.out_degree(src_node) != 0 &&
+    GetNeighborToWalk(g, src_node, prev_time_stamp, next_neighbor)) {
     local_array[pos] = next_neighbor.first;
     next_neighbor_ret = next_neighbor;
     return true;
@@ -187,33 +171,30 @@ bool compute_walk_from_a_node(
 WeightT GetInitialTime(const WGraph &g, NodeID src_node)
 {
   // TODO: modify this function later
-  return (WeightT)0;
+  return (WeightT) 0;
 }
 
 /*
   Write random walk to a file
 */
 void WriteWalkToAFile(
-    NodeID *global_walk,
-    int num_nodes,
-    int max_walk,
-    int num_walks_per_node,
-    std::string walk_filename)
+  NodeID* global_walk,
+  int num_nodes,
+  int max_walk,
+  int num_walks_per_node,
+  std::string walk_filename)
 {
   std::ofstream random_walk_file(walk_filename);
-  for (int w_n = 0; w_n < num_walks_per_node; ++w_n)
-  {
-    for (NodeID iter = 0; iter < num_nodes; iter++)
-    {
+  for(int w_n = 0; w_n < num_walks_per_node; ++w_n) {
+    for(NodeID iter = 0; iter < num_nodes; iter++) {
       NodeID *local_walk =
-          global_walk +
-          (iter * max_walk * num_walks_per_node) +
-          (w_n * max_walk);
-      for (int i = 0; i < max_walk; i++)
-      {
-        if (local_walk[i] == -1)
-          break;
-        random_walk_file << local_walk[i] << " ";
+        global_walk +
+        ( iter * max_walk * num_walks_per_node ) +
+        ( w_n * max_walk );
+      for (int i = 0; i < max_walk; i++) {
+          if (local_walk[i] == -1)
+            break;
+          random_walk_file << local_walk[i] << " ";
       }
       random_walk_file << "\n";
     }
@@ -228,56 +209,53 @@ void WriteWalkToAFile(
   which is pushed to global_walk that stores all random walks
 */
 void compute_random_walk(
-    const WGraph &g,
-    int max_walk_length,
-    int num_walks_per_node,
-    std::string walk_filename)
-{
+  const WGraph &g,
+  int max_walk_length,
+  int num_walks_per_node,
+  std::string walk_filename) {
   std::cout << "Computing random walk for " << g.num_nodes() << " nodes and "
-            << g.num_edges() << " edges." << std::endl;
+      << g.num_edges() << " edges." << std::endl;
   max_walk_length++;
   NodeID *global_walk = new NodeID[g.num_nodes() * max_walk_length * num_walks_per_node];
   Timer t;
   t.Start();
-  for (int w_n = 0; w_n < num_walks_per_node; ++w_n)
-  {
+  for(int w_n = 0; w_n < num_walks_per_node; ++w_n) {
     std::cout << "walk number: " << w_n << std::endl;
-    for (NodeID i = 0; i < g.num_nodes(); ++i)
-    {
+    for(NodeID i = 0; i < g.num_nodes(); ++i) {
       NodeID *local_walk =
-          global_walk +
-          (i * max_walk_length * num_walks_per_node) +
-          (w_n * max_walk_length);
+        global_walk +
+        ( i * max_walk_length * num_walks_per_node ) +
+        ( w_n * max_walk_length );
       local_walk[0] = i;
       WeightT prev_time_stamp = 0;
       NodeID next_neighbor = i;
       TNode next_neighbor_ret;
       int walk_cnt;
-      for (walk_cnt = 1; walk_cnt < max_walk_length; ++walk_cnt)
-      {
+      for(walk_cnt = 1; walk_cnt < max_walk_length; ++walk_cnt) {
         bool cont = compute_walk_from_a_node(
-            g,
-            next_neighbor,
-            prev_time_stamp,
-            next_neighbor_ret,
-            max_walk_length,
-            local_walk,
-            walk_cnt);
-        if (!cont)
-          break;
+          g,
+          next_neighbor,
+          prev_time_stamp,
+          next_neighbor_ret,
+          max_walk_length,
+          local_walk,
+          walk_cnt
+        );
+        if(!cont) break;
         next_neighbor = next_neighbor_ret.first;
         prev_time_stamp = next_neighbor_ret.second;
       }
       if (walk_cnt != max_walk_length)
-        local_walk[walk_cnt] = -1;
+          local_walk[walk_cnt] = -1;
     }
   }
   t.Stop();
   PrintStep("[TimingStat] Random walk time (s):", t.Seconds());
   WriteWalkToAFile(global_walk, g.num_nodes(),
-                   max_walk_length, num_walks_per_node, walk_filename);
+    max_walk_length, num_walks_per_node, walk_filename);
   delete[] global_walk;
 }
+
 
 // num_of_node, num_of_walk, max_walk_length,
 // node_idx : |E| array, node index -> int32_t*
@@ -288,50 +266,112 @@ void GPU_random_walk(
     const WGraph &g,
     int max_walk_length,
     int num_walks_per_node,
-    std::string walk_filename)
+    std::string walk_filename,
+    bool clean)
 {
-  // flatten the graph into 2 arrays
-  // pair<> not supported in GPU
-  int32_t num_nodes = g.num_nodes();
-  int32_t num_edges = g.num_edges();
-  // printf("num_nodes : %d ; num_edges : %d； num_walks_per_node: %d; max_walk_length: %d\n", num_nodes, num_edges, num_walks_per_node, max_walk_length);
+    // flatten the graph into 2 arrays
+    // pair<> not supported in GPU
+    int32_t num_nodes = g.num_nodes();
+    int32_t num_edges = g.num_edges();
+    // printf("num_nodes : %d ; num_edges : %d； num_walks_per_node: %d; max_walk_length: %d\n", num_nodes, num_edges, num_walks_per_node, max_walk_length);
 
-  // define the array
-  start_idx_host = new int32_t[num_nodes + 1];
-  node_idx_host = new int32_t[num_edges];
-  timestamp_host = new float[num_edges];
-  max_walk_length++;
-  random_walk_host = new int32_t[num_nodes * max_walk_length * num_walks_per_node];
+    // define the array
+    start_idx_host = new int32_t[num_nodes + 1];
+    node_idx_host = new int32_t[num_edges];
+    timestamp_host = new float[num_edges];
+    max_walk_length++;
+    random_walk_host = new int32_t[num_nodes * max_walk_length * num_walks_per_node];
 
-  // prepare input data
-  //  flatten graph into arrays
-  start_idx_host[0] = 0;
+    //prepare input data
+    // flatten graph into arrays
+    start_idx_host[0] = 0;
 
-  for (NodeID i = 0; i < num_nodes; i++)
-  {
-    int32_t out_edge_number = g.out_degree(i);
-    start_idx_host[i + 1] = start_idx_host[i] + out_edge_number;
-    int32_t j = 0;
-    for (auto out_node : g.out_neigh(i))
+    for (NodeID i = 0; i < num_nodes; i++)
     {
-      int32_t idx = start_idx_host[i] + j;
-      node_idx_host[idx] = out_node.v;
-      timestamp_host[idx] = out_node.w;
-      j++;
+        int32_t out_edge_number = g.out_degree(i);
+        start_idx_host[i + 1] = start_idx_host[i] + out_edge_number;
+        int32_t j = 0;
+        for (auto out_node : g.out_neigh(i))
+        {
+            int32_t idx = start_idx_host[i] + j;
+            node_idx_host[idx] = out_node.v;
+            timestamp_host[idx] = out_node.w;
+            j++;
+        }
+        assert(j == out_edge_number);
     }
-    assert(j == out_edge_number);
-  }
 
-  Timer t;
-  t.Start();
-  cuda_rwalk(max_walk_length, num_walks_per_node, num_nodes, num_edges, (unsigned long long)(RandomNumberGenerator() * 1.0 * ULLONG_MAX));
-  t.Stop();
+#if defined(PREPROCESSING)
+    if(!preprocessed){
+      preprocessed = true;
+      cuda_preprocess(max_walk_length, num_walks_per_node, num_nodes, num_edges);
+    }
+#endif
 
-  PrintStep("[TimingStat] Random walk time (s):", t.Seconds());
-  WriteWalkToAFile(random_walk_host, num_nodes, max_walk_length, num_walks_per_node, walk_filename);
+    Timer t;
+    t.Start();
+    cuda_rwalk(max_walk_length, num_walks_per_node, num_nodes, num_edges, (unsigned long long) (RandomNumberGenerator() * 1.0 * ULLONG_MAX));
+    t.Stop();
 
-  delete[] start_idx_host;
-  delete[] node_idx_host;
-  delete[] timestamp_host;
-  delete[] random_walk_host;
+#if defined(PREPROCESSING)
+    if(preprocessed && clean){
+      cuda_clean_preprocess();
+    }
+#endif
+
+    PrintStep("[TimingStat] Random walk time (s):", t.Seconds());
+    WriteWalkToAFile(random_walk_host, num_nodes, max_walk_length, num_walks_per_node, walk_filename);
+
+    delete[] start_idx_host;
+    delete[] node_idx_host;
+    delete[] timestamp_host;
+    delete[] random_walk_host;
 }
+
+// void GPU_random_walk_original(
+//   const WGraph &g,
+//   int max_walk_length,
+//   int num_walks_per_node,
+//   std::string walk_filename) {
+
+//   num_of_nodes = g.num_nodes();
+//   num_of_edges = g.num_edges();
+
+//   p_scan_list = new int32_t [num_of_nodes + 1];
+//   p_scan_list[0] = 0;
+//   v_list = new int32_t[num_of_edges];
+//   w_list = new float[num_of_edges];
+
+//   std::cout << "Generating parallel scan list and data structures for GPU..." << std::endl;
+//   for(NodeID i = 0; i < num_of_nodes; ++i) {
+//     p_scan_list[i + 1] = p_scan_list[i] + g.out_degree(i);
+//     int cnt = 0;
+//     for(auto v: g.out_neigh(i)){
+//       int32_t idx = p_scan_list[i] + cnt;
+//       v_list[idx] = v.v;
+//       w_list[idx] = v.w;
+//       cnt++;
+//     }
+//   }
+
+//   std::cout << "Computing random walk for " << g.num_nodes() << " nodes and "
+//       << g.num_edges() << " edges." << std::endl;
+//   max_walk_length++;
+//   global_walk = new NodeID[g.num_nodes() * max_walk_length * num_walks_per_node];
+//   // NodeID * host_global_walk = new NodeID[g.num_nodes() * max_walk_length * num_walks_per_node];
+
+//   Timer t;
+//   t.Start();
+//   initializeGPU_rwalk(max_walk_length, num_walks_per_node);
+//   TrainGPU_rwalk(max_walk_length, num_walks_per_node, (unsigned long long) (RandomNumberGenerator() * 1.0 * ULLONG_MAX));
+
+//   cleanUpGPU_rwalk();
+//   t.Stop();
+//   PrintStep("[TimingStat] Random walk time (s):", t.Seconds());
+//   WriteWalkToAFile(global_walk, g.num_nodes(), max_walk_length, num_walks_per_node, walk_filename);
+//   delete[] global_walk;
+
+//   delete[] p_scan_list;
+//   delete[] v_list;
+//   delete[] w_list;
+// }

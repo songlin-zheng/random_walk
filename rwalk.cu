@@ -377,7 +377,7 @@ void __global__ multipleRandomWalk(int num_of_node, int num_of_walk, int max_wal
   }
 
 
-void cuda_rwalk(int max_walk_length, int num_walks_per_node, int32_t num_nodes, int32_t num_edges, unsigned long long random_number){
+void cuda_rwalk(int max_walk_length, int num_walks_per_node, int32_t num_nodes, int32_t num_edges, unsigned long long random_number, bool stream){
 
     size_t free_memory;
     size_t total_memory;
@@ -393,8 +393,11 @@ void cuda_rwalk(int max_walk_length, int num_walks_per_node, int32_t num_nodes, 
 
     // memcpy
     cudaCheck(cudaMemcpy(start_idx_dev, start_idx_host, sizeof(int32_t) * (num_nodes + 1), cudaMemcpyHostToDevice));
-    cudaCheck(cudaMemcpy(node_idx_dev, node_idx_host, sizeof(int32_t) * num_edges, cudaMemcpyHostToDevice));
-    cudaCheck(cudaMemcpy(timestamp_dev, timestamp_host, sizeof(float) * num_edges, cudaMemcpyHostToDevice));
+
+    if(!stream){
+        cudaCheck(cudaMemcpy(node_idx_dev, node_idx_host, sizeof(int32_t) * num_edges, cudaMemcpyHostToDevice));
+        cudaCheck(cudaMemcpy(timestamp_dev, timestamp_host, sizeof(float) * num_edges, cudaMemcpyHostToDevice));
+    }
 
     // cudaGetDeviceCount(&count_dev);
     // for(int i = 0; i < count_dev; i ++){
