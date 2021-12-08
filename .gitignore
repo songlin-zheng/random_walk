@@ -3,3 +3,4 @@ _build/*
 cmake-build-debug/*
 *.wel
 out_random_walk.txt
+random_walk*
