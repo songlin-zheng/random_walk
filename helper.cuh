@@ -7,6 +7,7 @@
 extern int32_t *start_idx_host; // rwalk.h
 extern int32_t *node_idx_host; // rwalk.h
 extern float *timestamp_host; // rwalk.h
+extern int32_t *out_edge_cnt_host; // rwalk.h
 extern int32_t *random_walk_host; //rwalk.h
 extern bool preprocessed;
 

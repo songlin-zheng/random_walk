@@ -13,82 +13,16 @@
         }                                                                                         \
     }
 
-template <class int_t, class float_t>
-void __global__ sortByWeight(int_t start, int_t end, float_t *src_weight, int_t *src_node, float_t *dest_weight, int_t *dest_node)
-{
-    extern __shared__ float smem[];
-    // address missalignment
-    float_t *local_ts = smem;
-    int_t *idx_1 = (int_t *)&smem[end - start];
-    int_t *idx_2 = (int_t *)&idx_1[end - start];
-    int tid = threadIdx.x;
-
-    // recursively load elements into local_arr
-    for (int_t i = tid; i < end - start; i += blockDim.x)
-    {
-        local_ts[i] = src_weight[start + i];
-        idx_1[i] = i;
-    }
-    __syncthreads();
-
-    int_t width = 1;
-    int num_of_sort = 0;
-    while (width < end - start)
-    {
-        for (int_t i = tid; i < end - start; i += blockDim.x)
-        {
-            int_t start_i = i * (width << 1);
-            int_t mid_i = min(start_i + width, end - start);
-            int_t end_i = min(end - start, start_i + (width << 1));
-            if (start_i < end - start)
-            {
-
-                if (num_of_sort % 2 == 0)
-                {
-                    bottomUpSort(local_ts, idx_1, idx_2, start_i, mid_i, end_i);
-                }
-                else
-                {
-                    bottomUpSort(local_ts, idx_2, idx_1, start_i, mid_i, end_i);
-                }
-            }
-        }
-        // width x 2
-        width <<= 1;
-        num_of_sort++;
-        __syncthreads();
-    }
-
-#if defined(DEBUG)
-    if (tid == 0)
-    {
-        for (int i = 0; i < end - start; i++)
-        {
-            int_t idx = num_of_sort % 2 == 0 ? idx_1[i] : idx_2[i];
-            printf("[i, idx, node_idx, ts]: [%d, %d, %d, %f] ", i, idx, src_node[start + idx], local_ts[idx]);
-        }
-        printf("\n");
-    }
-#endif
-
-    for (int i = tid; i < end - start; i += blockDim.x)
-    {
-        int_t idx = num_of_sort % 2 == 0 ? idx_1[i] : idx_2[i];
-        dest_weight[start + i] = local_ts[idx];
-        dest_node[start + i] = src_node[start + idx];
-    }
-}
-
 // [start, end)
-template <class int_t, class float_t>
-void __device__ inline bottomUpSort(float_t *ts, int_t *src_idx, int_t *dest_idx, int_t start, int_t mid, int_t end)
+template <class int_t, class w_t>
+void __device__ inline bottomUpSort(w_t *weight, int_t *src_idx, int_t *dest_idx, int_t start, int_t mid, int_t end)
 {
     // ovid overflow
     int_t i = start, j = mid;
     for (int_t k = start; k < end; k++)
     {
-        // printf("src_idx[i], src_idx[j], ts[src_idx[i]], ts[src_idx[j]]: %lld, %lld, %f, %f\n", src_idx[i], src_idx[j], ts[src_idx[i]], ts[src_idx[j]]);
-        if (i < mid && (j == end || ts[src_idx[i]] < ts[src_idx[j]]))
+        // printf("src_idx[i], src_idx[j], weight[src_idx[i]], weight[src_idx[j]]: %lld, %lld, %f, %f\n", src_idx[i], src_idx[j], weight[src_idx[i]], weight[src_idx[j]]);
+        if (i < mid && (j == end || weight[src_idx[i]] < weight[src_idx[j]]))
         {
             dest_idx[k] = src_idx[i];
             i++;
@@ -97,6 +31,121 @@ void __device__ inline bottomUpSort(float_t *ts, int_t *src_idx, int_t *dest_idx
         {
             dest_idx[k] = src_idx[j];
             j++;
+        }
+    }
+}
+
+template <class int_t, class w_t>
+void __device__ mergeSort(int_t start, int_t end, int_t stride, int_t* idx_1, int_t* idx_2, w_t* weight, int& num_of_sort){
+    while (stride < end - start)
+    {
+        for (int_t i = tid; i < end - start; i += blockDim.x)
+        {
+            int_t start_i = i * (stride << 1);
+            int_t mid_i = min(start_i + stride, end - start);
+            int_t end_i = min(end - start, start_i + (stride << 1));
+            if (start_i < end - start)
+            {
+
+                if (num_of_sort % 2 == 0)
+                {
+                    bottomUpSort(weight, idx_1, idx_2, start_i, mid_i, end_i);
+                }
+                else
+                {
+                    bottomUpSort(weight, idx_2, idx_1, start_i, mid_i, end_i);
+                }
+            }
+        }
+        // stride x 2
+        stride <<= 1;
+        num_of_sort++;
+        __syncthreads();
+    }
+}
+template <class int_t, class w_t>
+void __global__ sortByWeight(int_t start, int_t end, w_t *src_weight, int_t *src_node, w_t *dest_weight, int_t *dest_node)
+{
+    extern __shared__ float smem[];
+    // address missalignment
+    w_t *local_weight = smem;
+    int_t *idx_1 = (int_t *)&smem[end - start];
+    int_t *idx_2 = (int_t *)&idx_1[end - start];
+    int tid = threadIdx.x;
+
+    // recursively load elements into local_arr
+    for (int_t i = tid; i < end - start; i += blockDim.x)
+    {
+        local_weight[i] = src_weight[start + i];
+        idx_1[i] = i;
+    }
+    __syncthreads();
+
+    int num_of_sort = 0;
+    int stride = 1;
+    mergeSort(start, end, stride, idx_1, idx_2, local_weight, num_of_sort);
+
+#if defined(DEBUG)
+    if (tid == 0)
+    {
+        for (int i = 0; i < end - start; i++)
+        {
+            int_t idx = num_of_sort % 2 == 0 ? idx_1[i] : idx_2[i];
+            printf("[i, idx, node_idx, ts]: [%d, %d, %d, %f] ", i, idx, src_node[start + idx], local_weight[idx]);
+        }
+        printf("\n");
+    }
+#endif
+
+    for (int i = tid; i < end - start; i += blockDim.x)
+    {
+        int_t idx = num_of_sort % 2 == 0 ? idx_1[i] : idx_2[i];
+        dest_weight[start + i] = local_weight[idx];
+        dest_node[start + i] = src_node[start + idx];
+    }
+}
+
+template <class int_t, class w_t, bool use_shared_memory>
+void __global__ argsort(w_t* weight, int_t* argsort_idx, int_t* argsort_idx_buffer, int_t width, int_t stride, int_t arr_size){
+    int num_of_sort = 0;
+    if(use_shared_memory){
+        extern __shared__ w_t smem[];
+        // address missalignment
+        w_t* local_weight = smem;
+        int_t* idx_1 = (int_t *)&smem[blockDim.x];
+        int_t* idx_2 = (int_t *)&idx_1[blockDim.x];
+        int global_idx = blockDim.x * blockIdx.x + threadIdx.x;
+        int tid = threadIdx.x
+
+        // recursively load elements into local_arr
+        for(int i = tid; i < width; i += blockDim.x){
+            if(blockIdx.x * width + i < arr_size){
+                local_weight[i] = weight[blockIdx.x * width + i];
+                idx_1[i] = argsort_idx[blockIdx.x * width + i];
+            }
+        }
+        __syncthreads();
+        mergeSort(0, end, stride, idx_1, idx_2, local_weight, num_of_sort);
+
+        for (int i = tid; i < width; i += blockDim.x)
+        {
+            if(blockIdx.x * width + i < arr_size){
+                int_t idx = num_of_sort % 2 == 0 ? idx_1[i] : idx_2[i];
+                argsort_idx[blockIdx.x * width + i] = idx;
+            }
+        }
+    }
+    else{
+        local_weight = weight;
+        idx_1 = argsort_idx;
+        idx_2 = argsort_idx_buffer;
+        int_t start = blockDim.x * width;
+        int_t end = min(arr_size, blockDim.x * (width + 1));
+        mergeSort(start, end, stride, argsort_idx, argsort_idx_buffer, weight, num_of_sort);
+        if(num_of_sort % 2 != 0){
+            for(int_t i = start; i < end; i += blockDim.x){
+                argsort_idx[i] = argsort_idx_buffer[i];
+            }
         }
     }
 }
@@ -227,6 +276,28 @@ void __global__ prefixSumConcurrent(int_t *start_idx, int_t *node_idx, float_t *
 
 void cuda_helper(int max_walk_length, int num_walks_per_node, int32_t num_nodes, int32_t num_edges)
 {
+    int width = 1024;
+    int stride = 1;
+    in32_t* node_argsort_idx_dev_buffer = nullptr;
+    while(width < num_edges){
+        int blockSize = min((int) threadBlockSize, width / 2);
+        int gridSize = ceil(num_nodes / (float) width);
+        int smem_size_per_block = sizeof(int32_t) * 3 * width;
+        dim3 grid(gridSize);
+        dim3 block(blockSize);
+        if(smem_size_per_block > prop.sharedMemPerBlock){
+            if(!node_argsort_idx_dev_buffer){
+                cudaCheck(cudaMalloc((void**) &node_argsort_idx_dev_buffer, sizeof(int32_t) * num_nodes));
+            }
+            argsort<int32_t, int32_t, false><<<gridSize, blockSize>>>(node_argsort_idx_dev);
+        }
+        else{
+
+        }
+    }
+    if(node_argsort_idx_dev_buffer){
+        cudaCheck(cudaFree(node_argsort_idx_dev_buffer));
+    }
 
     int count = 10;
     cudaStream_t *streams = new cudaStream_t[count];

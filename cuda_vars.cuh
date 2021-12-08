@@ -10,16 +10,18 @@ extern int32_t* random_walk_dev; // rwalk.cu
 extern int32_t* node_idx_dev; // rwalk.cu
 extern float* timestamp_dev; // rwalk.cu
 extern int32_t* start_idx_dev; // rwalk.cu
-extern int32_t* node_idx_host_sorted; // rwalk.cu
-extern float* timestamp_host_sorted;  // rwalk.cu
-extern float* cdf_buffer_host; // rwalk.cu
-extern int32_t* mapping_host; // rwalk.cu
-
-// host
 extern float* timestamp_dev_sorted; // rwalk.cu
 extern int32_t* node_idx_dev_sorted; // rwalk.cu
 extern float* cdf_buffer_dev; // rwalk.cu
 extern int32_t* mapping_dev; // rwalk.cu
+extern int32_t* node_argsort_idx_dev;
+extern int32_t* out_edge_cnt_dev;
+
+// host
+extern int32_t* node_idx_host_sorted; // rwalk.cu
+extern float* timestamp_host_sorted;  // rwalk.cu
+extern float* cdf_buffer_host; // rwalk.cu
+extern int32_t* mapping_host; // rwalk.cu
 
 // misc
 extern int threadBlockSize; // rwalk.cu

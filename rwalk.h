@@ -10,6 +10,7 @@ std::mutex m_screen;
 
 int32_t *start_idx_host;
 int32_t *node_idx_host;
+int32_t *out_edge_cnt_host;
 float *timestamp_host;
 int32_t *random_walk_host;
 bool preprocessed = false;
@@ -278,6 +279,7 @@ void GPU_random_walk(
     // define the array
     start_idx_host = new int32_t[num_nodes + 1];
     node_idx_host = new int32_t[num_edges];
+    out_edge_cnt_host = new int32_t[num_nodes];
     timestamp_host = new float[num_edges];
     max_walk_length++;
     random_walk_host = new int32_t[num_nodes * max_walk_length * num_walks_per_node];
@@ -289,6 +291,7 @@ void GPU_random_walk(
     for (NodeID i = 0; i < num_nodes; i++)
     {
         int32_t out_edge_number = g.out_degree(i);
+        out_edge_cnt_host[i] = out_edge_number;
         start_idx_host[i + 1] = start_idx_host[i] + out_edge_number;
         int32_t j = 0;
         for (auto out_node : g.out_neigh(i))

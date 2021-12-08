@@ -22,6 +22,9 @@ float *timestamp_host_sorted;
 float *timestamp_dev_sorted;
 int32_t *node_idx_dev_sorted;
 
+int32_t *out_edge_cnt_dev;
+int32_t *node_argsort_idx_dev;
+
 int32_t *mapping_host;
 int32_t *mapping_dev;
 
@@ -260,6 +263,8 @@ void cuda_preprocess(int max_walk_length, int num_walks_per_node, int32_t num_no
     cudaCheck(cudaMalloc((void **)&mapping_dev, sizeof(int32_t) * num_edges));
     cudaCheck(cudaMalloc((void **)&node_idx_dev_sorted, sizeof(int32_t) * num_edges));
     cudaCheck(cudaMalloc((void **)&timestamp_dev_sorted, sizeof(float) * num_edges));
+
+    cudaCheck(cudaMalloc((void **)&node_argsort_idx_dev, sizeof(int32_t) * num_nodes));
 
     cudaCheck(cudaMemcpy(start_idx_dev, start_idx_host, sizeof(int32_t) * (num_nodes + 1), cudaMemcpyHostToDevice));
     cuda_helper(max_walk_length, num_walks_per_node, num_nodes, num_edges);
