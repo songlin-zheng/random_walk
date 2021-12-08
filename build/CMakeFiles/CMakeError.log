@@ -1,0 +1,65 @@
+Performing C++ SOURCE FILE Test CMAKE_HAVE_LIBC_PTHREAD failed with the following output:
+Change Dir: /home/ubuntu/random_walk/build/CMakeFiles/CMakeTmp
+
+Run Build Command(s):/usr/bin/make -f Makefile cmTC_5742d/fast && /usr/bin/make  -f CMakeFiles/cmTC_5742d.dir/build.make CMakeFiles/cmTC_5742d.dir/build
+make[1]: Entering directory '/home/ubuntu/random_walk/build/CMakeFiles/CMakeTmp'
+Building CXX object CMakeFiles/cmTC_5742d.dir/src.cxx.o
+/usr/bin/x86_64-linux-gnu-g++-7 -DCMAKE_HAVE_LIBC_PTHREAD   -o CMakeFiles/cmTC_5742d.dir/src.cxx.o -c /home/ubuntu/random_walk/build/CMakeFiles/CMakeTmp/src.cxx
+Linking CXX executable cmTC_5742d
+/usr/local/lib/python3.6/dist-packages/cmake/data/bin/cmake -E cmake_link_script CMakeFiles/cmTC_5742d.dir/link.txt --verbose=1
+/usr/bin/x86_64-linux-gnu-g++-7 CMakeFiles/cmTC_5742d.dir/src.cxx.o -o cmTC_5742d 
+CMakeFiles/cmTC_5742d.dir/src.cxx.o: In function `main':
+src.cxx:(.text+0x3e): undefined reference to `pthread_create'
+src.cxx:(.text+0x4a): undefined reference to `pthread_detach'
+src.cxx:(.text+0x56): undefined reference to `pthread_cancel'
+src.cxx:(.text+0x67): undefined reference to `pthread_join'
+src.cxx:(.text+0x7b): undefined reference to `pthread_atfork'
+collect2: error: ld returned 1 exit status
+CMakeFiles/cmTC_5742d.dir/build.make:98: recipe for target 'cmTC_5742d' failed
+make[1]: *** [cmTC_5742d] Error 1
+make[1]: Leaving directory '/home/ubuntu/random_walk/build/CMakeFiles/CMakeTmp'
+Makefile:127: recipe for target 'cmTC_5742d/fast' failed
+make: *** [cmTC_5742d/fast] Error 2
+
+
+Source file was:
+#include <pthread.h>
+
+static void* test_func(void* data)
+{
+  return data;
+}
+
+int main(void)
+{
+  pthread_t thread;
+  pthread_create(&thread, NULL, test_func, NULL);
+  pthread_detach(thread);
+  pthread_cancel(thread);
+  pthread_join(thread, NULL);
+  pthread_atfork(NULL, NULL, NULL);
+  pthread_exit(NULL);
+
+  return 0;
+}
+
+Determining if the function pthread_create exists in the pthreads failed with the following output:
+Change Dir: /home/ubuntu/random_walk/build/CMakeFiles/CMakeTmp
+
+Run Build Command(s):/usr/bin/make -f Makefile cmTC_b7c08/fast && /usr/bin/make  -f CMakeFiles/cmTC_b7c08.dir/build.make CMakeFiles/cmTC_b7c08.dir/build
+make[1]: Entering directory '/home/ubuntu/random_walk/build/CMakeFiles/CMakeTmp'
+Building CXX object CMakeFiles/cmTC_b7c08.dir/CheckFunctionExists.cxx.o
+/usr/bin/x86_64-linux-gnu-g++-7   -DCHECK_FUNCTION_EXISTS=pthread_create -o CMakeFiles/cmTC_b7c08.dir/CheckFunctionExists.cxx.o -c /home/ubuntu/random_walk/build/CMakeFiles/CheckLibraryExists/CheckFunctionExists.cxx
+Linking CXX executable cmTC_b7c08
+/usr/local/lib/python3.6/dist-packages/cmake/data/bin/cmake -E cmake_link_script CMakeFiles/cmTC_b7c08.dir/link.txt --verbose=1
+/usr/bin/x86_64-linux-gnu-g++-7  -DCHECK_FUNCTION_EXISTS=pthread_create CMakeFiles/cmTC_b7c08.dir/CheckFunctionExists.cxx.o -o cmTC_b7c08  -lpthreads 
+/usr/bin/ld: cannot find -lpthreads
+collect2: error: ld returned 1 exit status
+CMakeFiles/cmTC_b7c08.dir/build.make:98: recipe for target 'cmTC_b7c08' failed
+make[1]: *** [cmTC_b7c08] Error 1
+make[1]: Leaving directory '/home/ubuntu/random_walk/build/CMakeFiles/CMakeTmp'
+Makefile:127: recipe for target 'cmTC_b7c08/fast' failed
+make: *** [cmTC_b7c08/fast] Error 2
+
+
+

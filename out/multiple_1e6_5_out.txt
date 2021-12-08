@@ -1,0 +1,23 @@
+Read Time:           2.86654
+Build Time:          1.30367
+Reading hyperparameters config file add-hyperparams-filename...
+[TimingStat] Random walk time (s):                9.01947
+[TimingStat] Random walk time (s):                8.95981
+[TimingStat] Random walk time (s):                8.90639
+[TimingStat] Random walk time (s):                8.92617
+[TimingStat] Random walk time (s):                8.84019
+[TimingStat] Random walk time (s):                8.89752
+[TimingStat] Random walk time (s):                8.80980
+[TimingStat] Random walk time (s):                8.79975
+[TimingStat] Random walk time (s):                8.93710
+[TimingStat] Random walk time (s):                8.89782
+[TimingStat] Random walk time (s):                8.91333
+[TimingStat] Random walk time (s):                8.83598
+[TimingStat] Random walk time (s):                8.84796
+[TimingStat] Random walk time (s):                8.90269
+[TimingStat] Random walk time (s):                8.84408
+[TimingStat] Random walk time (s):                8.88619
+[TimingStat] Random walk time (s):                8.89191
+[TimingStat] Random walk time (s):                8.84351
+[TimingStat] Random walk time (s):                8.86305
+[TimingStat] Random walk time (s):                8.93510

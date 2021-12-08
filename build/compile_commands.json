@@ -1,0 +1,12 @@
+[
+{
+  "directory": "/home/ubuntu/random_walk/build",
+  "command": "/usr/local/cuda/bin/nvcc   -I/usr/local/cuda/include -g -std=c++14 -x cu -c /home/ubuntu/random_walk/helper.cu -o CMakeFiles/cuda_lib.dir/helper.cu.o",
+  "file": "/home/ubuntu/random_walk/helper.cu"
+},
+{
+  "directory": "/home/ubuntu/random_walk/build",
+  "command": "/usr/bin/x86_64-linux-gnu-g++-7  -I/usr/local/cuda/include -g -std=gnu++14 -o CMakeFiles/helper.dir/helper_kernel.cc.o -c /home/ubuntu/random_walk/helper_kernel.cc",
+  "file": "/home/ubuntu/random_walk/helper_kernel.cc"
+}
+]

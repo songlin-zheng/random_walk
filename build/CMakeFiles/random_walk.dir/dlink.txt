@@ -1,0 +1,1 @@
+/usr/local/cuda/bin/nvcc  -g -Xcompiler=-fPIC -Wno-deprecated-gpu-targets -shared -dlink CMakeFiles/random_walk.dir/helper_kernel.cc.o -o CMakeFiles/random_walk.dir/cmake_device_link.o   -L/usr/local/cuda/lib64/stubs  -L/usr/local/cuda/lib64  libcuda_lib.a -lcudadevrt -lcudart_static -lrt -lpthread -ldl 
