@@ -13,6 +13,28 @@
         }                                                                                         \
     }
 
+// [start, end)
+template <class int_t, class float_t>
+void __device__ bottomUpSort(float_t *ts, int_t *src_idx, int_t *dest_idx, int_t start, int_t mid, int_t end)
+{
+    // ovid overflow
+    int_t i = start, j = mid;
+    for (int_t k = start; k < end; k++)
+    {
+        // printf("src_idx[i], src_idx[j], ts[src_idx[i]], ts[src_idx[j]]: %lld, %lld, %f, %f\n", src_idx[i], src_idx[j], ts[src_idx[i]], ts[src_idx[j]]);
+        if (i < mid && (j == end || ts[src_idx[i]] < ts[src_idx[j]]))
+        {
+            dest_idx[k] = src_idx[i];
+            i++;
+        }
+        else
+        {
+            dest_idx[k] = src_idx[j];
+            j++;
+        }
+    }
+}
+
 template <class int_t, class float_t>
 void __global__ sortByWeight(int_t start, int_t end, float_t *src_weight, int_t *src_node, float_t *dest_weight, int_t *dest_node)
 {
@@ -79,27 +101,6 @@ void __global__ sortByWeight(int_t start, int_t end, float_t *src_weight, int_t 
     }
 }
 
-// [start, end)
-template <class int_t, class float_t>
-void __device__ bottomUpSort(float_t *ts, int_t *src_idx, int_t *dest_idx, int_t start, int_t mid, int_t end)
-{
-    // ovid overflow
-    int_t i = start, j = mid;
-    for (int_t k = start; k < end; k++)
-    {
-        // printf("src_idx[i], src_idx[j], ts[src_idx[i]], ts[src_idx[j]]: %lld, %lld, %f, %f\n", src_idx[i], src_idx[j], ts[src_idx[i]], ts[src_idx[j]]);
-        if (i < mid && (j == end || ts[src_idx[i]] < ts[src_idx[j]]))
-        {
-            dest_idx[k] = src_idx[i];
-            i++;
-        }
-        else
-        {
-            dest_idx[k] = src_idx[j];
-            j++;
-        }
-    }
-}
 
 template <class int_t, class float_t>
 void __global__ getOutEdgeTimestampCorrespondence(int_t *start_idx, float_t *timestamp, int_t *node_idx, int_t *outIdx, int_t curr_node)
