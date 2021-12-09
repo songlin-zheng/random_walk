@@ -6,7 +6,7 @@
 			[
 				{
 					"build" : ".",
-					"jsonFile" : "directory-.-Debug-f5ebdc15457944623624.json",
+					"jsonFile" : "directory-.-Release-f5ebdc15457944623624.json",
 					"minimumCMakeVersion" : 
 					{
 						"string" : "3.5"
@@ -20,7 +20,7 @@
 					]
 				}
 			],
-			"name" : "Debug",
+			"name" : "Release",
 			"projects" : 
 			[
 				{
@@ -41,14 +41,14 @@
 				{
 					"directoryIndex" : 0,
 					"id" : "cuda_lib::@6890427a1f51a3e7e1df",
-					"jsonFile" : "target-cuda_lib-Debug-b7d4e614be61170dc532.json",
+					"jsonFile" : "target-cuda_lib-Release-9aca97f987553e5d5bdc.json",
 					"name" : "cuda_lib",
 					"projectIndex" : 0
 				},
 				{
 					"directoryIndex" : 0,
 					"id" : "random_walk::@6890427a1f51a3e7e1df",
-					"jsonFile" : "target-random_walk-Debug-efc16eb767c2c6323020.json",
+					"jsonFile" : "target-random_walk-Release-1b1d57bfa72040fb7098.json",
 					"name" : "random_walk",
 					"projectIndex" : 0
 				}

@@ -1,17 +1,17 @@
 [
 {
   "directory": "/home/ubuntu/random_walk/build",
-  "command": "/usr/local/cuda/bin/nvcc  -DPREPROCESSING=1 -Dcuda_lib_EXPORTS -I/usr/local/cuda/include -g -Xcompiler=-fPIC -std=c++14 -x cu -c /home/ubuntu/random_walk/helper.cu -o CMakeFiles/cuda_lib.dir/helper.cu.o",
+  "command": "/usr/local/cuda/bin/nvcc  -DDEBUG=1 -DPREPROCESSING=1 -Dcuda_lib_EXPORTS -I/usr/local/cuda/include -O3 -DNDEBUG -Xcompiler=-fPIC -std=c++11 -x cu -c /home/ubuntu/random_walk/helper.cu -o CMakeFiles/cuda_lib.dir/helper.cu.o",
   "file": "/home/ubuntu/random_walk/helper.cu"
 },
 {
   "directory": "/home/ubuntu/random_walk/build",
-  "command": "/usr/local/cuda/bin/nvcc  -DPREPROCESSING=1 -Dcuda_lib_EXPORTS -I/usr/local/cuda/include -g -Xcompiler=-fPIC -std=c++14 -x cu -c /home/ubuntu/random_walk/rwalk_optimized.cu -o CMakeFiles/cuda_lib.dir/rwalk_optimized.cu.o",
+  "command": "/usr/local/cuda/bin/nvcc  -DDEBUG=1 -DPREPROCESSING=1 -Dcuda_lib_EXPORTS -I/usr/local/cuda/include -O3 -DNDEBUG -Xcompiler=-fPIC -std=c++11 -x cu -c /home/ubuntu/random_walk/rwalk_optimized.cu -o CMakeFiles/cuda_lib.dir/rwalk_optimized.cu.o",
   "file": "/home/ubuntu/random_walk/rwalk_optimized.cu"
 },
 {
   "directory": "/home/ubuntu/random_walk/build",
-  "command": "/usr/bin/x86_64-linux-gnu-g++-7 -DPREPROCESSING=1 -I/usr/local/cuda/include -g -std=gnu++14 -o CMakeFiles/random_walk.dir/rwalk_kernel.cc.o -c /home/ubuntu/random_walk/rwalk_kernel.cc",
+  "command": "/usr/bin/x86_64-linux-gnu-g++-7 -DDEBUG=1 -DPREPROCESSING=1 -I/usr/local/cuda/include -O3 -DNDEBUG -std=gnu++11 -o CMakeFiles/random_walk.dir/rwalk_kernel.cc.o -c /home/ubuntu/random_walk/rwalk_kernel.cc",
   "file": "/home/ubuntu/random_walk/rwalk_kernel.cc"
 }
 ]

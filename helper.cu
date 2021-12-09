@@ -300,7 +300,7 @@ void cuda_helper(int max_walk_length, int num_walks_per_node, int32_t num_nodes,
     cudaDeviceSynchronize();
 
     cudaMemcpy(cdf_buffer_host, cdf_buffer_dev, sizeof(float) * num_edges, cudaMemcpyDeviceToHost);
-
+    printf("here\n");
 #if defined(DEBUG)
     printf("----------------prefix sum--------------------\n");
     for (int i = 0; i < num_nodes; i++)

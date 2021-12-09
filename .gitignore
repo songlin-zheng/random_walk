@@ -1,6 +1,6 @@
 _build/*
 .idea/*
 cmake-build-debug/*
-*.wel
+synth_1e*.wel
 out_random_walk.txt
 random_walk*

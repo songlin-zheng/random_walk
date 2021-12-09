@@ -32,6 +32,12 @@
 			{
 				"command" : 1,
 				"file" : 0,
+				"line" : 16,
+				"parent" : 0
+			},
+			{
+				"command" : 1,
+				"file" : 0,
 				"line" : 17,
 				"parent" : 0
 			},
@@ -49,16 +55,20 @@
 			"compileCommandFragments" : 
 			[
 				{
-					"fragment" : "-g -Xcompiler=-fPIC"
+					"fragment" : "-O3 -DNDEBUG -Xcompiler=-fPIC"
 				},
 				{
-					"fragment" : "-std=c++14"
+					"fragment" : "-std=c++11"
 				}
 			],
 			"defines" : 
 			[
 				{
 					"backtrace" : 2,
+					"define" : "DEBUG=1"
+				},
+				{
+					"backtrace" : 3,
 					"define" : "PREPROCESSING=1"
 				},
 				{
@@ -68,7 +78,7 @@
 			"includes" : 
 			[
 				{
-					"backtrace" : 3,
+					"backtrace" : 4,
 					"path" : "/usr/local/cuda/include"
 				}
 			],
@@ -79,7 +89,7 @@
 				[
 					1
 				],
-				"standard" : "14"
+				"standard" : "11"
 			},
 			"sourceIndexes" : 
 			[
