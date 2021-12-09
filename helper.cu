@@ -182,9 +182,7 @@ void __global__ prefixSumConcurrent(int_t *start_idx, int_t *node_idx, float_t *
     for (int i = tid; i < end - start; i += blockDim.x)
     {
         smem[i] = timestamp[end - 1] + ratio * (timestamp[end - 1] - timestamp[start]) - timestamp[start + i];
-        // printf("[i, val]: [%d, %f] ", i, smem[i]);
     }
-    // printf("\n");
     __syncthreads();
 
     // reduction
@@ -210,7 +208,7 @@ void __global__ prefixSumConcurrent(int_t *start_idx, int_t *node_idx, float_t *
         for (int i = tid; i < end - start; i += blockDim.x)
         {
             int idx = stride * (i + 1) * 2 - 1;
-            if (idx < end - start)
+            if (idx + stride < end - start)
             {
                 smem[idx + stride] += smem[idx];
             }
@@ -294,13 +292,15 @@ void cuda_helper(int max_walk_length, int num_walks_per_node, int32_t num_nodes,
         {
             dim3 grid(1);
             dim3 block(min(threadBlockSize, (end - start)));
+            // int smem_size = pow(2, int(ceil(log2((end - start)))));
+            // printf("end - start : %d, smem_size :%d \n", end - start, smem_size);
             prefixSumConcurrent<int32_t, float><<<grid, block, sizeof(float) * (end - start)>>>(start_idx_dev, node_idx_dev_sorted, timestamp_dev_sorted, cdf_buffer_dev, i, extend_ratio);
         }
     }
-    cudaDeviceSynchronize();
+    cudaCheck(cudaDeviceSynchronize());
+    // printf("buffer %f\n", cdf_buffer_host[0]);
+    cudaCheck(cudaMemcpy(cdf_buffer_host, cdf_buffer_dev, sizeof(float) * num_edges, cudaMemcpyDeviceToHost));
 
-    cudaMemcpy(cdf_buffer_host, cdf_buffer_dev, sizeof(float) * num_edges, cudaMemcpyDeviceToHost);
-    printf("here\n");
 #if defined(DEBUG)
     printf("----------------prefix sum--------------------\n");
     for (int i = 0; i < num_nodes; i++)
