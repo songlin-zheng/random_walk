@@ -81,7 +81,7 @@ void __global__ sortByWeight(int_t start, int_t end, float_t *src_weight, int_t 
 
 // [start, end)
 template <class int_t, class float_t>
-void __device__ inline bottomUpSort(float_t *ts, int_t *src_idx, int_t *dest_idx, int_t start, int_t mid, int_t end)
+void __device__ bottomUpSort(float_t *ts, int_t *src_idx, int_t *dest_idx, int_t start, int_t mid, int_t end)
 {
     // ovid overflow
     int_t i = start, j = mid;
