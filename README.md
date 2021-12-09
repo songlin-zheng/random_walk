@@ -28,3 +28,6 @@ You can make larger synthetic graphs using this script:
 We've built the file into binary, you can also directly run ```sbatch run_tests synth_N_10_E_50_S_42_preproc.wel > out.txt``` with our toy example.
 ## outputs
 the folder ```out``` contains the test we have run so far.
+
+## experiment
+We experiment all the testcases at AWS g4dn.2xlarge server. It comes with one Tesla T4 GPU, 32 GB DRAM and Inter(R) Xeon(R) 4 CoresPlatinum 8259CL CPU @ 2.50GHz
